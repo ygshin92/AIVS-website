@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AIVS Lab</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Projects</h1>
+      <p>
+        Ongoing funded projects and collaborations. Replace placeholders with your real project info.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Project A</h2>
+        <p><strong>Duration:</strong> 2025–2026</p>
+        <p><strong>Funding:</strong> (Agency / Program)</p>
+        <p style="color: var(--muted);">One-line summary of the project goal.</p>
+      </div>
+
+      <div class="card">
+        <h2>Project B</h2>
+        <p><strong>Duration:</strong> 2024–2027</p>
+        <p><strong>Funding:</strong> (Agency / Program)</p>
+        <p style="color: var(--muted);">One-line summary of the project goal.</p>
+      </div>
+
+      <div class="card">
+        <h2>Collaboration</h2>
+        <p><strong>Partners:</strong> (University / Company)</p>
+        <p style="color: var(--muted);">Short description of collaboration topic.</p>
+      </div>
+    </section>
+
+    <section class="card" style="margin: 6px 0 48px;">
+      <h2>Interested in Collaboration?</h2>
+      <p style="margin:0;">
+        Please reach out via the <a href="contact.html">Contact</a> page.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
