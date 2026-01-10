@@ -1,6 +1,6 @@
 :root {
-  --creamson: #fff2e6;   /* cream + salmon 느낌. 원하는 톤 있으면 바꿔도 됨 */
-  --creamson-2: #ffe2cc; /* 살짝 더 진한 톤(hover/테두리용) */
+  --creamson: #A52A2A;   /* cream + salmon 느낌. 원하는 톤 있으면 바꿔도 됨 */
+  --creamson-2: #880000; /* 살짝 더 진한 톤(hover/테두리용) */
   
   --text: #111;
   --muted: #666;
