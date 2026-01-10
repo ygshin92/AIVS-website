@@ -41,9 +41,10 @@ body {
 .site-header {
   position: sticky;
   top: 0;
-  background: linear-gradient(90deg, #A52A2A, #880000);
-  border-bottom: 2px solid #6f0000;
+  background: linear-gradient(90deg, var(--creamson), var(--creamson-2));
+  border-bottom: 2px solid var(--creamson-2);
 }
+
 
 .header-inner {
   display: flex;
@@ -126,7 +127,7 @@ body {
 }
 
 .card {
-  border: 1px solid var(--border);
+   border: 1px solid rgba(136, 0, 0, 0.18);
   background: var(--card);
   border-radius: 16px;
   padding: 16px;
@@ -136,11 +137,12 @@ body {
 .card p { margin: 0 0 10px; color: var(--muted); }
 
 .site-footer {
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--creamson-2);
   padding: 18px 0;
   color: var(--muted);
   font-size: 14px;
 }
+
 
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
@@ -186,7 +188,7 @@ body {
   padding: 10px 12px;
   border-radius: 12px;
 
-  font-size: 16px;     /* ← 여기서 커짐 */
+  font-size: 18px;     /* ← 여기서 커짐 */
   font-weight: 800;    /* ← bold */
   letter-spacing: 0.2px;
 }
