@@ -163,24 +163,22 @@ body {
   color: var(--text);
 }
 
-/* .brand-logo {
-  width: 68px;
-  height: 68px;
-  object-fit: contain;
-} */
+/* 로고 이미지 */
+.brand-logo {
+  height: 1.3em;        /* ← 텍스트와 시각적으로 같은 크기 */
+  width: auto;
+  display: block;
+}
 
-/* .brand-text {
-  letter-spacing: 0.2px;
-} */
-
+/* 로고 텍스트 */
 .brand-text {
   font-size: 26px;
   font-weight: 900;
   letter-spacing: 1px;
   color: var(--header-text);
   text-transform: uppercase;
+  line-height: 1;       /* 이미지랑 높이 맞추는 핵심 */
 }
-
 
 .nav a {
   text-decoration: none;
