@@ -146,3 +146,26 @@ body {
   color: #fff;
 }
 
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.brand-text {
+  letter-spacing: 0.2px;
+}
+
+.nav a {
+  color: var(--text);
+}
