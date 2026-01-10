@@ -174,7 +174,7 @@ body {
 
 /* 로고 텍스트 */
 .brand-text {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1;
   letter-spacing: 1px;
@@ -189,7 +189,7 @@ body {
   padding: 10px 12px;
   border-radius: 12px;
 
-  font-size: 36px;     /* ← 여기서 커짐 */
+  font-size: 28px;     /* ← 여기서 커짐 */
   font-weight: 800;    /* ← bold */
   letter-spacing: 0.2px;
 }
