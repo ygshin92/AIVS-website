@@ -166,7 +166,7 @@ body {
 
 /* 로고 이미지 */
 .brand-logo {
-  height: 40px;     /* 로고 자체 크기 */
+  height: 60px;     /* 로고 자체 크기 */
   width: auto;
   display: block;
 }
