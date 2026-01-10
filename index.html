@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <p>Hello, World!</p>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AIVS Lab</a>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>AI Vision & Systems (AIVS) Laboratory</h1>
+      <p>
+        Welcome to the AIVS Lab at Korea University. We conduct research on
+        computer vision, multimodal AI, and embodied intelligence.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="research.html">Explore Research</a>
+        <a class="btn btn-ghost" href="publications.html">View Publications</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Research</h2>
+        <p>Core topics, ongoing directions, and highlighted works.</p>
+        <a href="research.html">Learn more →</a>
+      </div>
+      <div class="card">
+        <h2>Members</h2>
+        <p>Faculty, students, and collaborators.</p>
+        <a href="members.html">Meet the team →</a>
+      </div>
+      <div class="card">
+        <h2>Projects</h2>
+        <p>Funded projects and collaborations.</p>
+        <a href="projects.html">See projects →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
