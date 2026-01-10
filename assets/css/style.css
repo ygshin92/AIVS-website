@@ -1,4 +1,7 @@
 :root {
+  --creamson: #fff2e6;   /* cream + salmon 느낌. 원하는 톤 있으면 바꿔도 됨 */
+  --creamson-2: #ffe2cc; /* 살짝 더 진한 톤(hover/테두리용) */
+  
   --text: #111;
   --muted: #666;
   --border: #e6e6e6;
@@ -21,13 +24,21 @@ body {
   margin: 0 auto;
 }
 
-.site-header {
+/* .site-header {
   position: sticky;
   top: 0;
   background: rgba(255,255,255,0.9);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
+} */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--creamson);
+  border-bottom: 1px solid var(--creamson-2);
 }
+
 
 .header-inner {
   display: flex;
@@ -56,9 +67,14 @@ body {
   border-radius: 8px;
 }
 
-.nav a:hover {
+/* .nav a:hover {
   background: #f3f3f3;
+} */
+
+.nav a:hover {
+  background: var(--creamson-2);
 }
+
 
 .hero {
   padding: 48px 0 24px;
