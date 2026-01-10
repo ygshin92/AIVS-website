@@ -6,35 +6,30 @@
   <title>Contact | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Contact page-only tweak: adjust intro text size here -->
+  <!-- Contact page-only tweaks -->
   <style>
     :root{
-      --contact-intro-font-size: 16px;   /* ✅ 여기 숫자만 바꾸면 소개글 크기 조절됨 */
-      --contact-intro-line-height: 1.25;
+      --contact-intro-font-size: 16px;   /* ✅ 소개글 글씨 크기 조절 */
+      --contact-intro-line-height: 1.65; /* ✅ 소개글 줄간격 조절 */
     }
 
-    /* Full-width intro section (breaks out of .container width) */
-    .contact-intro-wrap{
-      width: 100%;
+    /* 소개글 카드 전용 스타일 */
+    .intro-card p{
       margin: 0;
-    }
-
-    .contact-intro-full{
-      width: 100vw;
-      margin-left: calc(50% - 50vw);   /* ✅ 화면 전체폭으로 확장 */
-      margin-right: calc(50% - 50vw);
-      padding: 0 16px;                 /* 양옆 안전 여백 */
-    }
-
-    .contact-intro-inner{
-      max-width: 900px;               /* 너무 길어지지 않게(원하면 1400으로) */
-      margin: 0 auto;
-    }
-
-    .contact-intro-full p{
       font-size: var(--contact-intro-font-size);
       line-height: var(--contact-intro-line-height);
-      max-width: none;                 /* ✅ 폭 제한 제거 */
+
+      /* ✅ 좌우 맞춤 */
+      text-align: justify;
+      text-justify: inter-word;
+
+      /* ✅ 한글 줄바꿈을 어절 단위로 자연스럽게 */
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .intro-card p + p{
+      margin-top: 14px; /* 영/한 문단 사이 간격 */
     }
   </style>
 </head>
@@ -61,28 +56,25 @@
 
   <!-- ================= MAIN ================= -->
   <main class="container">
-    <section class="hero contact-intro-wrap">
-      <h1>Contact</h1>
+    <!-- ✅ 큰 Contact 제목 제거, hero padding만 유지하고 싶으면 section은 유지 -->
+    <section class="hero" style="padding-top: 28px; padding-bottom: 14px;">
+      <!-- ✅ 소개글도 상자(card)로 만들기 (제목 없음) -->
+      <section class="card intro-card">
+        <p lang="en">
+          The AIVS Laboratory invites applications from prospective <strong>M.S. and Ph.D. students</strong>
+          who are interested in research on artificial intelligence, computer vision, and related areas.
+          Students with strong motivation for research and a solid technical background are encouraged to reach out.
+          We also welcome inquiries from <strong>undergraduate students</strong> who wish to gain research experience in AI
+          through undergraduate research opportunities.
+        </p>
 
-      <!-- ✅ Full-width intro area -->
-      <div class="contact-intro-full">
-        <div class="contact-intro-inner">
-          <p>
-            The AIVS Laboratory invites applications from prospective <strong>M.S. and Ph.D. students</strong>
-            who are interested in research on artificial intelligence, computer vision, and related areas.
-            Students with strong motivation for research and a solid technical background are encouraged to reach out.
-            We also welcome inquiries from <strong>undergraduate students</strong> who wish to gain research experience in AI
-            through undergraduate research opportunities.
-          </p>
-
-          <p style="margin-top:16px;">
-            AIVS 연구실에서는 인공지능(AI) 및 관련 분야 연구에 관심 있는 <strong>석사 및 박사 과정 진학 희망자</strong>의
-            지원 및 문의를 받고 있습니다. 연구에 대한 열의와 성실한 태도를 갖춘 학생들의 많은 관심을 바랍니다.
-            또한, <strong>학부연구생</strong>으로서 AI 관련 연구 경험을 쌓고자 하는 학부생들의 문의도 환영합니다.
-            연구 참여 또는 진학과 관련하여 관심 있는 학생들은 이메일로 연락해 주시기 바랍니다.
-          </p>
-        </div>
-      </div>
+        <p lang="ko">
+          AIVS 연구실에서는 인공지능(AI) 및 관련 분야 연구에 관심 있는 <strong>석사 및 박사 과정 진학 희망자</strong>의
+          지원 및 문의를 받고 있습니다. 연구에 대한 열의와 성실한 태도를 갖춘 학생들의 많은 관심을 바랍니다.
+          또한, <strong>학부연구생</strong>으로서 AI 관련 연구 경험을 쌓고자 하는 학부생들의 문의도 환영합니다.
+          연구 참여 또는 진학과 관련하여 관심 있는 학생들은 이메일로 연락해 주시기 바랍니다.
+        </p>
+      </section>
     </section>
 
     <!-- Address -->
