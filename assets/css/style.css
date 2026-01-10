@@ -124,3 +124,9 @@ body {
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
 }
+
+.nav a.active {
+  background: #111;
+  color: #fff;
+}
+
