@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AIVS Lab</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Contact</h1>
+      <p>Get in touch with the AIVS Laboratory.</p>
+    </section>
+
+    <section class="card">
+      <h2>Address</h2>
+      <p style="margin:0;">
+        Korea University, Sejong Campus<br />
+        (Add building / room)<br />
+        Sejong, Republic of Korea
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2>Email</h2>
+      <p style="margin:0;">
+        <a href="mailto:your-email@korea.ac.kr">your-email@korea.ac.kr</a>
+      </p>
+    </section>
+
+    <section class="card" style="margin:14px 0 48px;">
+      <h2>Links</h2>
+      <p style="margin:0;">
+        GitHub: <a href="#" onclick="return false;">(add link)</a><br />
+        Google Scholar: <a href="#" onclick="return false;">(add link)</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
