@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research | AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AIVS Lab</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Research</h1>
+      <p>
+        Our research focuses on computer vision, multimodal AI, and embodied intelligence.
+        This page highlights our main directions and representative topics.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Generative AI</h2>
+        <p>Diffusion models, controllable generation, efficient inference, and safety.</p>
+      </div>
+      <div class="card">
+        <h2>Vision & Multimodal Learning</h2>
+        <p>Representation learning, VLMs, fine-grained recognition, and robust perception.</p>
+      </div>
+      <div class="card">
+        <h2>Embodied AI & Robotics</h2>
+        <p>Perception-action loops, manipulation, planning, and data-efficient learning.</p>
+      </div>
+    </section>
+
+    <section class="card" style="margin: 6px 0 48px;">
+      <h2>Selected Keywords</h2>
+      <p style="color: var(--muted); margin: 0;">
+        Diffusion, Controllable Generation, Linear Attention, Vision-Language Models, Segmentation,
+        Adversarial Robustness, Embodied Agents, Manipulation, Data-Efficient Learning
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
