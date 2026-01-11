@@ -3,61 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | AIVS Lab</title>
+  <title>Contact | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Projects page-only styles -->
+  <!-- Contact page-only tweaks -->
   <style>
     :root{
-      /* ✅ [FONT SIZE CONTROL] 아래 숫자만 바꾸면 "Current Projects" / "Past Projects" 제목 크기 조절됨 */
-      --projects-title-size: 38px;
+      --contact-intro-font-size: 16px;   /* ✅ 소개글 글씨 크기 조절 */
+      --contact-intro-line-height: 1.65; /* ✅ 소개글 줄간격 조절 */
     }
 
-    /* 페이지 상단 제목 스타일 */
-    .projects-title{
-      margin: 0 0 10px;
-      font-size: var(--projects-title-size); /* ✅ 여기 값이 위 변수에 의해 결정됨 */
-      font-weight: 900;
-      line-height: 1.15;
+    /* 소개글 카드 전용 스타일 */
+    .intro-card p{
+      margin: 0;
+      font-size: var(--contact-intro-font-size);
+      line-height: var(--contact-intro-line-height);
+
+      /* ✅ 좌우 맞춤 */
+      text-align: justify;
+      text-justify: inter-word;
+
+      /* ✅ 한글 줄바꿈을 어절 단위로 자연스럽게 */
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
-    /* 섹션 간 간격 */
-    .projects-section{
-      padding: 34px 0 18px;
-    }
-
-    /* 2열 그리드(한 줄에 2개 카드) */
-    .projects-grid-2{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);  /* ✅ 한 줄에 2개 */
-      gap: 14px;
-      padding: 10px 0 24px;
-    }
-
-    /* Past Projects에서 마지막 줄 1개만 왼쪽에 나오게 */
-    .projects-grid-2.past .card.single-left{
-      grid-column: 1 / span 1;  /* ✅ 왼쪽 컬럼에만 배치 */
-    }
-
-    /* 모바일에서는 1열로 */
-    @media (max-width: 900px){
-      .projects-grid-2{
-        grid-template-columns: 1fr;
-      }
-      .projects-grid-2.past .card.single-left{
-        grid-column: auto;
-      }
-    }
-
-    /* 카드 안 항목 정리 */
-    .project-meta p{
-      margin: 0 0 8px;
-    }
-    .project-meta p:last-child{
-      margin-bottom: 0;
-    }
-    .project-meta .summary{
-      color: var(--muted);
+    .intro-card p + p{
+      margin-top: 14px; /* 영/한 문단 사이 간격 */
     }
   </style>
 </head>
@@ -76,110 +48,71 @@
         <a href="members.html">Members</a>
         <a href="research.html">Research</a>
         <a href="publications.html">Publications</a>
-        <a class="active" href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+        <a href="projects.html">Projects</a>
+        <a class="active" href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
 
   <!-- ================= MAIN ================= -->
   <main class="container">
+    <!-- ✅ 큰 Contact 제목 제거, hero padding만 유지하고 싶으면 section은 유지 -->
+    <section class="hero" style="padding-top: 28px; padding-bottom: 14px;">
+      <!-- ✅ 소개글도 상자(card)로 만들기 (제목 없음) -->
+      <section class="card intro-card">
+        <p lang="en">
+          The AIVS Laboratory invites applications from prospective <strong>M.S. and Ph.D. students</strong>
+          who are interested in research on artificial intelligence, computer vision, and related areas.
+          Students with strong motivation for research and a solid technical background are encouraged to reach out.
+          We also welcome inquiries from <strong>undergraduate students</strong> who wish to gain research experience in AI
+          through undergraduate research opportunities.
+        </p>
 
-    <!-- ================= CURRENT PROJECTS ================= -->
-    <section class="projects-section">
-      <!-- ✅ 1) 큰 굵은 글씨: Current Projects -->
-      <!-- ✅ 글씨 크기 조절: 위 <style>의 --projects-title-size 숫자를 변경하세요 -->
-      <h1 class="projects-title">Current Projects</h1>
-
-      <!-- ✅ 2) "Ongoing funded projects..." 문구 제거 -->
-
-      <!-- ✅ 3) 한 줄에 2개씩 / 총 2줄 4개 카드 -->
-      <section class="projects-grid-2">
-
-        <!-- ====== Current Project 1 ====== -->
-        <div class="card project-meta">
-          <!-- ✅ [EDIT HERE] 프로젝트 이름 수정 -->
-          <h2>Name: Project 1</h2>
-
-          <!-- ✅ [EDIT HERE] 기간 수정 -->
-          <p><strong>Duration:</strong> 2025–2026</p>
-
-          <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-
-          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-        <!-- ====== Current Project 2 ====== -->
-        <div class="card project-meta">
-          <h2>Name: Project 2</h2>
-          <p><strong>Duration:</strong> 2025–2027</p>
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-        <!-- ====== Current Project 3 ====== -->
-        <div class="card project-meta">
-          <h2>Name: Project 3</h2>
-          <p><strong>Duration:</strong> 2024–2026</p>
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-        <!-- ====== Current Project 4 ====== -->
-        <div class="card project-meta">
-          <h2>Name: Project 4</h2>
-          <p><strong>Duration:</strong> 2023–2026</p>
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
+        <p lang="ko">
+          AIVS 연구실에서는 인공지능(AI) 및 관련 분야 연구에 관심 있는 <strong>석사 및 박사 과정 진학 희망자</strong>의
+          지원 및 문의를 받고 있습니다. 연구에 대한 열의와 성실한 태도를 갖춘 학생들의 많은 관심을 바랍니다.
+          또한, <strong>학부연구생</strong>으로서 AI 관련 연구 경험을 쌓고자 하는 학부생들의 문의도 환영합니다.
+          연구 참여 또는 진학과 관련하여 관심 있는 학생들은 이메일로 연락해 주시기 바랍니다.
+        </p>
       </section>
     </section>
 
-    <!-- ================= PAST PROJECTS ================= -->
-    <section class="projects-section" style="padding-top: 10px;">
-      <!-- ✅ 5) Past Projects 제목(같은 사이즈) -->
-      <h1 class="projects-title">Past Projects</h1>
-
-      <!-- ✅ 6) 1줄 2개 + 다음줄 왼쪽에 1개(2개 상자 크기와 동일) -->
-      <section class="projects-grid-2 past">
-
-        <!-- ====== Past Project 1 ====== -->
-        <div class="card project-meta">
-          <!-- ✅ [EDIT HERE] 프로젝트 이름 수정 -->
-          <h2>Name: Past Project 1</h2>
-
-          <!-- ✅ [EDIT HERE] 기간 수정 -->
-          <p><strong>Duration:</strong> 2021–2023</p>
-
-          <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-
-          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-        <!-- ====== Past Project 2 ====== -->
-        <div class="card project-meta">
-          <h2>Name: Past Project 2</h2>
-          <p><strong>Duration:</strong> 2020–2022</p>
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-        <!-- ====== Past Project 3 (single on the left) ====== -->
-        <div class="card project-meta single-left">
-          <h2>Name: Past Project 3</h2>
-          <p><strong>Duration:</strong> 2018–2020</p>
-          <p><strong>Funding:</strong> (Agency / Program)</p>
-          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
-        </div>
-
-      </section>
+    <!-- Address -->
+    <section class="card">
+      <h2>Address</h2>
+      <p style="margin:0;">
+        AIVS Laboratory, Korea University, Sejong Campus<br />
+        Room 204, Science and Technology Building 1 (Gwahangisul 1-gwan)<br />
+        2511, Sejong-ro, Jochiwon-eup, Sejong-si, Republic of Korea
+      </p>
     </section>
 
+    <!-- Contact Info -->
+    <section class="card" style="margin-top:14px;">
+      <h2>Contact Information</h2>
+      <p style="margin:0;">
+        <strong>E-mail:</strong>
+        <a href="mailto:ygshin92@korea.ac.kr">ygshin92@korea.ac.kr</a><br />
+        <strong>Tel:</strong>
+        <a href="tel:+82-44-860-1351">+82-44-860-1351</a>
+      </p>
+    </section>
+
+    <!-- Links -->
+    <section class="card" style="margin:14px 0 48px;">
+      <h2>Links</h2>
+      <p style="margin:0;">
+        <strong>Google Scholar:</strong>
+        <a
+          href="https://scholar.google.com/citations?hl=ko&user=TNWHgVEAAAAJ"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Profile
+        </a><br />
+        <strong>GitHub:</strong> To be published
+      </p>
+    </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
