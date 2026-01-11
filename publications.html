@@ -5,17 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publications | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Publications page-only styles -->
+  <style>
+    :root{
+      /* ✅ 여기 숫자만 바꾸면 페이지 상단 "Publications" 제목 크기 조절됨 */
+      --pub-title-size: 38px;
+
+      /* ✅ 연도(2025, 2024...) 제목 크기 조절 */
+      --pub-year-size: 24px;
+
+      /* ✅ 논문 리스트 글자 크기 조절 */
+      --pub-item-size: 16px;
+
+      /* ✅ 줄 간격 조절 */
+      --pub-line-height: 1.55;
+    }
+
+    .pub-title{
+      margin: 0 0 18px;
+      font-size: var(--pub-title-size);
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    /* 연도 카드 간격 */
+    .pub-card{ margin-top: 14px; }
+
+    .pub-card h2{
+      font-size: var(--pub-year-size);
+      margin: 0 0 10px;
+    }
+
+    /* 리스트 가독성 */
+    .pub-list{
+      margin: 0;
+      padding-left: 20px;
+    }
+    .pub-list li{
+      font-size: var(--pub-item-size);
+      line-height: var(--pub-line-height);
+      margin: 0 0 10px;
+
+      /* ✅ 좌우 맞춤(Justify) */
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    /* 제목 링크 스타일 */
+    .pub-list a{
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+    .pub-list a:hover{
+      border-bottom-color: rgba(0,0,0,0.45);
+    }
+
+    /* 상단 설명 문구 제거하고 싶으면 아래 p를 지우면 됨 */
+    .pub-note{
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+  </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-      <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
-      <span class="brand-text">AIVS</span>
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
       </a>
 
-
-      
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="members.html">Members</a>
@@ -28,37 +91,150 @@
   </header>
 
   <main class="container">
-    <section class="hero">
-      <h1>Publications</h1>
-      <p>
-        Below is a simple list format. You can later replace this with Google Scholar links,
-        BibTeX, or a searchable list.
-      </p>
-    </section>
+    <!-- 페이지 큰 제목 -->
+    <h1 class="pub-title">Publications</h1>
 
-    <section class="card">
-      <h2>2026</h2>
-      <ul>
-        <li><strong>Paper Title</strong> — Authors. <em>Conference/Journal</em>.</li>
-        <li><strong>Paper Title</strong> — Authors. <em>Conference/Journal</em>.</li>
-      </ul>
-    </section>
+    <!-- 필요 없으면 이 문단 통째로 삭제해도 됨 -->
+    <p class="pub-note">
+      Publications are organized by year. For the most up-to-date list, please also see the Google Scholar profile.
+    </p>
 
-    <section class="card" style="margin-top:14px;">
+    <!-- ================= 2025 ================= -->
+    <section class="card pub-card">
       <h2>2025</h2>
-      <ul>
-        <li><strong>Paper Title</strong> — Authors. <em>Conference/Journal</em>.</li>
-        <li><strong>Paper Title</strong> — Authors. <em>Conference/Journal</em>.</li>
+      <ul class="pub-list">
+        <li>
+          <a href="https://dblp.org/rec/journals/ict-express/ParkS25" target="_blank" rel="noopener noreferrer">
+            GRB-Sty: Redesign of Generative Residual Block for StyleGAN.
+          </a>
+          — Seung Park, Yong-Goo Shin. <em>ICT Express</em> 11(1): 223–227, 2025.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/tnn/ParkS25" target="_blank" rel="noopener noreferrer">
+            A Novel Generator With Auxiliary Branch for Improving GAN Performance.
+          </a>
+          — Seung Park, Yong-Goo Shin. <em>IEEE Transactions on Neural Networks and Learning Systems</em> 36(3): 5818–5825, 2025.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/tnn/ParkS25a" target="_blank" rel="noopener noreferrer">
+            Rethinking Image Skip Connections in StyleGAN2.
+          </a>
+          — Seung Park, Yong-Goo Shin. <em>IEEE Transactions on Neural Networks and Learning Systems</em> 36(7): 13615–13623, 2025.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/corr/abs-2502-01262" target="_blank" rel="noopener noreferrer">
+            FSPGD: Rethinking Black-box Attacks on Semantic Segmentation.
+          </a>
+          — Eun-Sol Park, MiSo Park, Seung Park, Yong-Goo Shin. <em>CoRR</em> abs/2502.01262, 2025.
+        </li>
       </ul>
     </section>
 
-    <section class="card" style="margin:14px 0 48px;">
+    <!-- ================= 2024 ================= -->
+    <section class="card pub-card">
+      <h2>2024</h2>
+      <ul class="pub-list">
+        <li>
+          <a href="https://dblp.org/rec/journals/artmed/ChoiYKSSP24" target="_blank" rel="noopener noreferrer">
+            Prognostic prediction of sepsis patient using transformer with skip connected token for tabular data.
+          </a>
+          — Jee-Woo Choi, Minuk Yang, Jae-Woo Kim, Yoon Mi Shin, Yong-Goo Shin, Seung Park.
+          <em>Artificial Intelligence in Medicine</em> 149: 102804, 2024.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/prl/YooYBWS24" target="_blank" rel="noopener noreferrer">
+            A unified framework to stereotyped behavior detection for screening Autism Spectrum Disorder.
+          </a>
+          — Cheol-Hwan Yoo, Jang-Hee Yoo, Moon-Ki Back, Woo-Jin Wang, Yong-Goo Shin.
+          <em>Pattern Recognition Letters</em> 186: 156–163, 2024.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/tnn/SagongYSK24" target="_blank" rel="noopener noreferrer">
+            Conditional Convolution Projecting Latent Vectors on Condition-Specific Space.
+          </a>
+          — Min-Cheol Sagong, Yoon-Jae Yeo, Yong-Goo Shin, Sung-Jea Ko.
+          <em>IEEE Transactions on Neural Networks and Learning Systems</em> 35(1): 1386–1393, 2024.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/corr/abs-2407-05527" target="_blank" rel="noopener noreferrer">
+            Rethinking Image Skip Connections in StyleGAN2.
+          </a>
+          — Seung Park, Yong-Goo Shin. <em>CoRR</em> abs/2407.05527, 2024.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= 2023 ================= -->
+    <section class="card pub-card">
+      <h2>2023</h2>
+      <ul class="pub-list">
+        <li>
+          <a href="https://dblp.org/rec/journals/apin/ParkYS23" target="_blank" rel="noopener noreferrer">
+            Effective shortcut technique for generative adversarial networks.
+          </a>
+          — Seung Park, Cheol-Hwan Yoo, Yong-Goo Shin.
+          <em>Applied Intelligence</em> 53(2): 2055–2067, 2023.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/journals/apin/YeoSPKS23" target="_blank" rel="noopener noreferrer">
+            Image generation with self pixel-wise normalization.
+          </a>
+          — Yoon-Jae Yeo, Min-Cheol Sagong, Seung Park, Sung-Jea Ko, Yong-Goo Shin.
+          <em>Applied Intelligence</em> 53(8): 9409–9423, 2023.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/conf/iccel/NamCSP23" target="_blank" rel="noopener noreferrer">
+            A BERT-Based Artificial Intelligence to Analyze Free-Text Clinical Notes for Binary Classification in Papillary Thyroid Carcinoma Recurrence.
+          </a>
+          — Jahyun Nam, Jee-Woo Choi, Yong-Goo Shin, Seung Park.
+          <em>ICCE 2023</em>, pp. 1–2, 2023.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/conf/icufn/ParkNCSP23" target="_blank" rel="noopener noreferrer">
+            Structured Medical Dataset Analysis Tool Based on ChatGPT.
+          </a>
+          — JinCheol Park, Jahyun Nam, Jee-Woo Choi, Yong-Goo Shin, Seung Park.
+          <em>ICUFN 2023</em>, pp. 837–842, 2023.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= 2022 ================= -->
+    <section class="card pub-card">
+      <h2>2022</h2>
+      <ul class="pub-list">
+        <li>
+          <a href="https://dblp.org/rec/journals/apin/ParkS22" target="_blank" rel="noopener noreferrer">
+            Rethinking Generator Style in StyleGAN.
+          </a>
+          — Seung Park, Yong-Goo Shin.
+          <em>Applied Intelligence</em> 52(14): 16534–16545, 2022.
+        </li>
+        <li>
+          <a href="https://dblp.org/rec/conf/iccel/ChoiSKKLS22" target="_blank" rel="noopener noreferrer">
+            Classification of Papillary Thyroid Carcinoma through Artificial Intelligence using Radiology Reports.
+          </a>
+          — Jee-Woo Choi, Sung-Hyun Kim, Seung Park, Sung-Jea Ko, Min-Ho Kim, Dong-Hwan Lee, Yong-Goo Shin.
+          <em>ICCE 2022</em>, pp. 1–2, 2022.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= LINKS ================= -->
+    <section class="card pub-card" style="margin:14px 0 48px;">
       <h2>Links</h2>
       <p style="margin:0;">
-        Google Scholar: <a href="#" onclick="return false;">(add link)</a><br />
-        DBLP: <a href="#" onclick="return false;">(add link)</a>
+        <strong>Google Scholar:</strong>
+        <a href="https://scholar.google.com/citations?user=TNWHgVEAAAAJ&hl=ko" target="_blank" rel="noopener noreferrer">
+          Profile
+        </a><br />
+        <strong>DBLP:</strong>
+        <a href="https://dblp.org/pid/165/2150.html" target="_blank" rel="noopener noreferrer">
+          Publication list
+        </a>
       </p>
     </section>
+
   </main>
 
   <footer class="site-footer">
