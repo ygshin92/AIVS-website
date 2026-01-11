@@ -14,19 +14,20 @@
     }
 
     /* 소개글 카드 전용 스타일 */
-    .intro-card p{
-      margin: 0;
-      font-size: var(--contact-intro-font-size);
-      line-height: var(--contact-intro-line-height);
+.intro-card p{
+  margin: 0;
+  font-size: var(--contact-intro-font-size);
+  line-height: var(--contact-intro-line-height);
 
-      /* ✅ 좌우 맞춤 */
-      text-align: justify;
-      text-justify: inter-word;
+  text-align: justify;
+  text-justify: inter-word;
 
-      /* ✅ 한글 줄바꿈을 어절 단위로 자연스럽게 */
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
+  word-break: keep-all;
+  overflow-wrap: break-word;
+
+  max-width: none;   /* ✅ hero p의 70ch 제한 해제 */
+}
+
 
     .intro-card p + p{
       margin-top: 14px; /* 영/한 문단 사이 간격 */
