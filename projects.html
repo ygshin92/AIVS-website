@@ -5,16 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Projects page-only styles -->
+  <style>
+    :root{
+      /* ✅ [FONT SIZE CONTROL] 아래 숫자만 바꾸면 "Current Projects" / "Past Projects" 제목 크기 조절됨 */
+      --projects-title-size: 38px;
+    }
+
+    /* 페이지 상단 제목 스타일 */
+    .projects-title{
+      margin: 0 0 10px;
+      font-size: var(--projects-title-size); /* ✅ 여기 값이 위 변수에 의해 결정됨 */
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    /* 섹션 간 간격 */
+    .projects-section{
+      padding: 34px 0 18px;
+    }
+
+    /* 2열 그리드(한 줄에 2개 카드) */
+    .projects-grid-2{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);  /* ✅ 한 줄에 2개 */
+      gap: 14px;
+      padding: 10px 0 24px;
+    }
+
+    /* Past Projects에서 마지막 줄 1개만 왼쪽에 나오게 */
+    .projects-grid-2.past .card.single-left{
+      grid-column: 1 / span 1;  /* ✅ 왼쪽 컬럼에만 배치 */
+    }
+
+    /* 모바일에서는 1열로 */
+    @media (max-width: 900px){
+      .projects-grid-2{
+        grid-template-columns: 1fr;
+      }
+      .projects-grid-2.past .card.single-left{
+        grid-column: auto;
+      }
+    }
+
+    /* 카드 안 항목 정리 */
+    .project-meta p{
+      margin: 0 0 8px;
+    }
+    .project-meta p:last-child{
+      margin-bottom: 0;
+    }
+    .project-meta .summary{
+      color: var(--muted);
+    }
+  </style>
 </head>
+
 <body>
+  <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-      <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
-      <span class="brand-text">AIVS</span>
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
       </a>
 
-      
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="members.html">Members</a>
@@ -26,44 +82,107 @@
     </div>
   </header>
 
+  <!-- ================= MAIN ================= -->
   <main class="container">
-    <section class="hero">
-      <h1>Projects</h1>
-      <p>
-        Ongoing funded projects and collaborations. Replace placeholders with your real project info.
-      </p>
+
+    <!-- ================= CURRENT PROJECTS ================= -->
+    <section class="projects-section">
+      <!-- ✅ 1) 큰 굵은 글씨: Current Projects -->
+      <!-- ✅ 글씨 크기 조절: 위 <style>의 --projects-title-size 숫자를 변경하세요 -->
+      <h1 class="projects-title">Current Projects</h1>
+
+      <!-- ✅ 2) "Ongoing funded projects..." 문구 제거 -->
+
+      <!-- ✅ 3) 한 줄에 2개씩 / 총 2줄 4개 카드 -->
+      <section class="projects-grid-2">
+
+        <!-- ====== Current Project 1 ====== -->
+        <div class="card project-meta">
+          <!-- ✅ [EDIT HERE] 프로젝트 이름 수정 -->
+          <h2>Name: Project 1</h2>
+
+          <!-- ✅ [EDIT HERE] 기간 수정 -->
+          <p><strong>Duration:</strong> 2025–2026</p>
+
+          <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+
+          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+        <!-- ====== Current Project 2 ====== -->
+        <div class="card project-meta">
+          <h2>Name: Project 2</h2>
+          <p><strong>Duration:</strong> 2025–2027</p>
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+        <!-- ====== Current Project 3 ====== -->
+        <div class="card project-meta">
+          <h2>Name: Project 3</h2>
+          <p><strong>Duration:</strong> 2024–2026</p>
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+        <!-- ====== Current Project 4 ====== -->
+        <div class="card project-meta">
+          <h2>Name: Project 4</h2>
+          <p><strong>Duration:</strong> 2023–2026</p>
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+      </section>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Project A</h2>
-        <p><strong>Duration:</strong> 2025–2026</p>
-        <p><strong>Funding:</strong> (Agency / Program)</p>
-        <p style="color: var(--muted);">One-line summary of the project goal.</p>
-      </div>
+    <!-- ================= PAST PROJECTS ================= -->
+    <section class="projects-section" style="padding-top: 10px;">
+      <!-- ✅ 5) Past Projects 제목(같은 사이즈) -->
+      <h1 class="projects-title">Past Projects</h1>
 
-      <div class="card">
-        <h2>Project B</h2>
-        <p><strong>Duration:</strong> 2024–2027</p>
-        <p><strong>Funding:</strong> (Agency / Program)</p>
-        <p style="color: var(--muted);">One-line summary of the project goal.</p>
-      </div>
+      <!-- ✅ 6) 1줄 2개 + 다음줄 왼쪽에 1개(2개 상자 크기와 동일) -->
+      <section class="projects-grid-2 past">
 
-      <div class="card">
-        <h2>Collaboration</h2>
-        <p><strong>Partners:</strong> (University / Company)</p>
-        <p style="color: var(--muted);">Short description of collaboration topic.</p>
-      </div>
+        <!-- ====== Past Project 1 ====== -->
+        <div class="card project-meta">
+          <!-- ✅ [EDIT HERE] 프로젝트 이름 수정 -->
+          <h2>Name: Past Project 1</h2>
+
+          <!-- ✅ [EDIT HERE] 기간 수정 -->
+          <p><strong>Duration:</strong> 2021–2023</p>
+
+          <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+
+          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+        <!-- ====== Past Project 2 ====== -->
+        <div class="card project-meta">
+          <h2>Name: Past Project 2</h2>
+          <p><strong>Duration:</strong> 2020–2022</p>
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+        <!-- ====== Past Project 3 (single on the left) ====== -->
+        <div class="card project-meta single-left">
+          <h2>Name: Past Project 3</h2>
+          <p><strong>Duration:</strong> 2018–2020</p>
+          <p><strong>Funding:</strong> (Agency / Program)</p>
+          <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
+        </div>
+
+      </section>
     </section>
 
-    <section class="card" style="margin: 6px 0 48px;">
-      <h2>Interested in Collaboration?</h2>
-      <p style="margin:0;">
-        Please reach out via the <a href="contact.html">Contact</a> page.
-      </p>
-    </section>
   </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
     <div class="container">
       <p>© <span id="year"></span> AIVS Lab.</p>
