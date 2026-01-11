@@ -139,6 +139,19 @@
       line-height: 1.5;
     }
 
+    /* 교수 ↔ 학생 구분선 */
+    .section-divider {
+      margin: 36px 0 28px;   /* 위: 교수와 거리 / 아래: 학생 제목과 거리 */
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(136, 0, 0, 0.25),
+        transparent
+      );
+    }
+
+
     /* ===== Responsive ===== */
     @media (max-width: 980px) {
       .students-grid { grid-template-columns: repeat(2, 1fr); }
@@ -209,6 +222,10 @@
       </div>
     </section>
 
+    <!-- Section divider -->
+    <div class="section-divider"></div>
+
+    
     <!-- ===== Graduate Students ===== -->
     <section class="card students">
       <h2 class="section-title">Graduate Students</h2>
