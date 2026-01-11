@@ -32,6 +32,9 @@
     /* 연도 카드 간격 */
     .pub-card{ margin-top: 14px; }
 
+    /* ✅ 첫 번째 pub-card는 위 여백 제거(타이틀/설명 바로 아래이므로) */
+    main .pub-card:first-of-type{ margin-top: 0; }
+
     .pub-card h2{
       font-size: var(--pub-year-size);
       margin: 0 0 10px;
@@ -51,6 +54,8 @@
       text-align: justify;
       text-justify: inter-word;
       hyphens: auto;
+      overflow-wrap: break-word;
+      word-break: normal;
     }
 
     /* 제목 링크 스타일 */
@@ -63,7 +68,7 @@
       border-bottom-color: rgba(0,0,0,0.45);
     }
 
-    /* 상단 설명 문구 제거하고 싶으면 아래 p를 지우면 됨 */
+    /* 상단 설명 문구 */
     .pub-note{
       margin: 0 0 18px;
       color: var(--muted);
@@ -94,149 +99,116 @@
     <!-- 페이지 큰 제목 -->
     <h1 class="pub-title">Publications</h1>
 
-    <!-- 필요 없으면 이 문단 통째로 삭제해도 됨 -->
     <p class="pub-note">
       Publications are organized by year. For the most up-to-date list, please also see the Google Scholar profile.
     </p>
 
-    <!-- Links -->
-    <section class="card" style="margin:14px 0 48px;">
-      <h2>Links</h2>
-      <p style="margin:0;">
-        <strong>Google Scholar:</strong>
-        <a
-          href="https://scholar.google.com/citations?hl=ko&user=TNWHgVEAAAAJ"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Profile
-        </a><br />
-        <strong>GitHub:</strong> To be published
-      </p>
-    </section>
-    
-    <!-- ================= 2025 ================= -->
+    <!-- ===================== GENERATED (from publications.bib) ===================== -->
+    <!-- ✅ 아래 연도별 섹션들은 bib 자동생성 결과를 "card pub-card"로 맞춘 버전 -->
+
     <section class="card pub-card">
       <h2>2025</h2>
       <ul class="pub-list">
-        <li>
-          <a href="https://dblp.org/rec/journals/ict-express/ParkS25" target="_blank" rel="noopener noreferrer">
-            GRB-Sty: Redesign of Generative Residual Block for StyleGAN.
-          </a>
-          — Seung Park, Yong-Goo Shin. <em>ICT Express</em> 11(1): 223–227, 2025.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/tnn/ParkS25" target="_blank" rel="noopener noreferrer">
-            A Novel Generator With Auxiliary Branch for Improving GAN Performance.
-          </a>
-          — Seung Park, Yong-Goo Shin. <em>IEEE Transactions on Neural Networks and Learning Systems</em> 36(3): 5818–5825, 2025.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/tnn/ParkS25a" target="_blank" rel="noopener noreferrer">
-            Rethinking Image Skip Connections in StyleGAN2.
-          </a>
-          — Seung Park, Yong-Goo Shin. <em>IEEE Transactions on Neural Networks and Learning Systems</em> 36(7): 13615–13623, 2025.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/corr/abs-2502-01262" target="_blank" rel="noopener noreferrer">
-            FSPGD: Rethinking Black-box Attacks on Semantic Segmentation.
-          </a>
-          — Eun-Sol Park, MiSo Park, Seung Park, Yong-Goo Shin. <em>CoRR</em> abs/2502.01262, 2025.
-        </li>
+        <li><strong>An Ultrathin, Cyano-Functionalized Copolymeric Memristor by iCVD Process for Driving Convolutional Neural Networks of High-Resolution Images</strong> — Kim, Ji In, So, Minsu, Wang, Woo Jin, Kim, Taehoon, Jeong, Eun Su, Sim, Kyumin, Park, Hamin, Kim, Sung Kyu, Shin, Yong Goo, Choi, Junhwan, others. <em>Advanced Science, pp. e11801</em>.</li>
+        <li><strong>Construction and Optimization of Machine Learning Networks for Rail Surface Defect Detection</strong> — Choi, Yeongtae, Hyun, Ho, Oh, Sowon, Park, Mi So, Shin, Yong Goo. <em>Journal of the Korean Society for Railway, vol. 28, no. 8, pp. 783--801</em>.</li>
+        <li><strong>GRB-Sty: Redesign of Generative Residual Block for StyleGAN</strong> — Park, Seung, Shin, Yong-Goo. <em>ICT Express, vol. 11, no. 2, pp. 223--227</em>.</li>
+        <li><strong>Transformer-based model for predicting length of stay in intensive care unit in sepsis patients</strong> — Kim, Jeesu, Kim, Geun-Hyeong, Kim, Jae-Woo, Kim, Ka Hyun, Maeng, Jae-Young, Shin, Yong-Goo, Park, Seung. <em>Frontiers in Medicine, vol. 11, pp. 1473533</em>.</li>
       </ul>
     </section>
 
-    <!-- ================= 2024 ================= -->
     <section class="card pub-card">
       <h2>2024</h2>
       <ul class="pub-list">
-        <li>
-          <a href="https://dblp.org/rec/journals/artmed/ChoiYKSSP24" target="_blank" rel="noopener noreferrer">
-            Prognostic prediction of sepsis patient using transformer with skip connected token for tabular data.
-          </a>
-          — Jee-Woo Choi, Minuk Yang, Jae-Woo Kim, Yoon Mi Shin, Yong-Goo Shin, Seung Park.
-          <em>Artificial Intelligence in Medicine</em> 149: 102804, 2024.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/prl/YooYBWS24" target="_blank" rel="noopener noreferrer">
-            A unified framework to stereotyped behavior detection for screening Autism Spectrum Disorder.
-          </a>
-          — Cheol-Hwan Yoo, Jang-Hee Yoo, Moon-Ki Back, Woo-Jin Wang, Yong-Goo Shin.
-          <em>Pattern Recognition Letters</em> 186: 156–163, 2024.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/tnn/SagongYSK24" target="_blank" rel="noopener noreferrer">
-            Conditional Convolution Projecting Latent Vectors on Condition-Specific Space.
-          </a>
-          — Min-Cheol Sagong, Yoon-Jae Yeo, Yong-Goo Shin, Sung-Jea Ko.
-          <em>IEEE Transactions on Neural Networks and Learning Systems</em> 35(1): 1386–1393, 2024.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/corr/abs-2407-05527" target="_blank" rel="noopener noreferrer">
-            Rethinking Image Skip Connections in StyleGAN2.
-          </a>
-          — Seung Park, Yong-Goo Shin. <em>CoRR</em> abs/2407.05527, 2024.
-        </li>
+        <li><strong>A novel generator with auxiliary branch for improving gan performance</strong> — Park, Seung, Shin, Yong-Goo. <em>IEEE Transactions on Neural Networks and Learning Systems</em>.</li>
+        <li><strong>A unified framework to stereotyped behavior detection for screening Autism Spectrum Disorder</strong> — Yoo, Cheol-Hwan, Yoo, Jang-Hee, Back, Moon-Ki, Wang, Woo-Jin, Shin, Yong-Goo. <em>Pattern Recognition Letters, vol. 186, pp. 156--163</em>.</li>
+        <li><strong>Prognostic prediction of sepsis patient using transformer with skip connected token for tabular data</strong> — Choi, Jee-Woo, Yang, Minuk, Kim, Jae-Woo, Shin, Yoon Mi, Shin, Yong-Goo, Park, Seung. <em>Artificial Intelligence in Medicine, vol. 149, pp. 102804</em>.</li>
+        <li><strong>Rethinking image skip connections in stylegan2</strong> — Park, Seung, Shin, Yong-Goo. <em>IEEE Transactions on Neural Networks and Learning Systems</em>.</li>
       </ul>
     </section>
 
-    <!-- ================= 2023 ================= -->
     <section class="card pub-card">
       <h2>2023</h2>
       <ul class="pub-list">
-        <li>
-          <a href="https://dblp.org/rec/journals/apin/ParkYS23" target="_blank" rel="noopener noreferrer">
-            Effective shortcut technique for generative adversarial networks.
-          </a>
-          — Seung Park, Cheol-Hwan Yoo, Yong-Goo Shin.
-          <em>Applied Intelligence</em> 53(2): 2055–2067, 2023.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/journals/apin/YeoSPKS23" target="_blank" rel="noopener noreferrer">
-            Image generation with self pixel-wise normalization.
-          </a>
-          — Yoon-Jae Yeo, Min-Cheol Sagong, Seung Park, Sung-Jea Ko, Yong-Goo Shin.
-          <em>Applied Intelligence</em> 53(8): 9409–9423, 2023.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/conf/iccel/NamCSP23" target="_blank" rel="noopener noreferrer">
-            A BERT-Based Artificial Intelligence to Analyze Free-Text Clinical Notes for Binary Classification in Papillary Thyroid Carcinoma Recurrence.
-          </a>
-          — Jahyun Nam, Jee-Woo Choi, Yong-Goo Shin, Seung Park.
-          <em>ICCE 2023</em>, pp. 1–2, 2023.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/conf/icufn/ParkNCSP23" target="_blank" rel="noopener noreferrer">
-            Structured Medical Dataset Analysis Tool Based on ChatGPT.
-          </a>
-          — JinCheol Park, Jahyun Nam, Jee-Woo Choi, Yong-Goo Shin, Seung Park.
-          <em>ICUFN 2023</em>, pp. 837–842, 2023.
-        </li>
+        <li><strong>A bert-based artificial intelligence to analyze free-text clinical notes for binary classification in papillary thyroid carcinoma recurrence</strong> — Nam, Jahyun, Choi, Jee-Woo, Shin, Yong-Goo, Park, Seung. <em>2023 IEEE International Conference on Consumer Electronics (ICCE), pp. 1--2</em>.</li>
+        <li><strong>Effective shortcut technique for generative adversarial networks</strong> — Park, Seung, Yoo, Cheol-Hwan, Shin, Yong-Goo. <em>Applied Intelligence, vol. 53, no. 2, pp. 2055--2067</em>.</li>
+        <li><strong>Image generation with self pixel-wise normalization</strong> — Yeo, Yoon-Jae, Sagong, Min-Cheol, Park, Seung, Ko, Sung-Jea, Shin, Yong-Goo. <em>Applied Intelligence, vol. 53, no. 8, pp. 9409--9423</em>.</li>
+        <li><strong>Structured medical dataset analysis tool based on ChatGPT</strong> — Park, JinCheol, Nam, Jahyun, Choi, Jeewoo, Shin, Yong-Goo, Park, Seung. <em>2023 Fourteenth International Conference on Ubiquitous and Future Networks (ICUFN), pp. 837--842</em>.</li>
       </ul>
     </section>
 
-    <!-- ================= 2022 ================= -->
     <section class="card pub-card">
       <h2>2022</h2>
       <ul class="pub-list">
-        <li>
-          <a href="https://dblp.org/rec/journals/apin/ParkS22" target="_blank" rel="noopener noreferrer">
-            Rethinking Generator Style in StyleGAN.
-          </a>
-          — Seung Park, Yong-Goo Shin.
-          <em>Applied Intelligence</em> 52(14): 16534–16545, 2022.
-        </li>
-        <li>
-          <a href="https://dblp.org/rec/conf/iccel/ChoiSKKLS22" target="_blank" rel="noopener noreferrer">
-            Classification of Papillary Thyroid Carcinoma through Artificial Intelligence using Radiology Reports.
-          </a>
-          — Jee-Woo Choi, Sung-Hyun Kim, Seung Park, Sung-Jea Ko, Min-Ho Kim, Dong-Hwan Lee, Yong-Goo Shin.
-          <em>ICCE 2022</em>, pp. 1–2, 2022.
-        </li>
+        <li><strong>Conditional convolution projecting latent vectors on condition-specific space</strong> — Sagong, Min-Cheol, Yeo, Yoon-Jae, Shin, Yong-Goo, Ko, Sung-Jea. <em>IEEE Transactions on Neural Networks and Learning Systems, vol. 35, no. 1, pp. 1386--1393</em>.</li>
+        <li><strong>Generative convolution layer for image generation</strong> — Park, Seung, Shin, Yong-Goo. <em>Neural Networks, vol. 152, pp. 370--379</em>.</li>
+        <li><strong>Generative residual block for image generation</strong> — Park, Seung, Shin, Yong-Goo. <em>Applied Intelligence, vol. 52, no. 7, pp. 7808--7817</em>.</li>
+        <li><strong>Improved Generative Convolution Method for Image Generation</strong> — Park, Seung, Yang, Min-Uk, Kim, Geun-Hyeong, Im, Jueng-Eun, Kim, Ki-Hun, Shin, Yong-Goo. <em>2022 13th International Conference on Information and Communication Technology Convergence (ICTC), pp. 546--551</em>.</li>
+        <li><strong>PConv: simple yet effective convolutional layer for generative adversarial network</strong> — Park, Seung, Yeo, Yoon-Jae, Shin, Yong-Goo. <em>Neural Computing and Applications, vol. 34, no. 9, pp. 7113--7124</em>.</li>
       </ul>
     </section>
 
-    <!-- ================= LINKS ================= -->
+    <section class="card pub-card">
+      <h2>2021</h2>
+      <ul class="pub-list">
+        <li><strong>Simple yet effective way for improving the performance of GAN</strong> — Yeo, Yoon-Jae, Shin, Yong-Goo, Park, Seung, Ko, Sung-Jea. <em>IEEE Transactions on Neural Networks and Learning Systems, vol. 33, no. 4, pp. 1811--1818</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2020</h2>
+      <ul class="pub-list">
+        <li><strong>Detail restoration and tone mapping networks for x-ray security inspection</strong> — Kim, Hyo-Young, Park, Seung, Shin, Yong-Goo, Jung, Seung-Won, Ko, Sung-Jea. <em>IEEE Access, vol. 8, pp. 197473--197483</em>.</li>
+        <li><strong>Fast and accurate 3D hand pose estimation via recurrent neural network for capturing hand articulations</strong> — Yoo, Cheol-Hwan, Ji, Seowon, Shin, Yong-Goo, Kim, Seung-Wook, Ko, Sung-Jea. <em>IEEE Access, vol. 8, pp. 114010--114019</em>.</li>
+        <li><strong>Pepsi++: Fast and lightweight network for image inpainting</strong> — Shin, Yong-Goo, Sagong, Min-Cheol, Yeo, Yoon-Jae, Kim, Seung-Wook, Ko, Sung-Jea. <em>IEEE transactions on neural networks and learning systems, vol. 32, no. 1, pp. 252--265</em>.</li>
+        <li><strong>Self-attentive normalization for automated gleason grading system</strong> — Shin, Hong-Kyu, Hong, Sung-Hoo, Choi, Yeong-Jin, Shin, Yong-Goo, Park, Seung, Ko, Sung-Jea. <em>2020 IEEE REGION 10 CONFERENCE (TENCON), pp. 1101--1105</em>.</li>
+        <li><strong>Simple yet effective way for improving the performance of depth map super-resolution</strong> — Yeo, Yoon-Jae, Sagong, Min-Cheol, Shin, Yong-Goo, Jung, Seung-Won, Ko, Sung-Jea. <em>IEEE Signal Processing Letters, vol. 27, pp. 2099--2103</em>.</li>
+        <li><strong>Simple yet effective way for improving the performance of lossy image compression</strong> — Yeo, Yoon-Jae, Shin, Yong-Goo, Sagong, Min-Cheol, Kim, Seung-Wook, Ko, Sung-Jea. <em>IEEE Signal Processing Letters, vol. 27, pp. 530--534</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2019</h2>
+      <ul class="pub-list">
+        <li><strong>Context-aware encoding for clothing parsing</strong> — Yoo, C-H, Shin, Y-G, Kim, S-W, Ko, S-J. <em>Electronics Letters, vol. 55, no. 12, pp. 692--693</em>.</li>
+        <li><strong>Contrast enhancement using sensitivity model-based sigmoid function</strong> — Park, Seung, Shin, Yong-Goo, Ko, Sung-Jea. <em>IEEE Access, vol. 7, pp. 161573--161583</em>.</li>
+        <li><strong>Deep fashion recommendation system with style feature decomposition</strong> — Shin, Yong-Goo, Yeo, Yoon-Jae, Sagong, Min-Cheol, Ji, Seo-Won, Ko, Sung-Jea. <em>2019 IEEE 9th International Conference on Consumer Electronics (ICCE-Berlin), pp. 301--305</em>.</li>
+        <li><strong>Pepsi: Fast image inpainting with parallel decoding network</strong> — Sagong, Min-cheol, Shin, Yong-goo, Kim, Seung-wook, Park, Seung, Ko, Sung-jea. <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pp. 11360--11368</em>.</li>
+        <li><strong>Unsupervised deep contrast enhancement with power constraint for OLED displays</strong> — Shin, Yong-Goo, Park, Seung, Yeo, Yoon-Jae, Yoo, Min-Jae, Ko, Sung-Jea. <em>IEEE Transactions on Image Processing, vol. 29, pp. 2834--2844</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2018</h2>
+      <ul class="pub-list">
+        <li><strong>Adversarial context aggregation network for low-light image enhancement</strong> — Shin, Yong-Goo, Sagong, Min-Cheol, Yeo, Yoon-Jae, Ko, Sung-Jea. <em>2018 Digital Image Computing: Techniques and Applications (DICTA), pp. 1--5</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2017</h2>
+      <ul class="pub-list">
+        <li><strong>A novel burn-in potential region detection method using image processing technique</strong> — Shin, Yong-Goo, Lee, Dae-Hong, Kang, Mun-Cheon, Lee, Jeisung, Ko, Sung-Jea. <em>2017 IEEE International Conference on Consumer Electronics (ICCE), pp. 215--216</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2016</h2>
+      <ul class="pub-list">
+        <li><strong>Remote eye-gaze tracking method robust to the device rotation</strong> — Kim, Sung-Tae, Choi, Kang-A, Shin, Yong-Goo, Kang, Mun-Cheon, Ko, Sung-Jea. <em>Optical engineering, vol. 55, no. 8, pp. 083108--083108</em>.</li>
+      </ul>
+    </section>
+
+    <section class="card pub-card">
+      <h2>2015</h2>
+      <ul class="pub-list">
+        <li><strong>A novel 2-D mapping-based remote eye gaze tracking method using two IR light sources</strong> — Shin, Yong-Goo, Choi, Kang-A, Kim, Sung-Tae, Yoo, Cheol-Hwan, Ko, Sung-Jea. <em>2015 IEEE International Conference on Consumer Electronics (ICCE), pp. 190--191</em>.</li>
+        <li><strong>A novel iris center localization based on circle fitting using radially sampled features</strong> — Kim, Sung-Tae, Choi, Kang-A, Shin, Yong-Goo, Ko, Sung-Jea. <em>2015 International Symposium on Consumer Electronics (ISCE), pp. 1--2</em>.</li>
+        <li><strong>A novel single IR light based gaze estimation method using virtual glints</strong> — Shin, Yong-Goo, Choi, Kang-A, Kim, Sung-Tae, Ko, Sung-Jea. <em>IEEE Transactions on Consumer Electronics, vol. 61, no. 2, pp. 254--260</em>.</li>
+        <li><strong>Camera-based color calibration method for multiple flat-panel display system</strong> — Jung, June-Young, Park, Seung, Yoo, Cheol-Hwan, Shin, Yong-Goo, Ko, Sung-Jea. <em>2015 IEEE International Conference on Consumer Electronics (ICCE), pp. 90--91</em>.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== LINKS (only once, at the bottom) ===================== -->
     <section class="card pub-card" style="margin:14px 0 48px;">
       <h2>Links</h2>
       <p style="margin:0;">
@@ -244,10 +216,7 @@
         <a href="https://scholar.google.com/citations?user=TNWHgVEAAAAJ&hl=ko" target="_blank" rel="noopener noreferrer">
           Profile
         </a><br />
-        <strong>DBLP:</strong>
-        <a href="https://dblp.org/pid/165/2150.html" target="_blank" rel="noopener noreferrer">
-          Publication list
-        </a>
+        <strong>GitHub:</strong> To be published
       </p>
     </section>
 
