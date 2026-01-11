@@ -52,18 +52,30 @@
     /* 카드 안 항목 정리 */
     .project-meta p{
       margin: 0 0 8px;
+      /* ✅ 카드 안 텍스트를 좌우 맞춤 */
+      text-align: justify;
+      text-justify: inter-word;
+      /* ✅ 한글 어절 단위 줄바꿈(자연스럽게) */
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
     .project-meta p:last-child{
       margin-bottom: 0;
     }
+
+    /* Summary 톤 */
     .project-meta .summary{
       color: var(--muted);
     }
+
     /* Project 카드 제목 크기 조절 */
     .project-meta h2{
-      font-size: 18px;     /* ← 여기서 크기 조절 */
+      font-size: 18px;     /* ✅ 여기서 크기 조절 */
       font-weight: 800;
-      margin-bottom: 10px;
+      margin: 0 0 10px;    /* 위/아래 간격 정리 */
+      line-height: 1.25;   /* 긴 제목 줄바꿈 가독성 */
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
   </style>
@@ -98,8 +110,6 @@
       <!-- ✅ 글씨 크기 조절: 위 <style>의 --projects-title-size 숫자를 변경하세요 -->
       <h1 class="projects-title">Current Projects</h1>
 
-      <!-- ✅ 2) "Ongoing funded projects..." 문구 제거 -->
-
       <!-- ✅ 3) 한 줄에 2개씩 / 총 2줄 4개 카드 -->
       <section class="projects-grid-2">
 
@@ -112,11 +122,13 @@
           <p><strong>Duration:</strong> 2025.04.01–2029.12.31</p>
 
           <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
-          <p><strong>Funding:</strong> IITP (정보통신기획평가원) </p>
-          <p><strong>Total Budget:</strong> KRW 8.75 billon </p>          
+          <p><strong>Funding:</strong> IITP (정보통신기획평가원)</p>
 
-          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
-          <p class="summary"><strong>Summary:</strong> We develop a Vision–Language–Action (VLA) model for multi-sensory integrated control of next-generation social robots. 
+          <!-- ✅ [EDIT HERE] 총 예산 수정 -->
+          <p><strong>Total Budget:</strong> KRW 8.75 billon</p>
+
+          <!-- ✅ [EDIT HERE] 요약 수정 -->
+          <p class="summary"><strong>Summary:</strong> We develop a Vision–Language–Action (VLA) model for multi-sensory integrated control of next-generation social robots.
             The goal is to enable robust and generalizable robot decision-making across diverse real-world interactions.</p>
         </div>
 
@@ -166,7 +178,7 @@
           <!-- ✅ [EDIT HERE] 지원기관/프로그램 수정 -->
           <p><strong>Funding:</strong> (Agency / Program)</p>
 
-          <!-- ✅ [EDIT HERE] 한 줄 요약 수정 -->
+          <!-- ✅ [EDIT HERE] 요약 수정 -->
           <p class="summary"><strong>Summary:</strong> One-line summary of the project.</p>
         </div>
 
