@@ -70,6 +70,25 @@
       padding: 0;
     }
 
+    .member-roles {
+      margin: 10px 0 0;
+      padding-left: 18px;        /* bullet 간격 */
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .member-roles li {
+      margin: 4px 0;
+    }
+    
+    /* bullet 자체를 작고 단정하게 */
+    .member-roles li::marker {
+      font-size: 0.7em;
+      color: var(--creamson-2);
+    }
+
+
 
     /* 모바일 대응 */
     @media (max-width: 820px) {
@@ -121,7 +140,7 @@
         <div>
           <h2 class="member-name">Yong-Goo Shin</h2>
           <p class="member-role">
-            Professor, Director of AIVS Laboratory
+            Associate Professor, Department of Electronics and Information Engineering
           </p>
 
           <p class="member-desc">
