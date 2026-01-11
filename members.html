@@ -5,16 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Members | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Members page-only styles (only affects this page) -->
+  <style>
+    /* 교수 소개 카드 레이아웃 */
+    .member-profile {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .member-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;           /* 세로 사진 비율 */
+      border-radius: 16px;
+      object-fit: cover;
+      border: 1px solid rgba(136, 0, 0, 0.18);
+      background: #fff;
+    }
+
+    .member-name {
+      margin: 0 0 8px;
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.2px;
+    }
+
+    .member-role {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .member-desc {
+      margin: 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .member-meta {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid rgba(136, 0, 0, 0.18);
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 820px) {
+      .member-profile {
+        grid-template-columns: 1fr;
+      }
+      .member-photo {
+        max-width: 320px;
+        justify-self: start;
+      }
+      .member-name {
+        font-size: 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-      <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
-      <span class="brand-text">AIVS</span>
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
       </a>
 
-      
       <nav class="nav">
         <a href="index.html">Home</a>
         <a class="active" href="members.html">Members</a>
@@ -26,26 +99,51 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Members</h1>
-      <p>Faculty, students, and collaborators of the AIVS Laboratory.</p>
-    </section>
-
+  <main class="container" style="padding: 24px 0 48px;">
+    <!-- 교수 소개 카드 -->
     <section class="card">
-      <h2>Faculty</h2>
-      <p>Prof. Yong-Goo Shin</p>
-    </section>
+      <div class="member-profile">
+        <!-- 왼쪽: 사진 -->
+        <img
+          class="member-photo"
+          src="assets/img/prof_yonggoo_shin.jpg"
+          alt="Prof. Yong-Goo Shin"
+        />
 
-    <section class="card" style="margin-top:14px;">
-      <h2>Students</h2>
-      <p>Add PhD / MS / Undergraduate members here.</p>
+        <!-- 오른쪽: 텍스트 -->
+        <div>
+          <h2 class="member-name">Yong-Goo Shin</h2>
+          <p class="member-role">
+            Professor, Director of AIVS Laboratory
+          </p>
+
+          <p class="member-desc">
+            Add a short professional bio here. You can describe research interests,
+            current positions, and major responsibilities in a few concise lines.
+            <br />
+            Example: Multimodal AI, computer vision, and trustworthy AI systems.
+            Focused on building practical AI solutions for real-world problems.
+          </p>
+
+          <div class="member-meta">
+            <span class="pill">Multimodal AI</span>
+            <span class="pill">Computer Vision</span>
+            <span class="pill">AI Systems</span>
+            <span class="pill">Trustworthy AI</span>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container"><p>© <span id="year"></span> AIVS Lab.</p></div>
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab.</p>
+    </div>
   </footer>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
