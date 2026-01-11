@@ -9,9 +9,6 @@
   <!-- Publications page-only styles -->
   <style>
     :root{
-      /* ✅ 여기 숫자만 바꾸면 페이지 상단 "Publications" 제목 크기 조절됨 */
-      --pub-title-size: 38px;
-
       /* ✅ 연도(2025, 2024...) 제목 크기 조절 */
       --pub-year-size: 24px;
 
@@ -22,22 +19,23 @@
       --pub-line-height: 1.55;
     }
 
-    .pub-title{
-      margin: 0 0 18px;
-      font-size: var(--pub-title-size);
-      font-weight: 900;
-      line-height: 1.15;
+    /* ✅ (1) 상단 큰 제목/설명 제거했으니, main 상단 여백만 조금 */
+    main.container{
+      padding: 24px 0 48px;
     }
 
-    /* 연도 카드 간격 */
-    .pub-card{ margin-top: 14px; }
-
-    /* ✅ 첫 번째 pub-card는 위 여백 제거(타이틀/설명 바로 아래이므로) */
-    main .pub-card:first-of-type{ margin-top: 0; }
+    /* ✅ (2) Links/연도 섹션을 card로 쓰되, 배경/테두리/패딩 제거 */
+    .card.pub-card{
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;              /* divider가 간격을 담당 */
+    }
 
     .pub-card h2{
       font-size: var(--pub-year-size);
       margin: 0 0 10px;
+      font-weight: 900;
     }
 
     /* 리스트 가독성 */
@@ -50,7 +48,7 @@
       line-height: var(--pub-line-height);
       margin: 0 0 10px;
 
-      /* ✅ 좌우 맞춤(Justify) */
+      /* 좌우 맞춤(Justify) */
       text-align: justify;
       text-justify: inter-word;
       hyphens: auto;
@@ -68,10 +66,16 @@
       border-bottom-color: rgba(0,0,0,0.45);
     }
 
-    /* 상단 설명 문구 */
-    .pub-note{
-      margin: 0 0 18px;
-      color: var(--muted);
+    /* ✅ (3) Members에서 썼던 divider 스타일 그대로 */
+    .section-divider{
+      margin: 28px 0 22px;   /* 위/아래 간격 (원하면 숫자만 조절) */
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(136, 0, 0, 0.25),
+        transparent
+      );
     }
   </style>
 </head>
@@ -96,16 +100,10 @@
   </header>
 
   <main class="container">
-    <!-- 페이지 큰 제목 -->
-    <h1 class="pub-title">Publications</h1>
+    <!-- (1) 상단 "Publications + 설명" 삭제 -->
 
-    <p class="pub-note">
-      Publications are organized by year. For the most up-to-date list, please also see the Google Scholar profile.
-    </p>
-
-
-    <!-- ===================== LINKS (only once, at the bottom) ===================== -->
-    <section class="card pub-card" style="margin:14px 0 48px;">
+    <!-- ===================== LINKS ===================== -->
+    <section class="card pub-card">
       <h2>Links</h2>
       <p style="margin:0;">
         <strong>Google Scholar:</strong>
@@ -115,10 +113,10 @@
         <strong>GitHub:</strong> To be published
       </p>
     </section>
-    
-    <!-- ===================== GENERATED (from publications.bib) ===================== -->
-    <!-- ✅ 아래 연도별 섹션들은 bib 자동생성 결과를 "card pub-card"로 맞춘 버전 -->
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2025 ===================== -->
     <section class="card pub-card">
       <h2>2025</h2>
       <ul class="pub-list">
@@ -129,6 +127,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2024 ===================== -->
     <section class="card pub-card">
       <h2>2024</h2>
       <ul class="pub-list">
@@ -139,6 +140,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2023 ===================== -->
     <section class="card pub-card">
       <h2>2023</h2>
       <ul class="pub-list">
@@ -149,6 +153,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2022 ===================== -->
     <section class="card pub-card">
       <h2>2022</h2>
       <ul class="pub-list">
@@ -160,6 +167,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2021 ===================== -->
     <section class="card pub-card">
       <h2>2021</h2>
       <ul class="pub-list">
@@ -167,6 +177,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2020 ===================== -->
     <section class="card pub-card">
       <h2>2020</h2>
       <ul class="pub-list">
@@ -179,6 +192,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2019 ===================== -->
     <section class="card pub-card">
       <h2>2019</h2>
       <ul class="pub-list">
@@ -190,6 +206,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2018 ===================== -->
     <section class="card pub-card">
       <h2>2018</h2>
       <ul class="pub-list">
@@ -197,6 +216,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2017 ===================== -->
     <section class="card pub-card">
       <h2>2017</h2>
       <ul class="pub-list">
@@ -204,6 +226,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2016 ===================== -->
     <section class="card pub-card">
       <h2>2016</h2>
       <ul class="pub-list">
@@ -211,6 +236,9 @@
       </ul>
     </section>
 
+    <div class="section-divider"></div>
+
+    <!-- ===================== 2015 ===================== -->
     <section class="card pub-card">
       <h2>2015</h2>
       <ul class="pub-list">
@@ -220,9 +248,6 @@
         <li><strong>Camera-based color calibration method for multiple flat-panel display system</strong> — Jung, June-Young, Park, Seung, Yoo, Cheol-Hwan, Shin, Yong-Goo, Ko, Sung-Jea. <em>2015 IEEE International Conference on Consumer Electronics (ICCE), pp. 90--91</em>.</li>
       </ul>
     </section>
-
-
-
   </main>
 
   <footer class="site-footer">
