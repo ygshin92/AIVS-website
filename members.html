@@ -8,10 +8,15 @@
 
   <!-- Members page-only styles (only affects this page) -->
   <style>
-    /* 교수 소개 카드 레이아웃 */
+    :root{
+      /* ✅ 교수 사진 크기 조절은 여기 숫자만 바꾸면 됨 (px) */
+      --prof-photo-width: 200px;  /* ← 240 → 200으로 줄임. 더 줄이려면 180, 더 키우려면 220 */
+    }
+
+    /* ===== Professor ===== */
     .member-profile {
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: var(--prof-photo-width) 1fr; /* ✅ 교수 사진 영역 너비 */
       gap: 18px;
       align-items: center;
     }
@@ -40,13 +45,6 @@
       font-weight: 600;
     }
 
-    .member-desc {
-      margin: 0;
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
     .member-meta {
       margin-top: 12px;
       display: flex;
@@ -64,7 +62,9 @@
       font-weight: 600;
     }
 
-    .card.professor {
+    /* 교수/학생 섹션 모두 "살구 배경 + 테두리" 제거 */
+    .card.professor,
+    .card.students {
       background: transparent;
       border: none;
       padding: 0;
@@ -77,31 +77,79 @@
       font-size: 15px;
       line-height: 1.6;
     }
-    
-    .member-roles li {
-      margin: 4px 0;
-    }
-    
-    /* bullet 자체를 작고 단정하게 */
+    .member-roles li { margin: 4px 0; }
     .member-roles li::marker {
       font-size: 0.7em;
       color: var(--creamson-2);
     }
 
+    /* ===== Graduate Students ===== */
+    .section-title {
+      margin: 28px 0 12px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
 
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
 
-    /* 모바일 대응 */
+    .student-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      align-items: center;
+
+      /* ✅ 학생 카드도 배경/테두리 없이, 대신 살짝 구분만 */
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(136, 0, 0, 0.10);
+    }
+
+    .student-photo {
+      width: 76px;               /* ✅ 학생 사진 크기 조절은 여기 숫자만 */
+      height: 76px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(136, 0, 0, 0.18);
+      background: #fff;
+    }
+
+    .student-name {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .student-program {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .student-interest {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px) {
+      .students-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 820px) {
-      .member-profile {
-        grid-template-columns: 1fr;
-      }
-      .member-photo {
-        max-width: 320px;
-        justify-self: start;
-      }
-      .member-name {
-        font-size: 30px;
-      }
+      .member-profile { grid-template-columns: 1fr; }
+      .member-photo { max-width: 260px; justify-self: start; } /* 모바일에서 교수사진 최대폭 */
+      .member-name { font-size: 30px; }
+
+      .students-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -126,37 +174,133 @@
   </header>
 
   <main class="container" style="padding: 24px 0 48px;">
-    <!-- 교수 소개 카드 -->
+    <!-- ===== Professor ===== -->
     <section class="card professor">
       <div class="member-profile">
-        <!-- 왼쪽: 사진 -->
+        <!-- 왼쪽: 교수 사진 -->
         <img
           class="member-photo"
           src="assets/img/prof_yonggoo_shin.jpg"
           alt="Prof. Yong-Goo Shin"
         />
 
-        <!-- 오른쪽: 텍스트 -->
+        <!-- 오른쪽: 교수 정보 -->
         <div>
           <h2 class="member-name">Yong-Goo Shin</h2>
           <p class="member-role">
             Associate Professor, Department of Electronics and Information Engineering
           </p>
-          
+
           <ul class="member-roles">
-            <li>전자및정보공학과 학과장 (2026.03.01-현재) </li>
-            <li>디지털헬스케어공학과 겸임교수 (2025.03.01-현재) </li>
-            <li>BK21 스마트에너지 사업단 부단장 (2025.03.01-현재) </li>
-            <li>고려대학교 세종캠퍼스 소프트웨어 중심대학 참여교수 (2024.04.01-현재) </li>
-            <li>고려대학교 세종캠퍼스 첨단 반도체 공정장비인재양성사업단 참여교수 (2023.09.01-현재) </li>
-            
+            <li>전자및정보공학과 학과장 (2026.03.01-현재)</li>
+            <li>디지털헬스케어공학과 겸임교수 (2025.03.01-현재)</li>
+            <li>BK21 스마트에너지 사업단 부단장 (2025.03.01-현재)</li>
+            <li>고려대학교 세종캠퍼스 소프트웨어 중심대학 참여교수 (2024.04.01-현재)</li>
+            <li>고려대학교 세종캠퍼스 첨단 반도체 공정장비인재양성사업단 참여교수 (2023.09.01-현재)</li>
           </ul>
 
           <div class="member-meta">
             <span class="pill">Physical AI</span>
             <span class="pill">Generative AI</span>
-            <span class="pill">AI VIsion Systems</span>
+            <span class="pill">AI Vision Systems</span>
             <span class="pill">AI Agent</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Graduate Students ===== -->
+    <section class="card students">
+      <h2 class="section-title">Graduate Students</h2>
+
+      <div class="students-grid">
+        <!-- ===== Student 1 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student01.jpg" alt="Student 1" />
+          <div>
+            <h3 class="student-name">Student Name 1</h3>
+            <p class="student-program">Ph.D. Student · Spring 2025</p>
+            <p class="student-interest">Research interest: Multimodal learning for embodied agents.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 2 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student02.jpg" alt="Student 2" />
+          <div>
+            <h3 class="student-name">Student Name 2</h3>
+            <p class="student-program">M.S. Student · Fall 2024</p>
+            <p class="student-interest">Research interest: Generative models for controllable image editing.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 3 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student03.jpg" alt="Student 3" />
+          <div>
+            <h3 class="student-name">Student Name 3</h3>
+            <p class="student-program">M.S.-Ph.D. Student · Spring 2024</p>
+            <p class="student-interest">Research interest: Efficient attention and diffusion acceleration.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 4 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student04.jpg" alt="Student 4" />
+          <div>
+            <h3 class="student-name">Student Name 4</h3>
+            <p class="student-program">Ph.D. Student · Fall 2023</p>
+            <p class="student-interest">Research interest: Robust perception under adversarial attacks.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 5 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student05.jpg" alt="Student 5" />
+          <div>
+            <h3 class="student-name">Student Name 5</h3>
+            <p class="student-program">M.S. Student · Spring 2023</p>
+            <p class="student-interest">Research interest: Semantic segmentation and medical imaging AI.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 6 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student06.jpg" alt="Student 6" />
+          <div>
+            <h3 class="student-name">Student Name 6</h3>
+            <p class="student-program">M.S.-Ph.D. Student · Fall 2022</p>
+            <p class="student-interest">Research interest: Video generation and spatiotemporal modeling.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 7 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student07.jpg" alt="Student 7" />
+          <div>
+            <h3 class="student-name">Student Name 7</h3>
+            <p class="student-program">Ph.D. Student · Spring 2022</p>
+            <p class="student-interest">Research interest: On-device AI and efficient deployment.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 8 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student08.jpg" alt="Student 8" />
+          <div>
+            <h3 class="student-name">Student Name 8</h3>
+            <p class="student-program">M.S. Student · Fall 2021</p>
+            <p class="student-interest">Research interest: 3D vision and sensor fusion.</p>
+          </div>
+        </div>
+
+        <!-- ===== Student 9 ===== -->
+        <div class="student-item">
+          <img class="student-photo" src="assets/img/students/student09.jpg" alt="Student 9" />
+          <div>
+            <h3 class="student-name">Student Name 9</h3>
+            <p class="student-program">M.S.-Ph.D. Student · Spring 2021</p>
+            <p class="student-interest">Research interest: AI agents for autonomous manipulation.</p>
           </div>
         </div>
       </div>
