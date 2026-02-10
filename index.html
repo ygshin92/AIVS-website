@@ -43,13 +43,15 @@
 
     .home-photo img{
       width: 100%;
-      height: var(--home-photo-height);
-      object-fit: contain;
+      height: auto;                 /* 🔑 고정 높이 제거 */
+      max-height: 420px;            /* 선택: 너무 커지는 것 방지 */
+      object-fit: initial;          /* 또는 아예 삭제해도 됨 */
       object-position: center;
       border-radius: 16px;
       display: block;
       background: #fff;
     }
+
 
     .photo-caption{
       margin: 8px 0 0;
