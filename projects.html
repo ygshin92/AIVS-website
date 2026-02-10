@@ -5,106 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Research page-only styles -->
-  <style>
-    :root{
-      /* ✅ [FONT SIZE CONTROL] 숫자만 바꾸면 크기 조절 */
-      --research-title-size: 38px;   /* Research 제목 크기 */
-      --section-title-size: 22px;    /* 섹션(주제) 제목 크기 */
-      --section-text-size: 16px;     /* 본문 글자 크기 */
-      --section-line-height: 1.65;   /* 본문 줄간격 */
-    }
-
-    /* 상단 hero는 유지하되, 카드 느낌 제거(원하면) */
-    main.container{
-      padding: 24px 0 48px;
-    }
-
-    .research-hero h1{
-      margin: 0 0 10px;
-      font-size: var(--research-title-size);
-      font-weight: 900;
-      line-height: 1.15;
-    }
-
-    .research-hero p{
-      margin: 0;
-      color: var(--muted);
-      max-width: none;
-    }
-
-    /* ✅ Publications에서 쓰던 divider 톤 */
-    .section-divider{
-      margin: 28px 0 22px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(136, 0, 0, 0.25),
-        transparent
-      );
-    }
-
-    /* ✅ 주제 섹션: 배경/테두리 없이, 콘텐츠만 */
-    .research-section{
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .research-section h2{
-      margin: 0 0 12px;
-      font-size: var(--section-title-size);
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    .research-media{
-      width: 100%;
-      max-height: 340px;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-    }
-
-    .research-desc{
-      margin: 14px 0 0;
-      font-size: var(--section-text-size);
-      line-height: var(--section-line-height);
-      color: var(--text);
-
-      text-align: justify;
-      text-justify: inter-word;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
-
-    /* 키워드 칩(선택) */
-    .keywords{
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .pill{
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    @media (max-width: 820px){
-      .research-media{ max-height: 260px; }
-      .research-hero h1{ font-size: 32px; }
-    }
-  </style>
 </head>
-
 <body>
   <header class="site-header">
     <div class="container header-inner">
@@ -125,8 +26,7 @@
   </header>
 
   <main class="container">
-    <!-- ✅ 상단 소개(기존 Research 큰 글씨/설명은 유지, 원하면 지워도 됨) -->
-    <section class="research-hero" style="padding: 6px 0 6px;">
+    <section class="hero">
       <h1>Research</h1>
       <p>
         Our research focuses on computer vision, multimodal AI, and embodied intelligence.
@@ -134,81 +34,29 @@
       </p>
     </section>
 
-    <div class="section-divider"></div>
+    <section class="grid">
+      <div class="card">
+        <h2>Generative AI</h2>
+        <p>Diffusion models, controllable generation, efficient inference, and safety.</p>
+      </div>
 
-    <!-- ===================== SECTION 1 ===================== -->
-    <section class="research-section">
-      <h2>Generative AI</h2>
+      <div class="card">
+        <h2>Vision & Multimodal Learning</h2>
+        <p>Representation learning, VLMs, fine-grained recognition, and robust perception.</p>
+      </div>
 
-      <!-- ✅ 이미지: 일단 동일한 이미지로 채워둠 (나중에 파일만 바꾸면 됨) -->
-      <img class="research-media" src="assets/img/lab_group.jpg" alt="Generative AI research" />
-
-      <p class="research-desc">
-        We study modern generative models including diffusion models and GAN variants, with an emphasis on
-        controllable generation, efficient inference, and safety. Our goal is to build practical generation
-        pipelines that can be deployed reliably under real-world constraints.
-      </p>
-
-      <div class="keywords">
-        <span class="pill">Diffusion</span>
-        <span class="pill">Controllable Generation</span>
-        <span class="pill">Efficiency</span>
-        <span class="pill">Safety</span>
+      <div class="card">
+        <h2>Embodied AI & Robotics</h2>
+        <p>Perception-action loops, manipulation, planning, and data-efficient learning.</p>
       </div>
     </section>
 
-    <div class="section-divider"></div>
-
-    <!-- ===================== SECTION 2 ===================== -->
-    <section class="research-section">
-      <h2>Vision & Multimodal Learning</h2>
-
-      <img class="research-media" src="assets/img/lab_group.jpg" alt="Vision and Multimodal Learning research" />
-
-      <p class="research-desc">
-        We develop robust visual representations and multimodal learning methods, including vision-language models (VLMs),
-        fine-grained recognition, and reliable perception. We also explore training strategies that improve generalization
-        and robustness in diverse environments.
-      </p>
-
-      <div class="keywords">
-        <span class="pill">VLM</span>
-        <span class="pill">Representation Learning</span>
-        <span class="pill">Segmentation</span>
-        <span class="pill">Robust Perception</span>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ===================== SECTION 3 ===================== -->
-    <section class="research-section">
-      <h2>Embodied AI & Robotics</h2>
-
-      <img class="research-media" src="assets/img/lab_group.jpg" alt="Embodied AI and Robotics research" />
-
-      <p class="research-desc">
-        Our embodied AI research connects perception to action through planning and control.
-        We investigate data-efficient learning for manipulation and interactive decision-making, aiming to build
-        embodied agents that operate reliably in the physical world.
-      </p>
-
-      <div class="keywords">
-        <span class="pill">Embodied Agents</span>
-        <span class="pill">Manipulation</span>
-        <span class="pill">Planning</span>
-        <span class="pill">Data-Efficient Learning</span>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ===================== SELECTED KEYWORDS (optional) ===================== -->
-    <section class="research-section">
+    <section class="card" style="margin: 6px 0 48px;">
       <h2>Selected Keywords</h2>
-      <p class="research-desc" style="margin-top:0;">
-        Diffusion, Controllable Generation, Linear Attention, Vision-Language Models, Segmentation,
-        Adversarial Robustness, Embodied Agents, Manipulation, Data-Efficient Learning
+      <p style="color: var(--muted); margin: 0;">
+        Diffusion, Controllable Generation, Linear Attention, Vision-Language Models,
+        Segmentation, Adversarial Robustness, Embodied Agents, Manipulation,
+        Data-Efficient Learning
       </p>
     </section>
   </main>
