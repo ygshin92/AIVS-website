@@ -5,13 +5,187 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Home page-only styles -->
+  <style>
+    :root{
+      /* ✅ [FONT SIZE CONTROL] 숫자만 바꾸면 조절 가능 */
+      --home-title-size: 44px;     /* 메인 타이틀 */
+      --home-subtitle-size: 18px;  /* 설명 문단 */
+      --home-section-title: 22px;  /* 섹션 제목 */
+      --home-body-size: 16px;      /* 본문 */
+    }
+
+    main.container{
+      padding: 24px 0 48px;
+    }
+
+    /* ✅ Publications/Members에서 쓰던 divider 톤 */
+    .section-divider{
+      margin: 28px 0 22px;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(136, 0, 0, 0.25),
+        transparent
+      );
+    }
+
+    /* ================= HERO ================= */
+    .home-hero{
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 0 10px;
+    }
+
+    .home-hero h1{
+      margin: 0 0 10px;
+      font-size: var(--home-title-size);
+      font-weight: 900;
+      line-height: 1.10;
+      letter-spacing: 0.2px;
+    }
+
+    .home-hero p{
+      margin: 0 0 16px;
+      font-size: var(--home-subtitle-size);
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: none;
+    }
+
+    .hero-media{
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    /* ================= HIGHLIGHTS ================= */
+    .highlights{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    /* 카드 배경/테두리 없이 깔끔하게 */
+    .highlight-card{
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .highlight-card h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .highlight-card p{
+      margin: 0;
+      color: var(--text);
+      font-size: var(--home-body-size);
+      line-height: 1.6;
+    }
+
+    .highlight-card .muted{
+      color: var(--muted);
+    }
+
+    /* ================= RESEARCH PILLARS ================= */
+    .home-section-title{
+      margin: 0 0 12px;
+      font-size: var(--home-section-title);
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .pillars{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .pillar{
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pillar h3{
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .pillar p{
+      margin: 0 0 10px;
+      font-size: var(--home-body-size);
+      line-height: 1.65;
+      color: var(--muted);
+      text-align: justify;
+      text-justify: inter-word;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .keywords{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill{
+      border: 1px solid rgba(136, 0, 0, 0.18);
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ================= CTA / NEWS ================= */
+    .cta{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .cta p{
+      margin: 0;
+      color: var(--text);
+      font-size: var(--home-body-size);
+      line-height: 1.65;
+    }
+
+    /* 반응형 */
+    @media (max-width: 900px){
+      .home-hero{
+        grid-template-columns: 1fr;
+      }
+      .highlights, .pillars{
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-      <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
-      <span class="brand-text">AIVS</span>
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
       </a>
 
       <nav class="nav">
@@ -26,34 +200,116 @@
   </header>
 
   <main class="container">
-    <section class="hero">
-      <h1>AI Vision & Systems (AIVS) Laboratory</h1>
-      <p>
-        Welcome to the AIVS Lab at Korea University. We conduct research on
-        computer vision, multimodal AI, and embodied intelligence.
-      </p>
-      <div class="hero-actions">
-        <a class="btn" href="research.html">Explore Research</a>
-        <a class="btn btn-ghost" href="publications.html">View Publications</a>
+    <!-- ================= HERO ================= -->
+    <section class="home-hero">
+      <div>
+        <h1>AI Vision & Systems (AIVS) Laboratory</h1>
+
+        <!-- ✅ 홈 소개 문구(원하면 여기 문장만 바꿔도 됨) -->
+        <p>
+          At AIVS Lab, we build real-world intelligent systems that perceive, reason, and act.
+          Our research spans computer vision, multimodal foundation models, and embodied intelligence,
+          with a focus on robust, scalable, and deployable AI.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="research.html">Explore Research</a>
+          <a class="btn btn-ghost" href="contact.html">Join / Contact</a>
+        </div>
+      </div>
+
+      <!-- ✅ 오른쪽: 대표 이미지(연구실 단체 사진) -->
+      <img class="hero-media" src="assets/img/lab_group.jpg" alt="AIVS Lab Group" />
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================= QUICK HIGHLIGHTS ================= -->
+    <section>
+      <h2 class="home-section-title">Highlights</h2>
+
+      <div class="highlights">
+        <div class="highlight-card">
+          <h3>Funded Projects</h3>
+          <!-- ✅ 숫자/표현은 나중에 업데이트 -->
+          <p><span class="muted">Current focus:</span> large-scale multimodal & embodied AI projects.</p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Publications</h3>
+          <p><span class="muted">Selected venues:</span> TNNLS, TIP, Advanced Science, and more.</p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Recruiting</h3>
+          <p>We welcome MS/PhD and undergraduate researchers interested in AI systems.</p>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Research</h2>
-        <p>Core topics, ongoing directions, and highlighted works.</p>
-        <a href="research.html">Learn more →</a>
+    <div class="section-divider"></div>
+
+    <!-- ================= RESEARCH PILLARS ================= -->
+    <section>
+      <h2 class="home-section-title">Research Pillars</h2>
+
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Generative AI</h3>
+          <p>
+            We study modern generative models including diffusion models, GAN variants,
+            and recent video and 3D/4D generative frameworks, with an emphasis on controllability,
+            efficiency, and safe deployment.
+          </p>
+          <div class="keywords">
+            <span class="pill">Diffusion Models</span>
+            <span class="pill">Video Generation</span>
+            <span class="pill">3D / 4D Generation</span>
+            <span class="pill">Controllable Generation</span>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <h3>Vision & Multimodal Learning</h3>
+          <p>
+            We develop robust visual representations and multimodal learning methods that combine
+            visual and language signals, focusing on reliable perception, generalization under shift,
+            and trustworthy model behavior in the wild.
+          </p>
+          <div class="keywords">
+            <span class="pill">Vision-Language Models</span>
+            <span class="pill">Multimodal Representation</span>
+            <span class="pill">Fine-Grained Recognition</span>
+            <span class="pill">Trustworthy Perception</span>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <h3>Embodied AI & Robotics</h3>
+          <p>
+            Our embodied AI research bridges perception and action through planning, control,
+            and interactive decision-making. We study data-efficient methods for manipulation and
+            aim to build embodied agents that operate reliably in complex physical environments.
+          </p>
+          <div class="keywords">
+            <span class="pill">Vision-Language-Action (VLA)</span>
+            <span class="pill">Embodied Agents</span>
+            <span class="pill">Robotic Manipulation</span>
+            <span class="pill">Planning & Control</span>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <h2>Members</h2>
-        <p>Faculty, students, and collaborators.</p>
-        <a href="members.html">Meet the team →</a>
-      </div>
-      <div class="card">
-        <h2>Projects</h2>
-        <p>Funded projects and collaborations.</p>
-        <a href="projects.html">See projects →</a>
-      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================= CTA ================= -->
+    <section class="cta">
+      <p>
+        Interested in working with us? We are always looking for motivated students and collaborators.
+        Please see the contact page for application and inquiry details.
+      </p>
+      <a class="btn" href="contact.html">Contact</a>
     </section>
   </main>
 
