@@ -16,7 +16,7 @@
       --home-body-size: 16px;      /* 본문 */
 
       /* ✅ [PHOTO HEIGHT CONTROL] 사진 높이 조절 (여기 숫자만 변경) */
-      --home-photo-height: 260px;  /* ← 여기! (예: 220px / 300px) */
+      --home-photo-height: 260px;  /* (현재는 auto 사용 중이라 실질 영향 없음) */
       --home-caption-size: 13px;   /* 사진 아래 캡션 글씨 크기 */
     }
 
@@ -41,17 +41,17 @@
       margin: 22px 0 18px; /* ✅ 헤더 아래 여백 + 아래 간격 */
     }
 
+    /* ✅ 해결2 반영: 가로 꽉 + 안 잘림 */
     .home-photo img{
       width: 100%;
       height: auto;                 /* 🔑 고정 높이 제거 */
       max-height: 420px;            /* 선택: 너무 커지는 것 방지 */
-      object-fit: initial;          /* 또는 아예 삭제해도 됨 */
+      object-fit: initial;          /* (사실상 필요 없음) */
       object-position: center;
       border-radius: 16px;
       display: block;
       background: #fff;
     }
-
 
     .photo-caption{
       margin: 8px 0 0;
@@ -77,10 +77,10 @@
       font-size: var(--home-subtitle-size);
       color: var(--muted);
       line-height: 1.65;
-      max-width: none;
+      max-width: none; /* ✅ 줄바꿈 패턴 안정화 */
     }
 
-    /* ================= HIGHLIGHTS ================= */
+    /* ================= SECTION TITLE ================= */
     .home-section-title{
       margin: 0 0 12px;
       font-size: var(--home-section-title);
@@ -88,84 +88,89 @@
       line-height: 1.2;
     }
 
-    .highlights{
+    /* ================= HIGHLIGHTS (BULLET) ================= */
+    .highlights-list{
+      margin: 0;
+      padding-left: 18px; /* bullet 들여쓰기 */
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    /* 배경/테두리 없이 깔끔하게 */
-    .highlight-card{
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .highlight-card h3{
-      margin: 0 0 6px;
-      font-size: 16px;
-      font-weight: 900;
-    }
-
-    .highlight-card p{
-      margin: 0;
-      color: var(--text);
-      font-size: var(--home-body-size);
-      line-height: 1.6;
-    }
-
-    .highlight-card .muted{
-      color: var(--muted);
-    }
-
-    /* ================= RESEARCH PILLARS ================= */
-    .pillars{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .pillar{
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .pillar h3{
-      margin: 0 0 8px;
-      font-size: 18px;
-      font-weight: 900;
-      line-height: 1.25;
-    }
-
-    .pillar p{
-      margin: 0 0 10px;
-      font-size: var(--home-body-size);
-      line-height: 1.65;
-      color: var(--muted);
-      text-align: justify;
-      text-justify: inter-word;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
-
-    .keywords{
-      display: flex;
-      flex-wrap: wrap;
       gap: 10px;
     }
 
-    .pill{
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 700;
+    .highlights-list li{
+      margin: 0;
+      color: var(--text);
+      font-size: var(--home-body-size);
+      line-height: 1.65;
+    }
+
+    /* [Label] 스타일 */
+    .hl-tag{
+      display: inline-block;
+      font-weight: 900;
+      color: rgba(136, 0, 0, 0.85);
+      margin-right: 8px;
       white-space: nowrap;
+    }
+
+    .hl-desc{
+      color: var(--text);
+    }
+
+    /* ================= NEWS ================= */
+    .news{
+      display: grid;
+      gap: 10px;
+    }
+
+    .news-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .news-item{
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(136, 0, 0, 0.04);
+      border: 1px solid rgba(136, 0, 0, 0.10);
+    }
+
+    .news-date{
+      font-size: 14px;
+      font-weight: 800;
+      color: rgba(136, 0, 0, 0.75);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .news-text{
+      font-size: var(--home-body-size);
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .news-text a{
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(136, 0, 0, 0.25);
+    }
+
+    .news-text a:hover{
+      border-bottom-color: rgba(136, 0, 0, 0.55);
+    }
+
+    .news-actions{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
     }
 
     /* ================= CTA ================= */
@@ -185,16 +190,13 @@
 
     /* 반응형 */
     @media (max-width: 900px){
-      :root{
-        --home-photo-height: 200px;
+      .home-photo img{
+        max-height: 260px;
       }
 
-      .highlights, .pillars{
-        grid-template-columns: 1fr;
-      }
-
-      .home-hero p{
-        max-width: none;
+      .news-item{
+        grid-template-columns: 1fr; /* 날짜 위, 내용 아래 */
+        gap: 6px;
       }
     }
   </style>
@@ -223,7 +225,6 @@
     <!-- ================= LAB PHOTO ================= -->
     <section class="home-photo" aria-label="AIVS Lab Group Photo">
       <img src="assets/img/lab_group.jpg" alt="AIVS Lab Group" />
-      <!-- ✅ 사진 아래 캡션 (원하면 문장만 바꿔도 됨) -->
       <p class="photo-caption">AIVS Lab, Korea University</p>
     </section>
 
@@ -245,32 +246,69 @@
 
     <div class="section-divider"></div>
 
-    <!-- ================= QUICK HIGHLIGHTS ================= -->
-    <section>
+    <!-- ================= HIGHLIGHTS (BULLET) ================= -->
+    <section aria-label="Highlights">
       <h2 class="home-section-title">Highlights</h2>
 
-      <div class="highlights">
-        <div class="highlight-card">
-          <h3>Funded Projects</h3>
-          <p><span class="muted">Current focus:</span> large-scale multimodal & embodied AI projects.</p>
-        </div>
+      <ul class="highlights-list">
+        <li>
+          <span class="hl-tag">[Funded Projects]</span>
+          <span class="hl-desc">Actively conducting large-scale multimodal & embodied AI projects.</span>
+        </li>
+        <li>
+          <span class="hl-tag">[Publications]</span>
+          <span class="hl-desc">Papers accepted at top-tier venues including TNNLS, TIP, Advanced Science, and more.</span>
+        </li>
+        <li>
+          <span class="hl-tag">[Recruiting]</span>
+          <span class="hl-desc">We welcome MS/PhD and undergraduate researchers interested in AI systems.</span>
+        </li>
+      </ul>
+    </section>
 
-        <div class="highlight-card">
-          <h3>Publications</h3>
-          <p><span class="muted">Selected venues:</span> TNNLS, TIP, Advanced Science, and more.</p>
-        </div>
+    <div class="section-divider"></div>
 
-        <div class="highlight-card">
-          <h3>Recruiting</h3>
-          <p>We welcome MS/PhD and undergraduate researchers interested in AI systems.</p>
-        </div>
+    <!-- ================= NEWS ================= -->
+    <section class="news" aria-label="News">
+      <h2 class="home-section-title">News</h2>
+
+      <ul class="news-list">
+        <!-- ✅ 예시: 최신 소식은 여기 2~4개 정도만 -->
+        <li class="news-item">
+          <div class="news-date">2026-02</div>
+          <div class="news-text">
+            New project kickoff: multimodal embodied AI system development.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2026-01</div>
+          <div class="news-text">
+            Paper accepted in a top-tier venue (details to be announced).
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2025-12</div>
+          <div class="news-text">
+            We are recruiting MS/PhD students and undergraduate researchers for Spring 2026.
+            <a href="contact.html">See details</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="news-actions">
+        <!-- (선택) news.html 만들면 연결 -->
+        <!-- <a class="btn btn-ghost" href="news.html">View all news</a> -->
+        <a class="btn btn-ghost" href="projects.html">Projects</a>
+        <a class="btn btn-ghost" href="publications.html">Publications</a>
       </div>
     </section>
 
     <div class="section-divider"></div>
 
     <!-- ================= CTA ================= -->
-    <section class="cta">
+    <section class="cta" aria-label="Contact Call-to-Action">
       <p>
         Interested in working with us? We are always looking for motivated students and collaborators.
         Please see the contact page for application and inquiry details.
@@ -290,3 +328,4 @@
   </script>
 </body>
 </html>
+`
