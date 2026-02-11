@@ -9,22 +9,19 @@
   <!-- Home page-only styles -->
   <style>
     :root{
-      /* ✅ [FONT SIZE CONTROL] 숫자만 바꾸면 조절 가능 */
-      --home-title-size: 42px;     /* "Who We Are" 제목 */
-      --home-subtitle-size: 18px;  /* 소개 문단 */
-      --home-section-title: 22px;  /* 섹션 제목 */
-      --home-body-size: 16px;      /* 본문 */
+      --home-title-size: 42px;
+      --home-subtitle-size: 18px;
+      --home-section-title: 22px;
+      --home-body-size: 16px;
 
-      /* ✅ [PHOTO HEIGHT CONTROL] 사진 높이 조절 (여기 숫자만 변경) */
-      --home-photo-height: 260px;  /* (현재는 auto 사용 중이라 실질 영향 없음) */
-      --home-caption-size: 13px;   /* 사진 아래 캡션 글씨 크기 */
+      --home-photo-height: 260px; /* (현재 설정에서는 사용 안 함) */
+      --home-caption-size: 13px;
     }
 
     main.container{
       padding: 0 0 48px;
     }
 
-    /* ✅ Members/Publications에서 쓰던 divider 톤 */
     .section-divider{
       margin: 28px 0 22px;
       height: 1px;
@@ -41,15 +38,17 @@
       margin: 22px 0 18px;
     }
 
+    /* ✅ 본문 폭(컨테이너) 꽉 + 비율 유지 + 높이 제한 없음 */
     .home-photo img{
       display: block;
-      height: auto;                 /* 비율 유지 */
-      width: auto;                  /* 원본/비율 기준 */
-      max-width: 100%;              /* 컨테이너보다 커지면 줄이기 */
-      max-height: 340px;            /* 세로 제한 */
-      margin: 0 auto;               /* ✅ 가운데 정렬 */
+      width: 100%;      /* ✅ container 가로폭 꽉 채움 */
+      height: auto;     /* ✅ 원본 비율 유지 */
+      margin: 0;        /* width 100%면 가운데정렬 불필요 */
       border-radius: 16px;
       background: #fff;
+
+      /* (선택) 렌더링 품질/부드러움 관련: 브라우저마다 체감이 달라서 취향 */
+      /* image-rendering: auto; */
     }
 
     .photo-caption{
@@ -79,7 +78,6 @@
       max-width: none;
     }
 
-    /* ================= SECTION TITLE ================= */
     .home-section-title{
       margin: 0 0 12px;
       font-size: var(--home-section-title);
@@ -103,7 +101,7 @@
 
     .highlight-item{
       display: grid;
-      grid-template-columns: 170px 1fr; /* 왼쪽 라벨, 오른쪽 설명 */
+      grid-template-columns: 170px 1fr;
       gap: 12px;
       align-items: baseline;
       padding: 10px 12px;
@@ -192,17 +190,13 @@
 
     /* 반응형 */
     @media (max-width: 900px){
-      .home-photo img{
-        max-height: 260px;
-      }
-
       .highlight-item{
-        grid-template-columns: 1fr; /* 라벨 위, 내용 아래 */
+        grid-template-columns: 1fr;
         gap: 6px;
       }
 
       .news-item{
-        grid-template-columns: 1fr; /* 날짜 위, 내용 아래 */
+        grid-template-columns: 1fr;
         gap: 6px;
       }
     }
@@ -237,15 +231,15 @@
 
     <!-- ================= HERO TEXT ================= -->
     <section class="home-hero">
-
       <h1>Who We Are</h1>
+
       <p>
         We study <strong>intelligent systems that tightly connect perception, reasoning, and action</strong>.
         Our research lies at the intersection of <strong>computer vision</strong>,
         <strong>multimodal foundation models</strong>, and <strong>embodied intelligence</strong>,
         with a strong emphasis on building AI systems that can <strong>operate reliably in the real world</strong>.
       </p>
-      
+
       <p>
         Rather than focusing solely on isolated models or benchmarks, we aim to develop
         <strong>robust, scalable, and deployable AI technologies</strong> that integrate sensing,
@@ -253,7 +247,7 @@
         and <strong>system-level implementations</strong>, addressing challenges such as
         generalization under distribution shift, data efficiency, and real-world constraints.
       </p>
-      
+
       <ul>
         <li>
           Designing <strong>generative and multimodal models</strong> that enable controllable and trustworthy perception.
@@ -265,13 +259,12 @@
           Building <strong>end-to-end AI systems</strong> that bridge simulation, learning, and physical execution.
         </li>
       </ul>
-      
+
       <p>
         If you are interested in <strong>pushing the boundaries of real-world AI systems</strong>
         and working on challenging problems at the intersection of theory and practice,
         we encourage you to <strong>contact us and explore opportunities to join the lab</strong>.
       </p>
-      
     </section>
 
     <div class="section-divider"></div>
