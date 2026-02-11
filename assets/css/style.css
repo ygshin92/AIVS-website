@@ -1,34 +1,30 @@
 :root{
-  /* ================= Brand ================= */
+  /* Brand */
   --creamson: #A52A2A;
   --creamson-2: #880000;
 
-  /* ================= Base ================= */
+  /* Base */
   --bg: #ffffff;
   --card: #FFF9F6;
 
   --text: #1A1A1A;
   --muted: #5A5A5A;
 
-  /* ================= Header ================= */
+  /* Header */
   --header-text: #FFF3ED;
   --header-link: #FFF3ED;
   --header-link-hover-bg: rgba(255, 243, 237, 0.16);
 
-  /* ================= Border ================= */
+  /* Borders */
   --border: rgba(136, 0, 0, 0.18);
 }
 
-/* ================= Reset / Safety ================= */
+/* ================= Base Reset / Safety ================= */
 *,
 *::before,
-*::after{
-  box-sizing: border-box;
-}
+*::after{ box-sizing: border-box; }
 
-html{
-  -webkit-text-size-adjust: 100%;
-}
+html{ -webkit-text-size-adjust: 100%; }
 
 body{
   margin: 0;
@@ -46,15 +42,13 @@ img{
 
 a{ color: inherit; }
 
-p, li, div, a, h1, h2, h3{
-  overflow-wrap: anywhere;
-}
-
-/* ================= Layout ================= */
 .container{
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
 }
+
+/* Long text safety (URLs, long paper titles, etc.) */
+p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
 
 /* ================= Header ================= */
 .site-header{
@@ -70,10 +64,12 @@ p, li, div, a, h1, h2, h3{
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+
+  /* ✅ 데스크탑에서는 높이 고정 */
   height: 72px;
 }
 
-/* ===== Brand ===== */
+/* Brand */
 .brand{
   display: flex;
   align-items: center;
@@ -94,10 +90,9 @@ p, li, div, a, h1, h2, h3{
   letter-spacing: 1px;
   color: var(--header-text);
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
-/* ===== Navigation ===== */
+/* Nav */
 .nav{
   display: flex;
   align-items: center;
@@ -177,7 +172,6 @@ p, li, div, a, h1, h2, h3{
   color: var(--text);
 }
 
-/* ================= Cards / Grid ================= */
 .grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -195,7 +189,6 @@ p, li, div, a, h1, h2, h3{
 .card h2{ margin: 0 0 8px; }
 .card p{ margin: 0 0 10px; color: var(--muted); }
 
-/* ================= Footer ================= */
 .site-footer{
   border-top: 2px solid var(--creamson-2);
   padding: 18px 0;
@@ -203,15 +196,19 @@ p, li, div, a, h1, h2, h3{
   font-size: 14px;
 }
 
-/* ================= Tablet ================= */
+/* ================= Responsive ================= */
+
+/* Tablet & below */
 @media (max-width: 900px){
   .container{
     width: min(1100px, calc(100% - 24px));
   }
 
+  /* ✅ 헤더 높이 자동 */
   .header-inner{
     height: auto;
     padding: 10px 0;
+    align-items: center;
   }
 
   .brand-logo{ height: 44px; }
@@ -225,18 +222,16 @@ p, li, div, a, h1, h2, h3{
     border-radius: 10px;
   }
 
-  .grid{
-    grid-template-columns: 1fr;
-  }
+  .grid{ grid-template-columns: 1fr; }
 }
 
-/* ================= Mobile (Phone) ================= */
+/* Phone: 모바일에서는 로고(텍스트+이미지) 숨김 + nav 탭 + 본문 워터마크 */
 @media (max-width: 560px){
-  /* ✅ 모바일 헤더: 로고 텍스트 + 이미지 숨김 */
+  /* ✅ 헤더에서는 로고(텍스트/이미지) 모두 숨김 */
   .brand-text{ display: none; }
   .brand-logo{ display: none; }
 
-  /* ✅ Nav: 해외 랩 스타일 (가로 스크롤 탭) */
+  /* ✅ nav를 한 줄 탭처럼(가로 스크롤) */
   .nav{
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -244,35 +239,31 @@ p, li, div, a, h1, h2, h3{
     -webkit-overflow-scrolling: touch;
     padding-bottom: 2px;
   }
+  .nav a{ flex: 0 0 auto; }
 
-  .nav a{
-    flex: 0 0 auto;
-  }
-
-  /* ✅ 모바일 워터마크 */
-  body{
+  /* ✅ 워터마크는 "본문(main)"에만 (헤더 배경 절대 안 깨짐) */
+  main{
     position: relative;
   }
 
-  body::before{
+  main::before{
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
 
-    background-image: url("assets/img/logo.png");
+    background-image: url("assets/img/logo.png"); /* ✅ 요청한 경로 */
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: min(70vw, 360px);
+    background-position: center 120px;            /* ✅ 헤더 아래쪽부터 보이게 */
+    background-size: min(72vw, 360px);
 
     opacity: 0.06;
     filter: grayscale(100%);
   }
 
-  .site-header,
-  main,
-  .site-footer{
+  /* ✅ main 안의 실제 콘텐츠는 워터마크 위로 */
+  main > *{
     position: relative;
     z-index: 1;
   }
