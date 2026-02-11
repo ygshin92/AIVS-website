@@ -11,8 +11,8 @@
   --muted: #5A5A5A;
 
   /* Header */
-  --header-text: #FFF3ED;                 /* 로고 텍스트 */
-  --header-link: #FFF3ED;                 /* 메뉴 텍스트 */
+  --header-text: #FFF3ED;
+  --header-link: #FFF3ED;
   --header-link-hover-bg: rgba(255, 243, 237, 0.16);
 
   /* Borders */
@@ -97,7 +97,7 @@ p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-wrap: wrap; /* ✅ 데스크탑에서도 좁아지면 자연스럽게 wrap */
+  flex-wrap: wrap;
 }
 
 .nav a{
@@ -204,7 +204,7 @@ p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
     width: min(1100px, calc(100% - 24px));
   }
 
-  /* ✅ 헤더 높이 자동: nav가 2줄이 되어도 안 깨짐 */
+  /* ✅ 헤더 높이 자동 */
   .header-inner{
     height: auto;
     padding: 10px 0;
@@ -214,9 +214,7 @@ p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
   .brand-logo{ height: 44px; }
   .brand-text{ font-size: 34px; }
 
-  .nav{
-    gap: 8px;
-  }
+  .nav{ gap: 8px; }
 
   .nav a{
     font-size: 16px;
@@ -224,13 +222,18 @@ p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
     border-radius: 10px;
   }
 
-  .grid{
-    grid-template-columns: 1fr;
-  }
+  .grid{ grid-template-columns: 1fr; }
 }
 
-/* Phone: nav를 한 줄 탭처럼(가로 스크롤) */
+/* Phone: 해외 랩 스타일처럼 모바일에서는 "AIVS 텍스트" 숨기기 + nav 탭 */
 @media (max-width: 560px){
+  /* ✅ 로고 텍스트 숨김 (이미지 로고만 남김) */
+  .brand-text{ display: none; }
+
+  /* ✅ 로고 이미지 살짝 키워서 브랜드 유지 */
+  .brand-logo{ height: 46px; }
+
+  /* ✅ nav를 한 줄 탭처럼(가로 스크롤) */
   .nav{
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -239,6 +242,4 @@ p, li, div, a, h1, h2, h3{ overflow-wrap: anywhere; }
     padding-bottom: 2px;
   }
   .nav a{ flex: 0 0 auto; }
-
-  .brand-text{ font-size: 30px; }
 }
