@@ -36,41 +36,30 @@
       margin: 0;
     }
 
-    /* ✅ 2x2 사진 그리드 */
     .photo-grid{
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: var(--contact-photo-gap);
     }
-
-    /* ✅ 타일은 고정 높이 유지 + 안에서 이미지 중앙정렬 */
+    
+    /* ✅ 높이 고정 삭제 → 비율로 통일 (덜 어색함) */
     .photo-tile{
       width: 100%;
-      height: var(--contact-photo-row-height);
+      aspect-ratio: 16 / 9;        /* 🔥 4:3(4/3)도 가능. 16:9가 보통 깔끔 */
       border-radius: var(--contact-photo-radius);
       overflow: hidden;
-
-      background: var(--contact-photo-bg);
-      border: 1px solid var(--contact-photo-border);
-
-      /* ✅ 이미지 중앙 정렬(레터박스 있을 때도 보기 좋게) */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: var(--contact-photo-padding);
-      box-sizing: border-box;
+      background: #fff;
     }
-
-    /* ✅ 안 잘리게: contain */
+    
     .photo-tile img{
       width: 100%;
       height: 100%;
-      object-fit: contain;     /* ✅ 전체가 보이도록 (크롭 없음) */
-      object-position: center;
+      object-fit: cover;           /* ✅ 여백 없이 꽉 채움 */
+      object-position: center;     /* 기본은 센터 */
       display: block;
     }
+
 
     .section-divider{
       margin: 22px 0 22px;
