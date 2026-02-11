@@ -42,13 +42,13 @@
     }
 
     .home-photo img{
-      width: 100%;
-      height: auto;
-      max-height: 420px;
-      object-fit: initial;
-      object-position: center;
-      border-radius: 16px;
       display: block;
+      height: auto;                 /* 비율 유지 */
+      width: auto;                  /* 원본/비율 기준 */
+      max-width: 100%;              /* 컨테이너보다 커지면 줄이기 */
+      max-height: 340px;            /* 세로 제한 */
+      margin: 0 auto;               /* ✅ 가운데 정렬 */
+      border-radius: 16px;
       background: #fff;
     }
 
