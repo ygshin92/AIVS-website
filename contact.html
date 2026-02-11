@@ -12,6 +12,11 @@
       --contact-intro-font-size: 16px;   /* ✅ 소개글 글씨 크기 조절 */
       --contact-intro-line-height: 1.65; /* ✅ 소개글 줄간격 조절 */
       --divider-h: 1px;                  /* ✅ 일반 divider 굵기 */
+
+      /* ✅ 4분할 사진 컨트롤 */
+      --contact-photo-gap: 10px;         /* 사진 사이 여백 */
+      --contact-photo-radius: 16px;      /* 모서리 둥글기 */
+      --contact-photo-row-height: 170px; /* 각 사진 높이(원하면 숫자만 변경) */
     }
 
     /* main 상단/하단 여백 */
@@ -28,13 +33,28 @@
       margin: 0;
     }
 
-    /* ✅ (2) 단체사진 영역 */
-    .lab-photo{
+    /* ✅ (2) 4분할 사진 그리드 */
+    .photo-grid{
       width: 100%;
-      max-height: 360px;
-      object-fit: cover;
-      border-radius: 16px;
-      /* 배경/테두리 없는 톤 유지하면서 사진만 깔끔하게 */
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--contact-photo-gap);
+    }
+
+    /* 사진 컨테이너: 찌그러짐 방지 + 동일한 카드 느낌 */
+    .photo-tile{
+      width: 100%;
+      height: var(--contact-photo-row-height);
+      border-radius: var(--contact-photo-radius);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .photo-tile img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ✅ 찌그러짐 없이 꽉 채움 (일부 크롭 가능) */
+      object-position: center;
       display: block;
     }
 
@@ -55,7 +75,7 @@
     .intro-card h2{
       margin: 0 0 10px;
       font-weight: 900;
-      color: var(--text); /* 검정 톤 */
+      color: var(--text);
     }
 
     /* 소개글 문단 */
@@ -70,8 +90,8 @@
       word-break: keep-all;
       overflow-wrap: break-word;
 
-      max-width: none;   /* hero p의 70ch 제한 해제 */
-      color: var(--text); /* ✅ 검정 톤 */
+      max-width: none;
+      color: var(--text);
     }
     .intro-card p + p{
       margin-top: 14px;
@@ -80,16 +100,16 @@
     /* ✅ bullet 리스트(검정 톤) */
     .bullet-list{
       margin: 0;
-      padding-left: 18px;   /* bullet 들여쓰기 */
-      color: var(--text);   /* ✅ 검정 톤 */
+      padding-left: 18px;
+      color: var(--text);
     }
     .bullet-list li{
       margin: 0 0 8px;
-      color: var(--text);   /* ✅ 검정 톤 */
+      color: var(--text);
     }
     .bullet-list li:last-child{ margin-bottom: 0; }
 
-    /* 링크도 검정 톤 유지 (필요시) */
+    /* 링크도 검정 톤 유지 */
     .contact-card a{
       color: inherit;
       text-decoration: none;
@@ -99,9 +119,23 @@
       border-bottom-color: rgba(0,0,0,0.45);
     }
 
-    /* 모바일에서 사진 높이 조금 줄이기 */
-    @media (max-width: 820px){
-      .lab-photo{ max-height: 260px; }
+    /* 반응형 */
+    @media (max-width: 900px){
+      :root{
+        --contact-photo-row-height: 150px;
+      }
+      .photo-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px){
+      :root{
+        --contact-photo-row-height: 170px;
+      }
+      .photo-grid{
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -129,13 +163,22 @@
   <!-- ================= MAIN ================= -->
   <main class="container">
 
-    <!-- ✅ (2) 연구실 단체 사진 공간 -->
+    <!-- ✅ (2) 연구실 최신 사진 4분할 -->
     <!-- 이미지 파일 경로만 실제 파일명으로 바꿔주세요 -->
-    <img
-      class="lab-photo"
-      src="assets/img/lab_group.jpg"
-      alt="AIVS Lab Group Photo"
-    />
+    <section class="photo-grid" aria-label="AIVS Lab Recent Photos">
+      <div class="photo-tile">
+        <img src="assets/img/contact_1.jpg" alt="AIVS Lab Photo 1" />
+      </div>
+      <div class="photo-tile">
+        <img src="assets/img/contact_2.jpg" alt="AIVS Lab Photo 2" />
+      </div>
+      <div class="photo-tile">
+        <img src="assets/img/contact_3.jpg" alt="AIVS Lab Photo 3" />
+      </div>
+      <div class="photo-tile">
+        <img src="assets/img/contact_4.jpg" alt="AIVS Lab Photo 4" />
+      </div>
+    </section>
 
     <!-- ✅ (3) 사진 ↔ AIVS Lab 소개 구분선 -->
     <div class="section-divider"></div>
@@ -144,7 +187,6 @@
     <section class="card intro-card">
       <h2>AIVS Lab.</h2>
 
-      <!-- ✅ (4) bullet + 검정 톤 통일 -->
       <ul class="bullet-list">
         <li>
           <p lang="ko">
@@ -174,9 +216,8 @@
     <section class="card contact-card">
       <h2>Address</h2>
 
-      <!-- ✅ (4) bullet + 검정 톤 통일 -->
       <ul class="bullet-list">
-        <li>          
+        <li>
           Room 204, Science and Technology Building 1, 2511, Sejong-ro, Jochiwon-eup, Sejong-si, Republic of Korea
         </li>
       </ul>
@@ -189,7 +230,6 @@
     <section class="card contact-card">
       <h2>Contact Information</h2>
 
-      <!-- ✅ (4) bullet + 검정 톤 통일 -->
       <ul class="bullet-list">
         <li>
           <strong>E-mail:</strong>
