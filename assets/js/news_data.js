@@ -13,7 +13,7 @@ globalThis.AIVS_NEWS = [
   },
   {
     "date": "2026.09",
-    "category": "Public Service",
+    "category": "Service",
     "title": "Prof. Yong-Goo Shin appointed to the Daejeon Metropolitan City Informatization Committee",
     "highlight": false,
     "body": "Prof. Yong-Goo Shin begins a two-year term as a member of the Daejeon Metropolitan City Informatization Committee, contributing expert advice on the city's informatization projects. The term runs from September 2026 through August 2028.",
@@ -21,7 +21,7 @@ globalThis.AIVS_NEWS = [
   },
   {
     "date": "2026.09",
-    "category": "Education",
+    "category": "Project",
     "title": "AIVS Lab joins the AI Graduate School of Convergence Security program",
     "highlight": false,
     "body": "AIVS Lab participates in Korea University Sejong Campus's AI-focused Graduate School of Convergence Security under the national Convergence Security Core Talent Development program. Prof. Yong-Goo Shin participates as faculty, with AIVS contributing to graduate-level talent development from September 2026 through December 2031.",
@@ -83,7 +83,7 @@ globalThis.AIVS_NEWS = [
   },
   {
     "date": "2026.01",
-    "category": "Academic Service",
+    "category": "Service",
     "title": "Prof. Yong-Goo Shin begins serving in the KICS Finance Division",
     "highlight": false,
     "body": "Prof. Yong-Goo Shin begins a two-year term as a board member in the Finance Division of the Korean Institute of Communications and Information Sciences (KICS), from January 2026 through December 2027.",
@@ -189,7 +189,7 @@ globalThis.AIVS_NEWS = [
   },
   {
     "date": "2025.03",
-    "category": "Education",
+    "category": "Project",
     "title": "AIVS Lab joins the BK21 Smart Energy Program",
     "highlight": false,
     "body": "AIVS Lab begins participating in the BK21 Smart Energy Program, contributing to advanced research and graduate education. The laboratory's participation runs through August 2027.",
