@@ -19,20 +19,24 @@
 
     /* =========================================================
        HOME ACTIVITY CAROUSEL
+       - 4:3 / 3:2 / 16:9 landscape photos only
+       - 3:2 frame is a visual compromise between 4:3 and 16:9
+       - photos are resized to fit; no cropping
        ========================================================= */
     .home-carousel-section{
-      padding-top: 26px;
+      padding-top: 28px;
     }
 
     .home-carousel{
       position: relative;
-      width: min(760px, 100%);
-      height: 360px;
+      width: min(860px, 100%);
+      aspect-ratio: 3 / 2;
       margin: 0 auto;
       overflow: hidden;
+      border: 1px solid rgba(26, 26, 26, 0.08);
       border-radius: 16px;
-      background: #ffffff;
-      box-shadow: 0 7px 24px rgba(0, 0, 0, 0.07);
+      background: #f5f5f5;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
     }
 
     .carousel-track{
@@ -59,48 +63,45 @@
     }
 
     .carousel-slide img{
-      /*
-        실제 width/height는 JavaScript가 원본 해상도를 읽고 계산합니다.
-        object-fit으로 crop하지 않습니다.
-      */
-      width: auto !important;
-      height: auto !important;
-      max-width: none !important;
-      max-height: none !important;
-      flex: 0 0 auto;
       display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
 
     .carousel-control{
       position: absolute;
       top: 50%;
       z-index: 5;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       padding: 0;
       border: 0;
       border-radius: 50%;
       transform: translateY(-50%);
       display: grid;
       place-items: center;
-      background: rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.30);
       color: #fff;
-      font-size: 26px;
+      font-size: 27px;
       line-height: 1;
       cursor: pointer;
       transition: background 0.15s ease, transform 0.15s ease;
     }
 
     .carousel-control:hover{
-      background: rgba(0, 0, 0, 0.46);
+      background: rgba(0, 0, 0, 0.48);
     }
 
     .carousel-control:active{
       transform: translateY(-50%) scale(0.96);
     }
 
-    .carousel-prev{ left: 13px; }
-    .carousel-next{ right: 13px; }
+    .carousel-prev{ left: 14px; }
+    .carousel-next{ right: 14px; }
 
     .carousel-dots{
       display: flex;
@@ -137,7 +138,7 @@
        ========================================================= */
     .news{
       width: min(900px, 100%);
-      margin: 48px auto 0;
+      margin: 50px auto 0;
     }
 
     .home-section-title{
@@ -220,21 +221,17 @@
       border-radius: 8px;
     }
 
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
     @media (max-width: 900px){
       .home-carousel-section{
         padding-top: 20px;
       }
 
       .home-carousel{
-        width: min(700px, 100%);
-        height: 330px;
+        width: min(760px, 100%);
       }
 
       .news{
-        margin-top: 40px;
+        margin-top: 42px;
       }
     }
 
@@ -244,7 +241,8 @@
       }
 
       .home-carousel{
-        height: 260px;
+        width: 100%;
+        aspect-ratio: 4 / 3;
         border-radius: 13px;
       }
 
@@ -310,7 +308,6 @@
 </head>
 
 <body>
-  <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
@@ -330,14 +327,11 @@
   </header>
 
   <main class="container">
-    <!-- =====================================================
-         RECENT LAB ACTIVITY
-
-         사진 목록은 assets/home_media.json에서 자동으로 읽습니다.
-         GitHub Actions가 assets/img/activity/의 최근 추가 사진을
-         최대 6장까지 자동으로 선정해 JSON을 갱신합니다.
-         ===================================================== -->
-    <section class="home-carousel-section" aria-label="Recent AIVS Lab Activities">
+    <section
+      class="home-carousel-section"
+      id="homeCarouselSection"
+      aria-label="Recent AIVS Lab Activities"
+    >
       <div
         class="home-carousel"
         id="homeCarousel"
@@ -370,15 +364,11 @@
       ></div>
     </section>
 
-    <!-- =====================================================
-         NEWS
-         새 소식은 <details class="news-item"> 블록을 복사해서
-         가장 위에 추가하면 됩니다.
-         ===================================================== -->
     <section class="news" aria-labelledby="newsTitle">
       <h2 class="home-section-title" id="newsTitle">News</h2>
 
       <div class="news-list">
+        <!-- 새 News는 이 <details class="news-item"> 블록을 복사해서 가장 위에 추가 -->
         <details class="news-item">
           <summary class="news-summary">
             <span class="news-date">2026.05</span>
@@ -407,28 +397,10 @@
             </p>
           </div>
         </details>
-
-        <!--
-        ===== 새 News 예시 =====
-
-        <details class="news-item">
-          <summary class="news-summary">
-            <span class="news-date">2026.09</span>
-            <span class="news-title">Prof. Yong-Goo Shin appointed as ...</span>
-            <span class="news-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="news-detail">
-            <p>
-              Prof. Yong-Goo Shin has been appointed as ...
-            </p>
-          </div>
-        </details>
-        -->
       </div>
     </section>
   </main>
 
-  <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
     <div class="container">
       <p>© <span id="year"></span> AIVS Lab. All rights reserved.</p>
@@ -436,11 +408,13 @@
   </footer>
 
   <script>
-    /*
-      GitHub Actions가 생성한 목록을 우선 사용합니다.
-      첫 실행 전 JSON이 아직 없을 때는 현재 6장을 fallback으로 사용합니다.
-    */
     const HOME_MEDIA_JSON = "assets/home_media.json";
+    const MAX_HOME_MEDIA = 6;
+    const MIN_HOME_RATIO = 1.25;
+    const MAX_HOME_RATIO = 1.90;
+    const IMAGE_DURATION = 5000;
+
+    /* JSON이 아직 갱신되기 전에도 현재 activity1~6을 검사해 사용합니다. */
     const FALLBACK_MEDIA = [
       "assets/img/activity/activity6.jpg",
       "assets/img/activity/activity5.jpg",
@@ -450,8 +424,7 @@
       "assets/img/activity/activity1.jpg"
     ];
 
-    const IMAGE_DURATION = 5000;
-
+    const carouselSection = document.getElementById("homeCarouselSection");
     const carousel = document.getElementById("homeCarousel");
     const track = document.getElementById("carouselTrack");
     const dotsContainer = document.getElementById("carouselDots");
@@ -469,21 +442,44 @@
     }
 
     function normalizeHomeMedia(media){
-      const clean = media.filter(src => typeof src === "string" && src.trim() !== "");
+      const clean = [...new Set(
+        media.filter(src => typeof src === "string" && src.trim() !== "")
+      )];
 
-      /*
-        현재 activity1.jpg, activity2.jpg ... 형식이라면
-        숫자가 큰 사진을 최신 사진으로 간주합니다.
-        따라서 activity6 -> activity5 -> ... 순서로 표시됩니다.
-      */
       if(clean.length > 0 && clean.every(src => activityNumber(src) !== null)){
         clean.sort((a, b) => activityNumber(b) - activityNumber(a));
       }
 
-      return clean.slice(0, 6);
+      return clean;
+    }
+
+    function inspectImage(src){
+      return new Promise(resolve => {
+        const image = new Image();
+
+        image.onload = () => {
+          const ratio = image.naturalWidth / image.naturalHeight;
+          const eligible =
+            image.naturalWidth > image.naturalHeight &&
+            ratio >= MIN_HOME_RATIO &&
+            ratio <= MAX_HOME_RATIO;
+
+          resolve(eligible ? src : null);
+        };
+
+        image.onerror = () => resolve(null);
+        image.src = src;
+      });
+    }
+
+    async function keepEligibleLandscapePhotos(media){
+      const inspected = await Promise.all(media.map(inspectImage));
+      return inspected.filter(Boolean).slice(0, MAX_HOME_MEDIA);
     }
 
     async function loadHomeMedia(){
+      let candidates;
+
       try{
         const response = await fetch(HOME_MEDIA_JSON, { cache: "no-store" });
         if(!response.ok){
@@ -495,53 +491,13 @@
           throw new Error("No media entries found");
         }
 
-        return normalizeHomeMedia(data.media);
+        candidates = normalizeHomeMedia(data.media);
       }catch(error){
         console.warn("Using fallback activity photos:", error);
-        return normalizeHomeMedia(FALLBACK_MEDIA);
-      }
-    }
-
-    function fitImageToCarousel(image){
-      if(!image || !image.naturalWidth || !image.naturalHeight){
-        return;
+        candidates = normalizeHomeMedia(FALLBACK_MEDIA);
       }
 
-      const availableWidth = carousel.clientWidth;
-      const availableHeight = carousel.clientHeight;
-
-      if(availableWidth <= 0 || availableHeight <= 0){
-        return;
-      }
-
-      /*
-        원본 비율을 그대로 유지하면서 carousel 안에 완전히 들어오도록
-        실제 표시 width/height를 계산합니다.
-
-        scale = min(가로 제한 / 원본 가로, 세로 제한 / 원본 세로)
-
-        따라서 사진의 어떤 부분도 잘리지 않습니다.
-      */
-      const scale = Math.min(
-        availableWidth / image.naturalWidth,
-        availableHeight / image.naturalHeight,
-        1
-      );
-
-      const displayWidth = Math.max(1, Math.floor(image.naturalWidth * scale));
-      const displayHeight = Math.max(1, Math.floor(image.naturalHeight * scale));
-
-      image.style.setProperty("width", `${displayWidth}px`, "important");
-      image.style.setProperty("height", `${displayHeight}px`, "important");
-      image.dataset.fitted = "true";
-    }
-
-    function fitAllCarouselImages(){
-      track.querySelectorAll("img").forEach(image => {
-        if(image.complete && image.naturalWidth){
-          fitImageToCarousel(image);
-        }
-      });
+      return keepEligibleLandscapePhotos(candidates);
     }
 
     function createSlides(){
@@ -560,7 +516,6 @@
         image.alt = `AIVS Lab activity ${index + 1}`;
         image.loading = index === 0 ? "eager" : "lazy";
         image.decoding = "async";
-        image.addEventListener("load", () => fitImageToCarousel(image));
 
         slide.appendChild(image);
         track.appendChild(slide);
@@ -573,10 +528,11 @@
         dotsContainer.appendChild(dot);
       });
 
-      const hideNavigation = homeMedia.length <= 1;
-      prevButton.hidden = hideNavigation;
-      nextButton.hidden = hideNavigation;
-      dotsContainer.hidden = hideNavigation;
+      /* 사진 수와 bullet 수는 항상 동일합니다. */
+      const singlePhoto = homeMedia.length <= 1;
+      prevButton.hidden = singlePhoto;
+      nextButton.hidden = singlePhoto;
+      dotsContainer.hidden = singlePhoto;
     }
 
     function scheduleNext(){
@@ -643,11 +599,6 @@
       }
     });
 
-    carousel.addEventListener("mouseenter", () => clearTimeout(autoTimer));
-    carousel.addEventListener("mouseleave", scheduleNext);
-    carousel.addEventListener("focusin", () => clearTimeout(autoTimer));
-    carousel.addEventListener("focusout", scheduleNext);
-
     carousel.addEventListener("touchstart", event => {
       touchStartX = event.changedTouches[0].clientX;
     }, { passive: true });
@@ -660,28 +611,22 @@
         return;
       }
 
-      if(distance > 0){
-        showPrevious();
-      }else{
-        showNext();
-      }
+      distance > 0 ? showPrevious() : showNext();
     }, { passive: true });
 
-    let resizeTimer = null;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(fitAllCarouselImages, 80);
-    });
-
-    async function initializeHomeCarousel(){
+    async function initializeCarousel(){
       homeMedia = await loadHomeMedia();
-      createSlides();
-      if(homeMedia.length > 0){
-        showSlide(0);
+
+      if(homeMedia.length === 0){
+        carouselSection.hidden = true;
+        return;
       }
+
+      createSlides();
+      showSlide(0);
     }
 
-    initializeHomeCarousel();
+    initializeCarousel();
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
