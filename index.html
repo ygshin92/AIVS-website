@@ -27,11 +27,11 @@
     .home-carousel{
       position: relative;
       width: min(760px, 100%);
-      height: clamp(260px, 34vw, 380px);
+      height: 360px;
       margin: 0 auto;
       overflow: hidden;
       border-radius: 16px;
-      background: #f7f7f7;
+      background: #ffffff;
       box-shadow: 0 7px 24px rgba(0, 0, 0, 0.07);
     }
 
@@ -44,8 +44,9 @@
     .carousel-slide{
       position: absolute;
       inset: 0;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.45s ease;
@@ -59,15 +60,14 @@
 
     .carousel-slide img{
       /*
-        사진을 자르지 않고 원본 비율 그대로 축소합니다.
-        공통 CSS에서 이미지 크기를 지정하더라도 이 규칙을 우선합니다.
+        실제 width/height는 JavaScript가 원본 해상도를 읽고 계산합니다.
+        object-fit으로 crop하지 않습니다.
       */
       width: auto !important;
       height: auto !important;
-      max-width: 100% !important;
-      max-height: 100% !important;
-      object-fit: contain !important;
-      object-position: center center !important;
+      max-width: none !important;
+      max-height: none !important;
+      flex: 0 0 auto;
       display: block;
     }
 
@@ -230,7 +230,7 @@
 
       .home-carousel{
         width: min(700px, 100%);
-        height: clamp(250px, 46vw, 350px);
+        height: 330px;
       }
 
       .news{
@@ -244,8 +244,7 @@
       }
 
       .home-carousel{
-        width: 100%;
-        height: 240px;
+        height: 260px;
         border-radius: 13px;
       }
 
@@ -464,6 +463,26 @@
     let autoTimer = null;
     let touchStartX = 0;
 
+    function activityNumber(src){
+      const match = src.match(/activity(\d+)\.[a-z0-9]+$/i);
+      return match ? Number(match[1]) : null;
+    }
+
+    function normalizeHomeMedia(media){
+      const clean = media.filter(src => typeof src === "string" && src.trim() !== "");
+
+      /*
+        현재 activity1.jpg, activity2.jpg ... 형식이라면
+        숫자가 큰 사진을 최신 사진으로 간주합니다.
+        따라서 activity6 -> activity5 -> ... 순서로 표시됩니다.
+      */
+      if(clean.length > 0 && clean.every(src => activityNumber(src) !== null)){
+        clean.sort((a, b) => activityNumber(b) - activityNumber(a));
+      }
+
+      return clean.slice(0, 6);
+    }
+
     async function loadHomeMedia(){
       try{
         const response = await fetch(HOME_MEDIA_JSON, { cache: "no-store" });
@@ -476,11 +495,53 @@
           throw new Error("No media entries found");
         }
 
-        return data.media.slice(0, 6);
+        return normalizeHomeMedia(data.media);
       }catch(error){
         console.warn("Using fallback activity photos:", error);
-        return FALLBACK_MEDIA;
+        return normalizeHomeMedia(FALLBACK_MEDIA);
       }
+    }
+
+    function fitImageToCarousel(image){
+      if(!image || !image.naturalWidth || !image.naturalHeight){
+        return;
+      }
+
+      const availableWidth = carousel.clientWidth;
+      const availableHeight = carousel.clientHeight;
+
+      if(availableWidth <= 0 || availableHeight <= 0){
+        return;
+      }
+
+      /*
+        원본 비율을 그대로 유지하면서 carousel 안에 완전히 들어오도록
+        실제 표시 width/height를 계산합니다.
+
+        scale = min(가로 제한 / 원본 가로, 세로 제한 / 원본 세로)
+
+        따라서 사진의 어떤 부분도 잘리지 않습니다.
+      */
+      const scale = Math.min(
+        availableWidth / image.naturalWidth,
+        availableHeight / image.naturalHeight,
+        1
+      );
+
+      const displayWidth = Math.max(1, Math.floor(image.naturalWidth * scale));
+      const displayHeight = Math.max(1, Math.floor(image.naturalHeight * scale));
+
+      image.style.setProperty("width", `${displayWidth}px`, "important");
+      image.style.setProperty("height", `${displayHeight}px`, "important");
+      image.dataset.fitted = "true";
+    }
+
+    function fitAllCarouselImages(){
+      track.querySelectorAll("img").forEach(image => {
+        if(image.complete && image.naturalWidth){
+          fitImageToCarousel(image);
+        }
+      });
     }
 
     function createSlides(){
@@ -499,6 +560,7 @@
         image.alt = `AIVS Lab activity ${index + 1}`;
         image.loading = index === 0 ? "eager" : "lazy";
         image.decoding = "async";
+        image.addEventListener("load", () => fitImageToCarousel(image));
 
         slide.appendChild(image);
         track.appendChild(slide);
@@ -604,6 +666,12 @@
         showNext();
       }
     }, { passive: true });
+
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(fitAllCarouselImages, 80);
+    });
 
     async function initializeHomeCarousel(){
       homeMedia = await loadHomeMedia();
