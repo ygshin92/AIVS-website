@@ -221,6 +221,93 @@
       border-radius: 8px;
     }
 
+
+
+    .news-summary-main{
+      min-width: 0;
+    }
+
+    .news-title-row{
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .news-badge{
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(136, 0, 0, 0.10);
+      color: var(--home-accent);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .news-category{
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15px;
+    }
+
+    .news-paper-title{
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .news-venue{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .news-paper-list{
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .news-paper-list li{
+      margin: 4px 0;
+    }
+
+    .news-links{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-top: 12px;
+    }
+
+    .news-links a,
+    .view-all-news{
+      color: var(--home-accent);
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(136, 0, 0, 0.28);
+    }
+
+    .news-links a:hover,
+    .view-all-news:hover{
+      border-bottom-color: rgba(136, 0, 0, 0.75);
+    }
+
+    .news-footer-link{
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 18px;
+    }
+
     @media (max-width: 900px){
       .home-carousel-section{
         padding-top: 20px;
@@ -366,37 +453,9 @@
 
     <section class="news" aria-labelledby="newsTitle">
       <h2 class="home-section-title" id="newsTitle">News</h2>
-
-      <div class="news-list">
-        <!-- 새 News는 이 <details class="news-item"> 블록을 복사해서 가장 위에 추가 -->
-        <details class="news-item">
-          <summary class="news-summary">
-            <span class="news-date">2026.05</span>
-            <span class="news-title">New IITP-funded research project launched</span>
-            <span class="news-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="news-detail">
-            <p>
-              A new IITP-funded project has been launched, focusing on an
-              <strong>AI-driven autonomous fire response system</strong>
-              (<strong>2026.04–2027.12</strong>).
-            </p>
-          </div>
-        </details>
-
-        <details class="news-item">
-          <summary class="news-summary">
-            <span class="news-date">2025.12</span>
-            <span class="news-title">Paper accepted to Advanced Science</span>
-            <span class="news-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="news-detail">
-            <p>
-              One paper has been accepted to <em>Advanced Science</em>
-              (<strong>IF 14.1</strong>, <strong>JCR top 7%</strong>).
-            </p>
-          </div>
-        </details>
+      <div class="news-list" id="homeNewsList"></div>
+      <div class="news-footer-link">
+        <a class="view-all-news" href="news.html">View all news &rarr;</a>
       </div>
     </section>
   </main>
@@ -407,14 +466,17 @@
     </div>
   </footer>
 
+  <script src="assets/js/news_data_v1.js"></script>
+
   <script>
+    const HOME_NEWS_LIMIT = 12;
     const HOME_MEDIA_JSON = "assets/home_media.json";
     const MAX_HOME_MEDIA = 6;
     const MIN_HOME_RATIO = 1.25;
     const MAX_HOME_RATIO = 1.90;
     const IMAGE_DURATION = 5000;
 
-    /* JSON이 아직 갱신되기 전에도 현재 activity1~6을 검사해 사용합니다. */
+    /* Fallback photos are used if the generated JSON is unavailable. */
     const FALLBACK_MEDIA = [
       "assets/img/activity/activity6.jpg",
       "assets/img/activity/activity5.jpg",
@@ -423,6 +485,110 @@
       "assets/img/activity/activity2.jpg",
       "assets/img/activity/activity1.jpg"
     ];
+
+
+
+    function createNewsElement(item){
+      const details = document.createElement("details");
+      details.className = "news-item";
+
+      const summary = document.createElement("summary");
+      summary.className = "news-summary";
+
+      const date = document.createElement("span");
+      date.className = "news-date";
+      date.textContent = item.date;
+
+      const main = document.createElement("span");
+      main.className = "news-summary-main";
+
+      const titleRow = document.createElement("span");
+      titleRow.className = "news-title-row";
+
+      if(item.highlight){
+        const badge = document.createElement("span");
+        badge.className = "news-badge";
+        badge.textContent = "Highlight";
+        titleRow.appendChild(badge);
+      }
+
+      const title = document.createElement("span");
+      title.className = "news-title";
+      title.textContent = item.title;
+      titleRow.appendChild(title);
+      main.appendChild(titleRow);
+
+      const category = document.createElement("span");
+      category.className = "news-category";
+      category.textContent = item.category;
+      main.appendChild(category);
+
+      const chevron = document.createElement("span");
+      chevron.className = "news-chevron";
+      chevron.setAttribute("aria-hidden", "true");
+
+      summary.append(date, main, chevron);
+      details.appendChild(summary);
+
+      const detail = document.createElement("div");
+      detail.className = "news-detail";
+
+      if(item.paperTitle){
+        const paperTitle = document.createElement("p");
+        paperTitle.className = "news-paper-title";
+        paperTitle.textContent = item.paperTitle;
+        detail.appendChild(paperTitle);
+      }
+
+      const body = document.createElement("p");
+      body.textContent = item.body;
+      detail.appendChild(body);
+
+      if(Array.isArray(item.papers) && item.papers.length){
+        const paperList = document.createElement("ul");
+        paperList.className = "news-paper-list";
+        item.papers.forEach(text => {
+          const li = document.createElement("li");
+          li.textContent = text;
+          paperList.appendChild(li);
+        });
+        detail.appendChild(paperList);
+      }
+
+      if(item.venue){
+        const venue = document.createElement("p");
+        venue.className = "news-venue";
+        venue.textContent = item.venue;
+        detail.appendChild(venue);
+      }
+
+      if(Array.isArray(item.links) && item.links.length){
+        const links = document.createElement("div");
+        links.className = "news-links";
+        item.links.forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.textContent = `${link.label} ↗`;
+          if(/^https?:\/\//i.test(link.url)){
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+          }
+          links.appendChild(a);
+        });
+        detail.appendChild(links);
+      }
+
+      details.appendChild(detail);
+      return details;
+    }
+
+    function initializeHomeNews(){
+      const list = document.getElementById("homeNewsList");
+      if(!list || !Array.isArray(globalThis.AIVS_NEWS)) return;
+      globalThis.AIVS_NEWS.slice(0, HOME_NEWS_LIMIT).forEach(item => {
+        list.appendChild(createNewsElement(item));
+      });
+    }
 
     const carouselSection = document.getElementById("homeCarouselSection");
     const carousel = document.getElementById("homeCarousel");
@@ -528,7 +694,7 @@
         dotsContainer.appendChild(dot);
       });
 
-      /* 사진 수와 bullet 수는 항상 동일합니다. */
+      /* The number of pagination dots always matches the number of photos. */
       const singlePhoto = homeMedia.length <= 1;
       prevButton.hidden = singlePhoto;
       nextButton.hidden = singlePhoto;
@@ -628,6 +794,7 @@
 
     initializeCarousel();
 
+    initializeHomeNews();
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
