@@ -31,6 +31,12 @@ def natural_key(path: str):
     return [int(part) if part.isdigit() else part for part in re.split(r"(\d+)", name)]
 
 
+
+def activity_number(path: str) -> int | None:
+    """Return N for names like activityN.jpg, otherwise None."""
+    match = re.fullmatch(r"activity(\d+)", Path(path).stem, flags=re.IGNORECASE)
+    return int(match.group(1)) if match else None
+
 def added_timestamp(repo: Path, rel_path: str) -> int:
     """Return the commit timestamp where this path first appeared.
 
@@ -74,13 +80,18 @@ def select_recent_images(repo: Path, limit: int) -> list[str]:
     if not images:
         return []
 
-    ranked = [(added_timestamp(repo, path), path) for path in images]
+    # The current repository uses activity1.jpg, activity2.jpg, ... as a
+    # chronological sequence. When every activity image follows that convention,
+    # the highest number is unambiguously the newest and should appear first.
+    numbered = [(activity_number(path), path) for path in images]
+    if all(number is not None for number, _ in numbered):
+        numbered.sort(key=lambda item: item[0], reverse=True)
+        return [path for _, path in numbered[:limit]]
 
-    # Primary sort: newest Git addition first.
-    # Tie-break: higher natural filename first (activity6 before activity5).
+    # If future files use arbitrary names, fall back to Git add time.
+    ranked = [(added_timestamp(repo, path), path) for path in images]
     ranked.sort(key=lambda item: natural_key(item[1]), reverse=True)
     ranked.sort(key=lambda item: item[0], reverse=True)
-
     return [path for _, path in ranked[:limit]]
 
 
