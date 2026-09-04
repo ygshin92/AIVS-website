@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News | AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    :root{ --news-accent:#880000; }
+    main.container{ padding:34px 0 56px; }
+    .news-archive{ width:min(900px,100%); margin:0 auto; }
+    .news-page-title{ margin:0 0 6px; font-size:38px; font-weight:900; line-height:1.15; }
+    .news-page-intro{ margin:0 0 34px; color:var(--muted); line-height:1.7; }
+    .news-year{ margin:34px 0 10px; font-size:27px; font-weight:900; color:var(--text); }
+    .news-year:first-of-type{ margin-top:0; }
+    .news-list{ border-top:1px solid rgba(26,26,26,.16); }
+    .news-item{ border-bottom:1px solid rgba(26,26,26,.13); }
+    .news-summary{ list-style:none; display:grid; grid-template-columns:92px 1fr 24px; gap:16px; align-items:center; padding:20px 2px; cursor:pointer; user-select:none; }
+    .news-summary::-webkit-details-marker{ display:none; }
+    .news-date{ font-size:14px; font-weight:800; color:rgba(136,0,0,.82); white-space:nowrap; }
+    .news-summary-main{ min-width:0; }
+    .news-title-row{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    .news-title{ font-size:18px; font-weight:800; line-height:1.45; color:var(--text); }
+    .news-badge{ display:inline-flex; align-items:center; min-height:22px; padding:2px 8px; border-radius:999px; background:rgba(136,0,0,.10); color:var(--news-accent); font-size:11px; font-weight:900; letter-spacing:.25px; text-transform:uppercase; white-space:nowrap; }
+    .news-category{ display:block; margin-top:4px; color:var(--muted); font-size:12px; font-weight:700; }
+    .news-chevron{ width:9px; height:9px; justify-self:end; border-right:2px solid rgba(26,26,26,.58); border-bottom:2px solid rgba(26,26,26,.58); transform:rotate(45deg) translateY(-2px); transition:transform .18s ease; }
+    .news-item[open] .news-chevron{ transform:rotate(225deg) translate(-2px,-2px); }
+    .news-detail{ padding:0 48px 20px 110px; font-size:16px; line-height:1.75; color:var(--muted); }
+    .news-detail p{ margin:0; }
+    .news-paper-title{ margin:0 0 8px !important; color:var(--text); font-size:15px; font-weight:800; line-height:1.55; }
+    .news-venue{ margin:8px 0 0 !important; font-size:13px; font-style:italic; }
+    .news-paper-list{ margin:10px 0 0; padding-left:20px; }
+    .news-paper-list li{ margin:4px 0; }
+    .news-links{ display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:12px; }
+    .news-links a{ color:var(--news-accent); font-weight:800; text-decoration:none; border-bottom:1px solid rgba(136,0,0,.28); }
+    .news-links a:hover{ border-bottom-color:rgba(136,0,0,.75); }
+    .news-summary:focus-visible{ outline:2px solid rgba(136,0,0,.35); outline-offset:-2px; border-radius:8px; }
+    @media(max-width:680px){
+      main.container{ padding-top:26px; }
+      .news-page-title{ font-size:32px; }
+      .news-summary{ grid-template-columns:1fr 24px; gap:5px 12px; padding:17px 0; }
+      .news-date{ grid-column:1; grid-row:1; }
+      .news-summary-main{ grid-column:1; grid-row:2; }
+      .news-chevron{ grid-column:2; grid-row:1 / span 2; }
+      .news-title{ font-size:17px; }
+      .news-detail{ padding:0 34px 18px 0; font-size:15px; }
+    }
+    @media(prefers-reduced-motion:reduce){ .news-chevron{ transition:none; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
+  <main class="container">
+    <section class="news-archive" aria-labelledby="newsPageTitle">
+      <h1 class="news-page-title" id="newsPageTitle">News</h1>
+      <p class="news-page-intro">Publications, research projects, appointments, and major academic activities of AIVS Lab.</p>
+      <div id="newsArchive"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>© <span id="year"></span> AIVS Lab. All rights reserved.</p></div>
+  </footer>
+
+  <script src="assets/js/news_data_v1.js"></script>
+  <script>
+    function createNewsElement(item){
+      const details=document.createElement("details"); details.className="news-item";
+      const summary=document.createElement("summary"); summary.className="news-summary";
+      const date=document.createElement("span"); date.className="news-date"; date.textContent=item.date;
+      const main=document.createElement("span"); main.className="news-summary-main";
+      const titleRow=document.createElement("span"); titleRow.className="news-title-row";
+      if(item.highlight){ const badge=document.createElement("span"); badge.className="news-badge"; badge.textContent="Highlight"; titleRow.appendChild(badge); }
+      const title=document.createElement("span"); title.className="news-title"; title.textContent=item.title; titleRow.appendChild(title); main.appendChild(titleRow);
+      const category=document.createElement("span"); category.className="news-category"; category.textContent=item.category; main.appendChild(category);
+      const chevron=document.createElement("span"); chevron.className="news-chevron"; chevron.setAttribute("aria-hidden","true");
+      summary.append(date,main,chevron); details.appendChild(summary);
+      const detail=document.createElement("div"); detail.className="news-detail";
+      if(item.paperTitle){ const p=document.createElement("p"); p.className="news-paper-title"; p.textContent=item.paperTitle; detail.appendChild(p); }
+      const body=document.createElement("p"); body.textContent=item.body; detail.appendChild(body);
+      if(Array.isArray(item.papers)&&item.papers.length){ const ul=document.createElement("ul"); ul.className="news-paper-list"; item.papers.forEach(text=>{const li=document.createElement("li");li.textContent=text;ul.appendChild(li);}); detail.appendChild(ul); }
+      if(item.venue){ const p=document.createElement("p"); p.className="news-venue"; p.textContent=item.venue; detail.appendChild(p); }
+      if(Array.isArray(item.links)&&item.links.length){ const links=document.createElement("div"); links.className="news-links"; item.links.forEach(link=>{ const a=document.createElement("a"); a.href=link.url; a.textContent=`${link.label} ↗`; if(/^https?:\/\//i.test(link.url)){a.target="_blank";a.rel="noopener noreferrer";} links.appendChild(a); }); detail.appendChild(links); }
+      details.appendChild(detail); return details;
+    }
+
+    function renderArchive(){
+      const root=document.getElementById("newsArchive");
+      if(!root || !Array.isArray(globalThis.AIVS_NEWS)) return;
+      let currentYear=null, list=null;
+      globalThis.AIVS_NEWS.forEach(item=>{
+        const year=item.date.slice(0,4);
+        if(year!==currentYear){
+          currentYear=year;
+          const heading=document.createElement("h2"); heading.className="news-year"; heading.textContent=year; root.appendChild(heading);
+          list=document.createElement("div"); list.className="news-list"; root.appendChild(list);
+        }
+        list.appendChild(createNewsElement(item));
+      });
+    }
+
+    renderArchive();
+    document.getElementById("year").textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
