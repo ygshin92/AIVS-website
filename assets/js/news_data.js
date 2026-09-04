@@ -3,7 +3,26 @@
    conference entries use the conference month; project and service entries use their start month. */
 
 globalThis.AIVS_NEWS = [
-  {
+    {
+    "date": "2026.09",
+    "category": "Publication",
+    "title": "New paper published in Machine Vision and Applications",
+    "highlight": false,
+    "paperTitle": "FSPGD: Rethinking Black-Box Attacks on Semantic Segmentation",
+    "venue": "Machine Vision and Applications 37, 151 (2026)",
+    "body": "This work introduces Feature Similarity Projected Gradient Descent (FSPGD), a feature-space black-box attack for semantic segmentation that disrupts both clean-adversarial feature alignment and same-class spatial feature consistency. Experiments on PASCAL VOC 2012 and Cityscapes across CNN- and Transformer-based backbones demonstrate strong transferability against unseen target models, while FSPGD-based adversarial training also improves robustness to unseen attacks.",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://doi.org/10.1007/s00138-026-01919-5"
+      },
+      {
+        "label": "Code",
+        "url": "https://github.com/KU-AIVS/FSPGD"
+      }
+    ]
+  },
+   {
     "date": "2026.09",
     "category": "Appointment",
     "title": "Prof. Yong-Goo Shin appointed Associate Dean for Academic Affairs",
