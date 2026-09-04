@@ -250,12 +250,11 @@
     }
 
     .news-category{
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.15px;
+      color: var(--home-accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.1px;
+      white-space: nowrap;
     }
 
     .news-paper-title{
@@ -466,7 +465,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/news_data.js"></script>
+  <script src="assets/js/news_data.js?v=2"></script>
 
   <script>
     const HOME_NEWS_LIMIT = 12;
@@ -512,16 +511,16 @@
         titleRow.appendChild(badge);
       }
 
+      const category = document.createElement("span");
+      category.className = "news-category";
+      category.textContent = `[${item.category}]`;
+      titleRow.appendChild(category);
+
       const title = document.createElement("span");
       title.className = "news-title";
       title.textContent = item.title;
       titleRow.appendChild(title);
       main.appendChild(titleRow);
-
-      const category = document.createElement("span");
-      category.className = "news-category";
-      category.textContent = item.category;
-      main.appendChild(category);
 
       const chevron = document.createElement("span");
       chevron.className = "news-chevron";
