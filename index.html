@@ -26,8 +26,8 @@
 
     .home-carousel{
       position: relative;
-      width: min(860px, 100%);
-      height: clamp(280px, 36vw, 390px);
+      width: min(760px, 100%);
+      height: clamp(260px, 34vw, 380px);
       margin: 0 auto;
       overflow: hidden;
       border-radius: 16px;
@@ -58,10 +58,16 @@
     }
 
     .carousel-slide img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
+      /*
+        사진을 자르지 않고 원본 비율 그대로 축소합니다.
+        공통 CSS에서 이미지 크기를 지정하더라도 이 규칙을 우선합니다.
+      */
+      width: auto !important;
+      height: auto !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+      object-position: center center !important;
       display: block;
     }
 
@@ -223,8 +229,8 @@
       }
 
       .home-carousel{
-        width: min(760px, 100%);
-        height: clamp(260px, 48vw, 360px);
+        width: min(700px, 100%);
+        height: clamp(250px, 46vw, 350px);
       }
 
       .news{
@@ -238,7 +244,8 @@
       }
 
       .home-carousel{
-        height: 250px;
+        width: 100%;
+        height: 240px;
         border-radius: 13px;
       }
 
