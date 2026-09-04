@@ -6,204 +6,305 @@
   <title>AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Home page-only styles -->
   <style>
     :root{
-      --home-title-size: 42px;
-      --home-subtitle-size: 18px;
-      --home-section-title: 22px;
+      --home-accent: #880000;
+      --home-section-title: 28px;
       --home-body-size: 16px;
-
-      --home-photo-height: 260px; /* (현재 설정에서는 사용 안 함) */
-      --home-caption-size: 13px;
     }
 
     main.container{
-      padding: 0 0 48px;
+      padding: 0 0 56px;
     }
 
-    .section-divider{
-      margin: 28px 0 22px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(136, 0, 0, 0.25),
-        transparent
-      );
+    /* =========================================================
+       HOME ACTIVITY CAROUSEL
+       ========================================================= */
+    .home-carousel-section{
+      padding-top: 26px;
     }
 
-    /* ================= TOP PHOTO ================= */
-    .home-photo{
-      margin: 22px 0 18px;
-    }
-
-    /* ✅ 본문 폭(컨테이너) 꽉 + 비율 유지 + 높이 제한 없음 */
-    .home-photo img{
-      display: block;
-      width: 100%;      /* ✅ container 가로폭 꽉 채움 */
-      height: auto;     /* ✅ 원본 비율 유지 */
-      margin: 0;        /* width 100%면 가운데정렬 불필요 */
+    .home-carousel{
+      position: relative;
+      width: min(860px, 100%);
+      height: clamp(280px, 36vw, 390px);
+      margin: 0 auto;
+      overflow: hidden;
       border-radius: 16px;
-      background: #fff;
-
-      /* (선택) 렌더링 품질/부드러움 관련: 브라우저마다 체감이 달라서 취향 */
-      /* image-rendering: auto; */
+      background: #f7f7f7;
+      box-shadow: 0 7px 24px rgba(0, 0, 0, 0.07);
     }
 
-    .photo-caption{
-      margin: 8px 0 0;
-      font-size: var(--home-caption-size);
-      color: var(--muted);
+    .carousel-track{
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
-    /* ================= HERO TEXT ================= */
-    .home-hero{
-      padding: 6px 0 10px;
+    .carousel-slide{
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s ease;
     }
 
-    .home-hero h1{
-      margin: 0 0 10px;
-      font-size: var(--home-title-size);
-      font-weight: 900;
-      line-height: 1.10;
-      letter-spacing: 0.2px;
+    .carousel-slide.is-active{
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
     }
 
-    .home-hero p{
-      margin: 0 0 16px;
-      font-size: var(--home-subtitle-size);
-      color: var(--muted);
-      line-height: 1.65;
-      max-width: none;
+    .carousel-slide img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .carousel-control{
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, 0.28);
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .carousel-control:hover{
+      background: rgba(0, 0, 0, 0.46);
+    }
+
+    .carousel-control:active{
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .carousel-prev{ left: 13px; }
+    .carousel-next{ right: 13px; }
+
+    .carousel-dots{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .carousel-dot{
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(136, 0, 0, 0.24);
+      cursor: pointer;
+      transition: width 0.18s ease, background 0.18s ease;
+    }
+
+    .carousel-dot.is-active{
+      width: 22px;
+      background: var(--home-accent);
+    }
+
+    .carousel-control:focus-visible,
+    .carousel-dot:focus-visible{
+      outline: 3px solid rgba(136, 0, 0, 0.30);
+      outline-offset: 3px;
+    }
+
+    /* =========================================================
+       NEWS
+       ========================================================= */
+    .news{
+      width: min(900px, 100%);
+      margin: 48px auto 0;
     }
 
     .home-section-title{
-      margin: 0 0 12px;
+      margin: 0 0 16px;
       font-size: var(--home-section-title);
       font-weight: 900;
       line-height: 1.2;
     }
 
-    /* ================= HIGHLIGHTS (BOX) ================= */
-    .highlights{
-      display: grid;
-      gap: 10px;
-    }
-
-    .highlights-list{
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .highlight-item{
-      display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 12px;
-      align-items: baseline;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(136, 0, 0, 0.04);
-      border: 1px solid rgba(136, 0, 0, 0.10);
-    }
-
-    .highlight-tag{
-      font-size: 14px;
-      font-weight: 900;
-      color: rgba(136, 0, 0, 0.85);
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-    }
-
-    .highlight-text{
-      font-size: var(--home-body-size);
-      line-height: 1.6;
-      color: var(--text);
-    }
-
-    /* ================= NEWS ================= */
-    .news{
-      display: grid;
-      gap: 10px;
-    }
-
     .news-list{
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
+      border-top: 1px solid rgba(26, 26, 26, 0.16);
     }
 
     .news-item{
+      border-bottom: 1px solid rgba(26, 26, 26, 0.13);
+    }
+
+    .news-summary{
+      list-style: none;
       display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 12px;
-      align-items: baseline;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(136, 0, 0, 0.04);
-      border: 1px solid rgba(136, 0, 0, 0.10);
+      grid-template-columns: 92px 1fr 24px;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 2px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .news-summary::-webkit-details-marker{
+      display: none;
     }
 
     .news-date{
       font-size: 14px;
       font-weight: 800;
-      color: rgba(136, 0, 0, 0.75);
+      color: rgba(136, 0, 0, 0.82);
       letter-spacing: 0.2px;
       white-space: nowrap;
     }
 
-    .news-text{
-      font-size: var(--home-body-size);
-      line-height: 1.6;
+    .news-title{
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.45;
       color: var(--text);
     }
 
-    .news-text a{
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(136, 0, 0, 0.25);
+    .news-chevron{
+      width: 9px;
+      height: 9px;
+      justify-self: end;
+      border-right: 2px solid rgba(26, 26, 26, 0.58);
+      border-bottom: 2px solid rgba(26, 26, 26, 0.58);
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.18s ease;
     }
 
-    .news-text a:hover{
-      border-bottom-color: rgba(136, 0, 0, 0.55);
+    .news-item[open] .news-chevron{
+      transform: rotate(225deg) translate(-2px, -2px);
     }
 
-    /* ================= CTA ================= */
-    .cta{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
+    .news-detail{
+      padding: 0 48px 20px 110px;
+      font-size: var(--home-body-size);
+      line-height: 1.75;
+      color: var(--muted);
     }
 
-    .cta p{
+    .news-detail p{
       margin: 0;
-      color: var(--text);
-      font-size: var(--home-body-size);
-      line-height: 1.65;
     }
 
-    /* 반응형 */
+    .news-detail strong{
+      color: var(--text);
+    }
+
+    .news-summary:focus-visible{
+      outline: 2px solid rgba(136, 0, 0, 0.35);
+      outline-offset: -2px;
+      border-radius: 8px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
     @media (max-width: 900px){
-      .highlight-item{
-        grid-template-columns: 1fr;
-        gap: 6px;
+      .home-carousel-section{
+        padding-top: 20px;
       }
 
-      .news-item{
-        grid-template-columns: 1fr;
-        gap: 6px;
+      .home-carousel{
+        width: min(760px, 100%);
+        height: clamp(260px, 48vw, 360px);
+      }
+
+      .news{
+        margin-top: 40px;
+      }
+    }
+
+    @media (max-width: 620px){
+      main.container{
+        padding-bottom: 42px;
+      }
+
+      .home-carousel{
+        height: 250px;
+        border-radius: 13px;
+      }
+
+      .carousel-control{
+        width: 36px;
+        height: 36px;
+        font-size: 23px;
+      }
+
+      .carousel-prev{ left: 9px; }
+      .carousel-next{ right: 9px; }
+
+      .carousel-dots{
+        margin-top: 10px;
+      }
+
+      .news{
+        margin-top: 34px;
+      }
+
+      .home-section-title{
+        font-size: 24px;
+      }
+
+      .news-summary{
+        grid-template-columns: 1fr 22px;
+        gap: 7px 12px;
+        padding: 17px 0;
+      }
+
+      .news-date{
+        grid-column: 1;
+        grid-row: 1;
+        font-size: 13px;
+      }
+
+      .news-title{
+        grid-column: 1;
+        grid-row: 2;
+        font-size: 17px;
+      }
+
+      .news-chevron{
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+
+      .news-detail{
+        padding: 0 34px 18px 0;
+        font-size: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .carousel-slide,
+      .carousel-control,
+      .carousel-dot,
+      .news-chevron{
+        transition: none;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
@@ -223,115 +324,105 @@
   </header>
 
   <main class="container">
-    <!-- ================= LAB PHOTO ================= -->
-    <section class="home-photo" aria-label="AIVS Lab Group Photo">
-      <img src="assets/img/lab_group_260404.jpg" alt="AIVS Lab Group" />
-      <p class="photo-caption">AIVS Lab, Korea University</p>
+    <!-- =====================================================
+         RECENT LAB ACTIVITY
+
+         사진 목록은 assets/home_media.json에서 자동으로 읽습니다.
+         GitHub Actions가 assets/img/activity/의 최근 추가 사진을
+         최대 6장까지 자동으로 선정해 JSON을 갱신합니다.
+         ===================================================== -->
+    <section class="home-carousel-section" aria-label="Recent AIVS Lab Activities">
+      <div
+        class="home-carousel"
+        id="homeCarousel"
+        role="region"
+        tabindex="0"
+        aria-roledescription="carousel"
+        aria-label="Recent AIVS Lab activity photos"
+      >
+        <div class="carousel-track" id="carouselTrack"></div>
+
+        <button
+          class="carousel-control carousel-prev"
+          id="carouselPrev"
+          type="button"
+          aria-label="Previous photo"
+        >&#8249;</button>
+
+        <button
+          class="carousel-control carousel-next"
+          id="carouselNext"
+          type="button"
+          aria-label="Next photo"
+        >&#8250;</button>
+      </div>
+
+      <div
+        class="carousel-dots"
+        id="carouselDots"
+        aria-label="Choose an activity photo"
+      ></div>
     </section>
 
-    <!-- ================= HERO TEXT ================= -->
-    <section class="home-hero">
-      <h1>Who We Are</h1>
+    <!-- =====================================================
+         NEWS
+         새 소식은 <details class="news-item"> 블록을 복사해서
+         가장 위에 추가하면 됩니다.
+         ===================================================== -->
+    <section class="news" aria-labelledby="newsTitle">
+      <h2 class="home-section-title" id="newsTitle">News</h2>
 
-      <p>
-        We study <strong>intelligent systems that tightly connect perception, reasoning, and action</strong>.
-        Our research lies at the intersection of <strong>computer vision</strong>,
-        <strong>multimodal foundation models</strong>, and <strong>embodied intelligence</strong>,
-        with a strong emphasis on building AI systems that can <strong>operate reliably in the real world</strong>.
-      </p>
+      <div class="news-list">
+        <details class="news-item">
+          <summary class="news-summary">
+            <span class="news-date">2026.05</span>
+            <span class="news-title">New IITP-funded research project launched</span>
+            <span class="news-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="news-detail">
+            <p>
+              A new IITP-funded project has been launched, focusing on an
+              <strong>AI-driven autonomous fire response system</strong>
+              (<strong>2026.04–2027.12</strong>).
+            </p>
+          </div>
+        </details>
 
-      <p>
-        Rather than focusing solely on isolated models or benchmarks, we aim to develop
-        <strong>robust, scalable, and deployable AI technologies</strong> that integrate sensing,
-        decision-making, and control. Our work spans both <strong>fundamental AI research</strong>
-        and <strong>system-level implementations</strong>, addressing challenges such as
-        generalization under distribution shift, data efficiency, and real-world constraints.
-      </p>
+        <details class="news-item">
+          <summary class="news-summary">
+            <span class="news-date">2025.12</span>
+            <span class="news-title">Paper accepted to Advanced Science</span>
+            <span class="news-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="news-detail">
+            <p>
+              One paper has been accepted to <em>Advanced Science</em>
+              (<strong>IF 14.1</strong>, <strong>JCR top 7%</strong>).
+            </p>
+          </div>
+        </details>
 
-      <ul>
-        <li>
-          Designing <strong>generative and multimodal models</strong> that enable controllable and trustworthy perception.
-        </li>
-        <li>
-          Developing <strong>Vision–Language–Action (VLA) frameworks</strong> for embodied agents and robotic systems.
-        </li>
-        <li>
-          Building <strong>end-to-end AI systems</strong> that bridge simulation, learning, and physical execution.
-        </li>
-      </ul>
+        <!--
+        ===== 새 News 예시 =====
 
-      <p>
-        If you are interested in <strong>pushing the boundaries of real-world AI systems</strong>
-        and working on challenging problems at the intersection of theory and practice,
-        we encourage you to <strong>contact us and explore opportunities to join the lab</strong>.
-      </p>
+        <details class="news-item">
+          <summary class="news-summary">
+            <span class="news-date">2026.09</span>
+            <span class="news-title">Prof. Yong-Goo Shin appointed as ...</span>
+            <span class="news-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="news-detail">
+            <p>
+              Prof. Yong-Goo Shin has been appointed as ...
+            </p>
+          </div>
+        </details>
+        -->
+      </div>
     </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ================= HIGHLIGHTS (BOX) ================= -->
-    <section class="highlights" aria-label="Highlights">
-      <h2 class="home-section-title">Highlights</h2>
-
-      <ul class="highlights-list">
-        <li class="highlight-item">
-          <div class="highlight-tag">[Funded Projects]</div>
-          <div class="highlight-text">
-            Currently conducting <strong>four nationally funded research projects</strong>
-            in multimodal, generative, and embodied AI.
-          </div>
-        </li>
-
-        <li class="highlight-item">
-          <div class="highlight-tag">[Publications]</div>
-          <div class="highlight-text">
-            A strong publication record with international journal and conference papers,
-            including <strong>multiple JCR top 10% journals</strong>.
-          </div>
-        </li>
-
-        <!-- <li class="highlight-item">
-          <div class="highlight-tag">[Research Group]</div>
-          <div class="highlight-text">
-            An active research group consisting of <strong>7 integrated MS/PhD students</strong>
-            and <strong>6 undergraduate researchers</strong>.
-          </div>
-        </li> -->
-      </ul>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ================= NEWS ================= -->
-    <section class="news" aria-label="News">
-      <h2 class="home-section-title">News</h2>
-
-      <ul class="news-list">
-        
-        <li class="news-item">
-          <div class="news-date">2026-05</div>
-          <div class="news-text">
-            <strong>[New Project]</strong>
-            A IITP-funded project has been launched, focusing on AI–driven autonomous fire response system
-            (<strong>2026.04–2027.12</strong>).
-          </div>
-        </li>
-                
-        <li class="news-item">
-          <div class="news-date">2025-12</div>
-          <div class="news-text">
-            <strong>[Congratulations]</strong>
-            One paper has been accepted to <em>Advanced Science</em>
-            (<strong>IF 14.1</strong>, <strong>JCR top 7%</strong>).
-          </div>
-        </li>
-        
-      </ul>
-    </section>
-
-    <div class="section-divider"></div>
   </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
     <div class="container">
       <p>© <span id="year"></span> AIVS Lab. All rights reserved.</p>
@@ -339,6 +430,184 @@
   </footer>
 
   <script>
+    /*
+      GitHub Actions가 생성한 목록을 우선 사용합니다.
+      첫 실행 전 JSON이 아직 없을 때는 현재 6장을 fallback으로 사용합니다.
+    */
+    const HOME_MEDIA_JSON = "assets/home_media.json";
+    const FALLBACK_MEDIA = [
+      "assets/img/activity/activity6.jpg",
+      "assets/img/activity/activity5.jpg",
+      "assets/img/activity/activity4.jpg",
+      "assets/img/activity/activity3.jpg",
+      "assets/img/activity/activity2.jpg",
+      "assets/img/activity/activity1.jpg"
+    ];
+
+    const IMAGE_DURATION = 5000;
+
+    const carousel = document.getElementById("homeCarousel");
+    const track = document.getElementById("carouselTrack");
+    const dotsContainer = document.getElementById("carouselDots");
+    const prevButton = document.getElementById("carouselPrev");
+    const nextButton = document.getElementById("carouselNext");
+
+    let homeMedia = [];
+    let currentIndex = 0;
+    let autoTimer = null;
+    let touchStartX = 0;
+
+    async function loadHomeMedia(){
+      try{
+        const response = await fetch(HOME_MEDIA_JSON, { cache: "no-store" });
+        if(!response.ok){
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        if(!data || !Array.isArray(data.media) || data.media.length === 0){
+          throw new Error("No media entries found");
+        }
+
+        return data.media.slice(0, 6);
+      }catch(error){
+        console.warn("Using fallback activity photos:", error);
+        return FALLBACK_MEDIA;
+      }
+    }
+
+    function createSlides(){
+      track.innerHTML = "";
+      dotsContainer.innerHTML = "";
+
+      homeMedia.forEach((src, index) => {
+        const slide = document.createElement("div");
+        slide.className = "carousel-slide";
+        slide.setAttribute("role", "group");
+        slide.setAttribute("aria-roledescription", "slide");
+        slide.setAttribute("aria-label", `${index + 1} of ${homeMedia.length}`);
+
+        const image = document.createElement("img");
+        image.src = src;
+        image.alt = `AIVS Lab activity ${index + 1}`;
+        image.loading = index === 0 ? "eager" : "lazy";
+        image.decoding = "async";
+
+        slide.appendChild(image);
+        track.appendChild(slide);
+
+        const dot = document.createElement("button");
+        dot.className = "carousel-dot";
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Go to photo ${index + 1}`);
+        dot.addEventListener("click", () => showSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      const hideNavigation = homeMedia.length <= 1;
+      prevButton.hidden = hideNavigation;
+      nextButton.hidden = hideNavigation;
+      dotsContainer.hidden = hideNavigation;
+    }
+
+    function scheduleNext(){
+      clearTimeout(autoTimer);
+
+      if(
+        homeMedia.length <= 1 ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ){
+        return;
+      }
+
+      autoTimer = window.setTimeout(() => {
+        showSlide(currentIndex + 1);
+      }, IMAGE_DURATION);
+    }
+
+    function showSlide(index){
+      if(homeMedia.length === 0){
+        return;
+      }
+
+      clearTimeout(autoTimer);
+      currentIndex = (index + homeMedia.length) % homeMedia.length;
+
+      const slides = Array.from(track.children);
+      const dots = Array.from(dotsContainer.children);
+
+      slides.forEach((slide, i) => {
+        const active = i === currentIndex;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+      });
+
+      dots.forEach((dot, i) => {
+        const active = i === currentIndex;
+        dot.classList.toggle("is-active", active);
+        if(active){
+          dot.setAttribute("aria-current", "true");
+        }else{
+          dot.removeAttribute("aria-current");
+        }
+      });
+
+      scheduleNext();
+    }
+
+    function showNext(){
+      showSlide(currentIndex + 1);
+    }
+
+    function showPrevious(){
+      showSlide(currentIndex - 1);
+    }
+
+    prevButton.addEventListener("click", showPrevious);
+    nextButton.addEventListener("click", showNext);
+
+    carousel.addEventListener("keydown", event => {
+      if(event.key === "ArrowLeft"){
+        showPrevious();
+      }else if(event.key === "ArrowRight"){
+        showNext();
+      }
+    });
+
+    carousel.addEventListener("mouseenter", () => clearTimeout(autoTimer));
+    carousel.addEventListener("mouseleave", scheduleNext);
+    carousel.addEventListener("focusin", () => clearTimeout(autoTimer));
+    carousel.addEventListener("focusout", scheduleNext);
+
+    carousel.addEventListener("touchstart", event => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", event => {
+      const touchEndX = event.changedTouches[0].clientX;
+      const distance = touchEndX - touchStartX;
+
+      if(Math.abs(distance) < 45){
+        return;
+      }
+
+      if(distance > 0){
+        showPrevious();
+      }else{
+        showNext();
+      }
+    }, { passive: true });
+
+    async function initializeHomeCarousel(){
+      homeMedia = await loadHomeMedia();
+      createSlides();
+      if(homeMedia.length > 0){
+        showSlide(0);
+      }
+    }
+
+    initializeHomeCarousel();
+
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
