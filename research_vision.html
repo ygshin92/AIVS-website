@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision &amp; Multimodal Intelligence | AIVS Lab</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    :root {
+      --research-accent: #880000;
+      --research-border: rgba(26, 26, 26, 0.14);
+    }
+
+    main.container {
+      padding: 38px 0 68px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 42px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--research-accent); }
+
+    .detail-eyebrow {
+      margin: 0 0 12px;
+      color: var(--research-accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      max-width: 860px;
+      margin: 0;
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+    }
+
+    .detail-rule {
+      height: 1px;
+      margin: 34px 0 34px;
+      background: var(--research-border);
+    }
+
+    .detail-media-wrap {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 0 0 34px;
+    }
+
+    .detail-media {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 440px;
+      border-radius: 16px;
+    }
+
+    .detail-copy {
+      max-width: 900px;
+      font-size: 17px;
+      line-height: 1.78;
+      color: var(--text);
+    }
+
+    .detail-copy p { margin: 0; }
+
+    .topics {
+      margin-top: 42px;
+      padding-top: 26px;
+      border-top: 1px solid var(--research-border);
+    }
+
+    .topics h2 {
+      margin: 0 0 16px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .topic-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .topic {
+      padding: 7px 11px;
+      border: 1px solid rgba(136, 0, 0, 0.18);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    @media (max-width: 680px) {
+      main.container { padding-top: 28px; }
+      .back-link { margin-bottom: 32px; }
+      .detail-media { max-height: 300px; }
+      .detail-copy { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
+        <span class="brand-text">AIVS</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a class="active" href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back-link" href="research.html">← Back to Research</a>
+
+    <section>
+      <p class="detail-eyebrow">Research Direction 03</p>
+      <h1 class="detail-title">Vision &amp; Multimodal Intelligence</h1>
+      <div class="detail-rule"></div>
+
+      <div class="detail-media-wrap">
+        <img class="detail-media" src="assets/img/research/Vision_260220.png" alt="Vision and Multimodal Intelligence research" />
+      </div>
+
+      <div class="detail-copy">
+        <p>We develop robust visual representations and multimodal learning methods that combine visual, linguistic, and structured information. Our research covers vision–language models (VLMs), fine-grained recognition, and reliable perception under distribution shifts and challenging conditions. We also study training strategies and model architectures that improve generalization, robustness, and interpretability across diverse real-world environments.</p>
+      </div>
+
+      <div class="topics">
+        <h2>Research Topics</h2>
+        <div class="topic-list">
+        <span class="topic">Vision-Language Models (VLMs)</span>
+        <span class="topic">Multimodal Representation</span>
+        <span class="topic">Fine-Grained Recognition</span>
+        <span class="topic">Robust & Trustworthy Perception</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> AIVS Lab.</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
