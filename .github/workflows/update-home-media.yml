@@ -1,17 +1,21 @@
-name: Update Home Activity Media v3
+name: Update Home Activity Media
 
 on:
   push:
     branches:
       - main
-  paths:
-    - "assets/img/activity/**"
-    - "tools/generate_home_media.py"
-    - ".github/workflows/update-home-media.yml"
+    paths:
+      - "assets/img/activity/**"
+      - "tools/generate_home_media.py"
+      - ".github/workflows/update-home-media.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: update-home-activity-media
+  cancel-in-progress: false
 
 jobs:
   update-home-media:
@@ -19,24 +23,28 @@ jobs:
 
     steps:
       - name: Checkout repository with full history
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
       - name: Install Pillow
         run: python -m pip install --upgrade Pillow
 
-      - name: Generate recent landscape activity list
+      - name: Generate Home carousel media list
         run: python tools/generate_home_media.py
 
+      - name: Show generated list
+        run: cat assets/home_media.json
+
       - name: Commit updated media list
+        shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- assets/home_media.json)" ]; then
+          if git diff --quiet -- assets/home_media.json; then
             echo "Home media list is already up to date."
             exit 0
           fi
@@ -45,5 +53,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add assets/home_media.json
-          git commit -m "chore: update Home activity media v3"
-          git push
+          git commit -m "chore: update Home activity media"
+          git push origin HEAD:main
