@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-"""Generate Home carousel media from recent landscape activity photos.
+"""Generate the Home carousel list from recent landscape activity photos.
+
+Production target when pasted into the repository:
+    tools/generate_home_media.py
 
 Rules
 -----
-- Scan tracked images in assets/img/activity/.
-- Keep only landscape images whose aspect ratio is between 1.25 and 1.90.
-  This includes common 4:3, 3:2, and 16:9 photos while excluding portrait
-  images and very wide panoramas.
-- Select at most 6 eligible images.
-- For the current activityN.jpg naming convention, larger N is newer.
-- For arbitrary future filenames, fall back to Git add time.
-- Write the result to assets/home_media.json.
+- Scan image files in assets/img/activity/.
+- Correct EXIF orientation before checking width/height.
+- Keep landscape images with aspect ratio 1.20-1.90.
+  This admits activity8.jpg (4282x3433 ~= 1.247), common 4:3, 3:2,
+  and 16:9 photos, while excluding portrait/square images and panoramas.
+- Select at most 6 images.
+- If every eligible file follows activityN.ext, larger N is treated as newer.
+- Otherwise, rank by the Git commit where each file was first added.
+- Write exactly one authoritative list to assets/home_media.json.
 """
 
 from __future__ import annotations
@@ -21,7 +25,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
 ACTIVITY_DIR = Path("assets/img/activity")
@@ -31,47 +35,90 @@ MIN_ASPECT_RATIO = 1.20
 MAX_ASPECT_RATIO = 1.90
 
 
-def git(repo: Path, *args: str) -> str:
-    result = subprocess.run(
-        ["git", *args],
-        cwd=repo,
-        check=True,
-        text=True,
-        capture_output=True,
-    )
-    return result.stdout.strip()
-
-
-def natural_key(path: str):
-    name = Path(path).name.lower()
-    return [int(part) if part.isdigit() else part for part in re.split(r"(\d+)", name)]
-
-
 def activity_number(path: str) -> int | None:
     """Return N for names like activityN.jpg, otherwise None."""
     match = re.fullmatch(r"activity(\d+)", Path(path).stem, flags=re.IGNORECASE)
     return int(match.group(1)) if match else None
 
 
+def natural_key(path: str):
+    """Natural-sort helper: activity10 sorts after activity9."""
+    name = Path(path).name.lower()
+    return [int(part) if part.isdigit() else part for part in re.split(r"(\d+)", name)]
+
+
+def git_output(repo: Path, *args: str) -> str:
+    """Run Git and return stdout; return an empty string if history lookup fails."""
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=repo,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return ""
+    return result.stdout.strip()
+
+
+def image_dimensions(path: Path) -> tuple[int, int] | None:
+    """Read display-oriented dimensions, respecting phone-camera EXIF rotation."""
+    try:
+        with Image.open(path) as image:
+            oriented = ImageOps.exif_transpose(image)
+            return oriented.size
+    except (OSError, UnidentifiedImageError, ValueError):
+        return None
+
+
 def is_home_eligible(width: int, height: int) -> bool:
-    """Return True for landscape photos suitable for the Home carousel."""
     if width <= 0 or height <= 0 or width <= height:
         return False
     ratio = width / height
     return MIN_ASPECT_RATIO <= ratio <= MAX_ASPECT_RATIO
 
 
-def image_dimensions(path: Path) -> tuple[int, int] | None:
-    try:
-        with Image.open(path) as image:
-            return image.size
-    except (OSError, UnidentifiedImageError):
-        return None
+def list_activity_images(repo: Path) -> list[str]:
+    """List image files directly from the activity directory.
+
+    Scanning the checked-out directory is deliberately simpler and more robust than
+    depending on `git ls-files` for discovery. Git history is used only for ranking
+    arbitrary filenames.
+    """
+    directory = repo / ACTIVITY_DIR
+    if not directory.is_dir():
+        return []
+
+    files = []
+    for path in directory.iterdir():
+        if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS:
+            files.append(path.relative_to(repo).as_posix())
+    return files
 
 
-def added_timestamp(repo: Path, rel_path: str) -> int:
-    """Return timestamp for the commit in which the file was first added."""
-    output = git(
+def filter_eligible_images(repo: Path, images: list[str]) -> list[str]:
+    eligible: list[str] = []
+    for rel_path in images:
+        dimensions = image_dimensions(repo / rel_path)
+        if dimensions is None:
+            print(f"[skip] unreadable image: {rel_path}")
+            continue
+
+        width, height = dimensions
+        ratio = width / height if height else 0.0
+        if not is_home_eligible(width, height):
+            print(f"[skip] unsuitable ratio {width}x{height} ({ratio:.3f}): {rel_path}")
+            continue
+
+        print(f"[keep] {width}x{height} ({ratio:.3f}): {rel_path}")
+        eligible.append(rel_path)
+    return eligible
+
+
+def first_added_timestamp(repo: Path, rel_path: str) -> int:
+    """Return the commit timestamp where the file was first added."""
+    output = git_output(
         repo,
         "log",
         "--follow",
@@ -84,40 +131,8 @@ def added_timestamp(repo: Path, rel_path: str) -> int:
     if timestamps:
         return min(timestamps)
 
-    output = git(repo, "log", "-1", "--format=%ct", "--", rel_path)
+    output = git_output(repo, "log", "-1", "--format=%ct", "--", rel_path)
     return int(output) if output.isdigit() else 0
-
-
-def list_activity_images(repo: Path) -> list[str]:
-    tracked = git(repo, "ls-files", ACTIVITY_DIR.as_posix())
-    images: list[str] = []
-    for rel_path in tracked.splitlines():
-        rel_path = rel_path.strip()
-        if not rel_path:
-            continue
-        if Path(rel_path).suffix.lower() in IMAGE_EXTENSIONS:
-            images.append(rel_path)
-    return images
-
-
-def filter_eligible_images(repo: Path, images: list[str]) -> list[str]:
-    eligible: list[str] = []
-    for rel_path in images:
-        dimensions = image_dimensions(repo / rel_path)
-        if dimensions is None:
-            print(f"[skip] unreadable image: {rel_path}")
-            continue
-
-        width, height = dimensions
-        ratio = width / height if height else 0
-        if not is_home_eligible(width, height):
-            print(f"[skip] unsuitable ratio {width}x{height} ({ratio:.3f}): {rel_path}")
-            continue
-
-        print(f"[keep] {width}x{height} ({ratio:.3f}): {rel_path}")
-        eligible.append(rel_path)
-
-    return eligible
 
 
 def select_recent_images(repo: Path, limit: int) -> list[str]:
@@ -131,7 +146,8 @@ def select_recent_images(repo: Path, limit: int) -> list[str]:
         numbered.sort(key=lambda item: item[0], reverse=True)
         return [path for _, path in numbered[:limit]]
 
-    ranked = [(added_timestamp(repo, path), path) for path in eligible]
+    ranked = [(first_added_timestamp(repo, path), path) for path in eligible]
+    # Stable two-step sort: natural filename is the tie-breaker.
     ranked.sort(key=lambda item: natural_key(item[1]), reverse=True)
     ranked.sort(key=lambda item: item[0], reverse=True)
     return [path for _, path in ranked[:limit]]
@@ -165,7 +181,7 @@ def main() -> None:
 
     print(f"Selected {len(media)} Home carousel image(s):")
     for path in media:
-        print(f"  - {path}")
+        print(f" - {path}")
 
 
 if __name__ == "__main__":
