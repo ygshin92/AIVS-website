@@ -8,222 +8,291 @@
 
   <style>
     :root {
-      --prof-photo-width: 200px;
-      --student-photo-size: 92px;
-      --student-card-radius: 18px;
-      --student-card-border: rgba(136, 0, 0, 0.12);
-      --student-card-bg: rgba(255, 255, 255, 0.72);
-      --student-card-shadow: 0 10px 24px rgba(80, 40, 40, 0.06);
-      --student-card-shadow-hover: 0 16px 34px rgba(80, 40, 40, 0.11);
+      --members-accent: #880000;
+      --members-border: rgba(136, 0, 0, 0.14);
+      --members-muted-bg: rgba(136, 0, 0, 0.035);
+      --members-shadow: 0 10px 30px rgba(80, 40, 40, 0.07);
     }
 
-    /* ===== Professor ===== */
-    .member-profile {
-      display: grid;
-      grid-template-columns: var(--prof-photo-width) 1fr;
-      gap: 24px;
-      align-items: center;
+    main.container {
+      padding: 30px 0 56px;
     }
 
-    .member-photo {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      box-shadow: 0 10px 30px rgba(80, 40, 40, 0.08);
+    .members-section + .members-section {
+      margin-top: 58px;
     }
 
-    .member-name {
+    .section-kicker {
       margin: 0 0 8px;
-      font-size: 34px;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: 0.2px;
+      color: var(--members-accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .member-role {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    .member-meta {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .pill {
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .card.professor,
-    .card.students {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-
-    .member-roles {
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .member-roles li {
-      margin: 4px 0;
-    }
-
-    .member-roles li::marker {
-      font-size: 0.7em;
-      color: var(--creamson-2);
-    }
-
-    /* ===== Section ===== */
     .section-title {
-      margin: 28px 0 14px;
-      font-size: 24px;
+      margin: 0 0 22px;
+      font-size: 28px;
+      line-height: 1.2;
       font-weight: 900;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.1px;
     }
 
-    .section-subtitle {
-      margin: -2px 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .section-divider {
-      margin: 42px 0 30px;
+    .section-rule {
+      width: 100%;
       height: 1px;
+      margin: 0 0 28px;
       background: linear-gradient(
         to right,
-        transparent,
-        rgba(136, 0, 0, 0.25),
+        rgba(136, 0, 0, 0.28),
+        rgba(136, 0, 0, 0.08) 48%,
         transparent
       );
     }
 
-    /* ===== Students ===== */
+    /* ================= PRINCIPAL INVESTIGATOR ================= */
+    .pi-profile {
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .pi-photo-wrap {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .pi-photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 18px;
+      border: 1px solid var(--members-border);
+      background: #fff;
+      box-shadow: var(--members-shadow);
+    }
+
+    .pi-name {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 42px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .pi-role {
+      margin: 10px 0 0;
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .pi-affiliation {
+      margin: 3px 0 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .pi-appointment {
+      margin: 18px 0 0;
+      padding-left: 14px;
+      border-left: 3px solid rgba(136, 0, 0, 0.65);
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .pi-bio {
+      max-width: 760px;
+      margin: 20px 0 0;
+      font-size: 15px;
+      line-height: 1.78;
+      color: var(--text);
+    }
+
+    .research-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .research-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 11px;
+      border: 1px solid var(--members-border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .profile-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid rgba(136, 0, 0, 0.22);
+      border-radius: 10px;
+      color: var(--members-accent);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .profile-link:hover {
+      background: var(--members-muted-bg);
+      border-color: rgba(136, 0, 0, 0.38);
+      transform: translateY(-1px);
+    }
+
+    /* ================= GRADUATE STUDENTS ================= */
     .students-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px 22px;
-      margin-top: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px 26px;
     }
 
-    .student-item {
-      display: grid;
-      grid-template-columns: var(--student-photo-size) 1fr;
-      gap: 16px;
-      align-items: center;
-      padding: 16px;
-      border: 1px solid var(--student-card-border);
-      border-radius: var(--student-card-radius);
-      background: var(--student-card-bg);
-      box-shadow: var(--student-card-shadow);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+    .student-profile {
+      min-width: 0;
     }
 
-    .student-item:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--student-card-shadow-hover);
-      border-color: rgba(136, 0, 0, 0.2);
+    .student-photo-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      border: 1px solid var(--members-border);
+      background: #f4f4f4;
+      box-shadow: 0 8px 24px rgba(80, 40, 40, 0.055);
     }
 
     .student-photo {
-      width: var(--student-photo-size);
-      height: var(--student-photo-size);
-      border-radius: 16px;
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      flex-shrink: 0;
+      object-position: center;
+      transition: transform 0.25s ease;
+    }
+
+    .student-profile:hover .student-photo {
+      transform: scale(1.015);
+    }
+
+    .student-info {
+      padding: 14px 2px 0;
     }
 
     .student-name {
-      margin: 0 0 6px;
+      margin: 0;
       font-size: 20px;
+      line-height: 1.25;
       font-weight: 900;
-      line-height: 1.2;
-      letter-spacing: 0.1px;
+      letter-spacing: 0.05px;
     }
 
     .student-program {
-      margin: 0;
+      margin: 6px 0 0;
       color: var(--muted);
       font-size: 14px;
       font-weight: 700;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
+    .student-period {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Optional: add this line to any student card when you want to show interests.
+       <p class="student-interest">Generative AI · Computer Vision</p>
+    */
     .student-interest {
-      margin: 8px 0 0;
-      color: var(--text);
-      font-size: 14px;
+      margin: 9px 0 0;
+      font-size: 13px;
       line-height: 1.55;
+      color: var(--text);
     }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 980px) {
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 920px) {
+      .pi-profile {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 30px;
+      }
+
       .students-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 820px) {
-      .member-profile {
+    @media (max-width: 680px) {
+      main.container {
+        padding-top: 22px;
+      }
+
+      .members-section + .members-section {
+        margin-top: 46px;
+      }
+
+      .pi-profile {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
 
-      .member-photo {
-        max-width: 260px;
-        justify-self: start;
+      .pi-photo-wrap {
+        max-width: 230px;
       }
 
-      .member-name {
-        font-size: 30px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      :root {
-        --student-photo-size: 82px;
+      .section-title {
+        font-size: 24px;
       }
 
-      .student-item {
-        grid-template-columns: 82px 1fr;
-        gap: 14px;
-        padding: 14px;
+      .students-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 26px 14px;
       }
 
       .student-name {
         font-size: 18px;
       }
+    }
 
-      .student-program {
-        font-size: 13px;
+    @media (max-width: 430px) {
+      .students-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .student-profile {
+        max-width: 320px;
       }
     }
   </style>
 </head>
-
 <body>
   <header class="site-header">
     <div class="container header-inner">
@@ -231,7 +300,6 @@
         <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
         <span class="brand-text">AIVS</span>
       </a>
-
       <nav class="nav">
         <a href="index.html">Home</a>
         <a class="active" href="members.html">Members</a>
@@ -243,146 +311,137 @@
     </div>
   </header>
 
-  <main class="container" style="padding: 24px 0 48px;">
-    <!-- ===== Professor ===== -->
-    <section class="card professor">
-      <div class="member-profile">
-        <img
-          class="member-photo"
-          src="assets/img/prof_yonggoo_shin.jpg"
-          alt="Prof. Yong-Goo Shin"
-        />
+  <main class="container">
+    <!-- ================= PRINCIPAL INVESTIGATOR ================= -->
+    <section class="members-section" aria-labelledby="piTitle">
+      <p class="section-kicker">AIVS Lab</p>
+      <h1 class="section-title" id="piTitle">Principal Investigator</h1>
+      <div class="section-rule"></div>
 
-        <div>
-          <h2 class="member-name">Prof. Yong-Goo Shin</h2>
-          <p class="member-role">
-            Associate Professor, Department of Electronics and Information Engineering
+      <div class="pi-profile">
+        <div class="pi-photo-wrap">
+          <img
+            class="pi-photo"
+            src="assets/img/prof_yonggoo_shin.jpg"
+            alt="Prof. Yong-Goo Shin"
+          />
+        </div>
+
+        <div class="pi-content">
+          <h2 class="pi-name">Yong-Goo Shin</h2>
+          <p class="pi-role">Associate Professor</p>
+          <p class="pi-affiliation">
+            Department of Electronics and Information Engineering<br />
+            Korea University Sejong Campus
           </p>
 
-          <ul class="member-roles">
-            <li>전자및정보공학과 학과장 (2026.03.01-Present)</li>
-            <li>디지털헬스케어공학과 겸임교수 (2025.03.01-Present)</li>
-            <li>BK21 스마트에너지 사업단 부단장 (2025.05.01-Present)</li>
-            <li>한국통신학회 재무부 이사 (2026.01.01-Present)</li>
-            <li>고려대학교 세종캠퍼스 소프트웨어 중심대학 참여교수 (2024.04.01-Present)</li>
-            <li>고려대학교 세종캠퍼스 첨단 반도체 공정장비인재양성사업단 참여교수 (2023.09.01-Present)</li>
-          </ul>
+          <p class="pi-appointment">
+            Associate Dean for Academic Affairs, College of Science and Technology<br />
+            September 2026 – Present
+          </p>
 
-          <div class="member-meta">
-            <span class="pill">Physical AI</span>
-            <span class="pill">Generative AI</span>
-            <span class="pill">AI Vision Systems</span>
-            <span class="pill">AI Agent</span>
+          <!-- Edit this paragraph when you want to update the PI introduction. -->
+          <p class="pi-bio">
+            His research focuses on generative AI, physical and embodied AI,
+            computer vision, and multimodal intelligent systems, with an emphasis
+            on building AI systems that connect perception, reasoning, and action.
+          </p>
+
+          <div class="research-tags" aria-label="Research interests">
+            <span class="research-tag">Generative AI</span>
+            <span class="research-tag">Physical AI</span>
+            <span class="research-tag">Computer Vision</span>
+            <span class="research-tag">Multimodal AI</span>
+          </div>
+
+          <div class="profile-links">
+            <a class="profile-link" href="mailto:ygshin92@korea.ac.kr">Email</a>
+            <a class="profile-link" href="publications.html">Publications</a>
+            <a
+              class="profile-link"
+              href="https://pure.korea.ac.kr/en/persons/yong-goo-shin/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Korea University Profile</a>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="section-divider"></div>
-
-    <!-- ===== Graduate Students ===== -->
-    <section class="card students">
-      <h2 class="section-title">Graduate Students</h2>
-      <p class="section-subtitle">
-        Our graduate students are conducting research in physical AI, generative AI, multimodal learning, and AI vision systems.
-      </p>
+    <!-- ================= GRADUATE STUDENTS ================= -->
+    <section class="members-section" aria-labelledby="graduateTitle">
+      <p class="section-kicker">Current Members</p>
+      <h2 class="section-title" id="graduateTitle">Graduate Students</h2>
+      <div class="section-rule"></div>
 
       <div class="students-grid">
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/왕우진.jpg" alt="Woo-Jin Wang" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/왕우진.jpg" alt="Woo-Jin Wang" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Woo-Jin Wang</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2024 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2024 – Present</p>
           </div>
-        </div>
+        </article>
 
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/박미소.jpg" alt="Miso Park" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/박미소.jpg" alt="Miso Park" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Miso Park</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2024 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2024 – Present</p>
           </div>
-        </div>
+        </article>
 
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/박은솔.jpg" alt="Eun-Sol Park" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/박은솔.jpg" alt="Eun-Sol Park" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Eun-Sol Park</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2024 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2024 – Present</p>
           </div>
-        </div>
+        </article>
 
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/김성준.jpg" alt="Sung-Jun Kim" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/김성준.jpg" alt="Sung-Jun Kim" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Sung-Jun Kim</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2025 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2025 – Present</p>
           </div>
-        </div>
+        </article>
 
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/최부신.jpg" alt="Boo-Sin Choi" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/최부신.jpg" alt="Boo-Sin Choi" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Boo-Sin Choi</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2025 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2025 – Present</p>
           </div>
-        </div>
+        </article>
 
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/장보석.jpg" alt="Bo-Seok Jang" />
-          <div>
+        <article class="student-profile">
+          <div class="student-photo-wrap">
+            <img class="student-photo" src="assets/img/students/장보석.jpg" alt="Bo-Seok Jang" />
+          </div>
+          <div class="student-info">
             <h3 class="student-name">Bo-Seok Jang</h3>
-            <p class="student-program">Integrated MS-PhD Program<br />(Mar. 2025 – Present)</p>
+            <p class="student-program">Integrated M.S.–Ph.D. Program</p>
+            <p class="student-period">Mar. 2025 – Present</p>
           </div>
-        </div>
-
-
+        </article>
       </div>
     </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ===== Undergraduate Students ===== -->
-    <!-- <section class="card students">
-      <h2 class="section-title">Undergraduate Students</h2>
-      <p class="section-subtitle">
-        Undergraduate researchers actively participate in ongoing projects and gain hands-on experience in AI and vision research.
-      </p>
-
-      <div class="students-grid">
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/신애리.jpg" alt="Ae-ri Shin" />
-          <div>
-            <h3 class="student-name">Ae-ri Shin</h3>
-            <p class="student-program">Undergraduate Research Program</p>
-          </div>
-        </div>
-
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/김수민.png" alt="Soo-Min Kim" />
-          <div>
-            <h3 class="student-name">Soo-Min Kim</h3>
-            <p class="student-program">Undergraduate Research Program</p>
-          </div>
-        </div>
-
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/정인기.jpg" alt="In-Gi Jung" />
-          <div>
-            <h3 class="student-name">In-Gi Jung</h3>
-            <p class="student-program">Undergraduate Research Program</p>
-          </div>
-        </div>
-
-        <div class="student-item">
-          <img class="student-photo" src="assets/img/students/김한솔.jpg" alt="Han-Sol Kim" />
-          <div>
-            <h3 class="student-name">Han-Sol Kim</h3>
-            <p class="student-program">Undergraduate Research Program</p>
-          </div>
-        </div>
-      </div>
-    </section> -->
   </main>
 
   <footer class="site-footer">
