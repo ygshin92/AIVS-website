@@ -471,18 +471,16 @@
     const HOME_NEWS_LIMIT = 12;
     const HOME_MEDIA_JSON = "assets/home_media.json";
     const MAX_HOME_MEDIA = 6;
-    const MIN_HOME_RATIO = 1.20;
-    const MAX_HOME_RATIO = 1.90;
-    const IMAGE_DURATION = 5000;
+            const IMAGE_DURATION = 5000;
 
     /* Fallback photos are used if the generated JSON is unavailable. */
     const FALLBACK_MEDIA = [
+      "assets/img/activity/activity8.jpg",
       "assets/img/activity/activity6.jpg",
       "assets/img/activity/activity5.jpg",
       "assets/img/activity/activity4.jpg",
       "assets/img/activity/activity3.jpg",
-      "assets/img/activity/activity2.jpg",
-      "assets/img/activity/activity1.jpg"
+      "assets/img/activity/activity2.jpg"
     ];
 
 
@@ -618,30 +616,6 @@
       return clean;
     }
 
-    function inspectImage(src){
-      return new Promise(resolve => {
-        const image = new Image();
-
-        image.onload = () => {
-          const ratio = image.naturalWidth / image.naturalHeight;
-          const eligible =
-            image.naturalWidth > image.naturalHeight &&
-            ratio >= MIN_HOME_RATIO &&
-            ratio <= MAX_HOME_RATIO;
-
-          resolve(eligible ? src : null);
-        };
-
-        image.onerror = () => resolve(null);
-        image.src = src;
-      });
-    }
-
-    async function keepEligibleLandscapePhotos(media){
-      const inspected = await Promise.all(media.map(inspectImage));
-      return inspected.filter(Boolean).slice(0, MAX_HOME_MEDIA);
-    }
-
     async function loadHomeMedia(){
       let candidates;
 
@@ -662,7 +636,13 @@
         candidates = normalizeHomeMedia(FALLBACK_MEDIA);
       }
 
-      return keepEligibleLandscapePhotos(candidates);
+      /*
+       * home_media.json is the single source of truth for photo eligibility.
+       * The Python generator already filters orientation/aspect ratio and limits
+       * the list to the newest six photos. The browser only deduplicates and
+       * caps the list; it does NOT apply a second ratio filter.
+       */
+      return normalizeHomeMedia(candidates).slice(0, MAX_HOME_MEDIA);
     }
 
     function createSlides(){
