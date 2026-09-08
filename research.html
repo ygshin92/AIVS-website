@@ -5,108 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research | AIVS Lab</title>
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Research page-only styles -->
   <style>
-    :root{
-      /* ✅ [FONT SIZE CONTROL] 숫자만 바꾸면 크기 조절 */
-      --research-title-size: 38px;   /* Research 제목 크기 */
-      --section-title-size: 22px;    /* 섹션(주제) 제목 크기 */
-      --section-text-size: 16px;     /* 본문 글자 크기 */
-      --section-line-height: 1.65;   /* 본문 줄간격 */
+    :root {
+      --research-accent: #880000;
+      --research-border: rgba(26, 26, 26, 0.14);
     }
 
-    /* 상단 hero는 유지하되, 카드 느낌 제거(원하면) */
-    main.container{
-      padding: 24px 0 48px;
+    main.container {
+      padding: 46px 0 72px;
     }
 
-    .research-hero h1{
-      margin: 0 0 10px;
-      font-size: var(--research-title-size);
-      font-weight: 900;
-      line-height: 1.15;
+    .research-hero {
+      max-width: 840px;
+      margin-bottom: 58px;
     }
 
-    .research-hero p{
-      margin: 0;
-      color: var(--muted);
-      max-width: none;
-    }
-
-    /* ✅ Publications에서 쓰던 divider 톤 */
-    .section-divider{
-      margin: 28px 0 22px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(136, 0, 0, 0.25),
-        transparent
-      );
-    }
-
-    /* ✅ 주제 섹션: 배경/테두리 없이, 콘텐츠만 */
-    .research-section{
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .research-section h2{
+    .research-kicker {
       margin: 0 0 12px;
-      font-size: var(--section-title-size);
+      color: var(--research-accent);
+      font-size: 13px;
       font-weight: 900;
-      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .research-media{
-      display: block;
-      height: auto;                 /* 비율 유지 */
-      width: auto;                  /* 원본/비율 기준 */
-      max-width: 100%;              /* 컨테이너보다 커지면 줄이기 */
-      max-height: 340px;            /* 세로 제한 */
-      margin: 0 auto;               /* ✅ 가운데 정렬 */
-      border-radius: 16px;
+    .research-hero h1 {
+      margin: 0;
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: -0.025em;
     }
 
-    .research-desc{
-      margin: 14px 0 0;
-      font-size: var(--section-text-size);
-      line-height: var(--section-line-height);
-      color: var(--text);
-
-      text-align: justify;
-      text-justify: inter-word;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
-
-    /* 키워드 칩(선택) */
-    .keywords{
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .pill{
-      border: 1px solid rgba(136, 0, 0, 0.18);
-      background: #fff;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 14px;
+    .research-hero p {
+      max-width: 760px;
+      margin: 22px 0 0;
       color: var(--muted);
-      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.7;
     }
 
-    @media (max-width: 820px){
-      .research-media{ max-height: 260px; }
-      .research-hero h1{ font-size: 32px; }
+    .direction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--research-border);
+      border-bottom: 1px solid var(--research-border);
+    }
+
+    .direction {
+      min-height: 390px;
+      padding: 36px 34px 34px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .direction + .direction {
+      border-left: 1px solid var(--research-border);
+    }
+
+    .direction-number {
+      color: var(--research-accent);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .direction h2 {
+      margin: 72px 0 0;
+      font-size: clamp(25px, 2.4vw, 33px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.018em;
+    }
+
+    .direction p {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .explore-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-top: auto;
+      color: var(--research-accent);
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .explore-link .arrow {
+      transition: transform 0.18s ease;
+    }
+
+    .explore-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 860px) {
+      main.container { padding-top: 34px; }
+      .research-hero { margin-bottom: 42px; }
+      .direction-grid { grid-template-columns: 1fr; }
+      .direction { min-height: 300px; padding: 30px 4px 30px; }
+      .direction + .direction { border-left: 0; border-top: 1px solid var(--research-border); }
+      .direction h2 { margin-top: 42px; max-width: 520px; }
+      .direction p { max-width: 620px; }
+    }
+
+    @media (max-width: 560px) {
+      .research-hero h1 { font-size: 40px; }
+      .research-hero p { font-size: 16px; }
+      .direction h2 { font-size: 27px; }
     }
   </style>
 </head>
-
 <body>
   <header class="site-header">
     <div class="container header-inner">
@@ -114,7 +129,6 @@
         <img class="brand-logo" src="assets/img/logo.png" alt="AIVS Lab Logo" />
         <span class="brand-text">AIVS</span>
       </a>
-
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="members.html">Members</a>
@@ -127,112 +141,42 @@
   </header>
 
   <main class="container">
-    <!-- ✅ 상단 소개(기존 Research 큰 글씨/설명은 유지, 원하면 지워도 됨) -->
-    <section class="research-hero" style="padding: 6px 0 6px;">
+    <section class="research-hero">
+      <p class="research-kicker">AIVS Research</p>
       <h1>Research</h1>
       <p>
-        Our research explores core challenges in computer vision, multimodal artificial intelligence,
-        and embodied intelligence, with a strong emphasis on building intelligent systems
-        that perceive, reason, and act in the real world.
-        This page introduces our major research directions and representative topics,
-        spanning from fundamental algorithmic advances to system-level integration
-        for practical and scalable AI solutions.
+        We develop intelligent systems that connect perception, reasoning, and action.
+        Our research spans generative intelligence, embodied AI, and robust multimodal perception.
       </p>
     </section>
 
-    <div class="section-divider"></div>
+    <section class="direction-grid" aria-label="Research directions">
+      <article class="direction">
+        <span class="direction-number">01</span>
+        <h2>Generative &amp;<br />Restoration AI</h2>
+        <p>
+          Generative models for visual creation, restoration, and controllable inference.
+        </p>
+        <a class="explore-link" href="research-generative.html">Explore Research <span class="arrow">→</span></a>
+      </article>
 
-    <!-- ===================== SECTION 1 ===================== -->
-    <section class="research-section">
-      <h2>Generative AI</h2>
+      <article class="direction">
+        <span class="direction-number">02</span>
+        <h2>Embodied AI &amp;<br />Robotics</h2>
+        <p>
+          Intelligent agents that perceive, reason, and act in complex real-world environments.
+        </p>
+        <a class="explore-link" href="research-embodied.html">Explore Research <span class="arrow">→</span></a>
+      </article>
 
-      <!-- ✅ 이미지: 일단 동일한 이미지로 채워둠 (나중에 파일만 바꾸면 됨) -->
-      <img class="research-media" src="assets/img/research/Generative_260220.png" alt="Generative AI research" />
-
-      <p class="research-desc">
-        We study modern generative models including diffusion models, GAN variants, and recent video and 3D/4D generative frameworks.
-        Our research emphasizes controllable generation, temporal and spatial consistency, efficient inference, and safety.
-        We aim to build practical generative pipelines that can reliably produce high-quality images, videos, and 3D/4D representations
-        under real-world computational and deployment constraints.
-      </p>
-
-      <div class="keywords">
-        <span class="pill">Diffusion Models</span>
-        <span class="pill">Video Generation</span>
-        <span class="pill">3D / 4D Generation</span>
-        <span class="pill">Controllable Generation</span>
-        <span class="pill">Efficient Inference</span>
-        <span class="pill">Safe & Trustworthy Generation</span>
-
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ===================== SECTION 2 ===================== -->
-    <section class="research-section">
-      <h2>Embodied AI & Robotics</h2>
-
-      <img class="research-media" src="assets/img/research/Embodided_AI_260220.png" alt="Embodied AI and Robotics research" />
-
-      <p class="research-desc">
-        Our embodied AI research bridges perception and action through planning, control,
-        and interactive decision-making in physical environments.
-        We investigate data-efficient learning methods for robotic manipulation and embodied interaction,
-        focusing on how agents can acquire skills from limited data and adapt to new situations.
-        Our goal is to build robust embodied agents that tightly integrate perception, reasoning,
-        and action, enabling reliable operation in complex and unstructured real-world settings.
-
-      </p>
-
-      <div class="keywords">
-        <span class="pill">Vision-Language-Action (VLA)</span>
-        <span class="pill">Embodied Agents</span>
-        <span class="pill">Robotic Manipulation</span>
-        <span class="pill">Planning & Control</span>
-        <span class="pill">Data-Efficient Learning</span>
-        <span class="pill">Interactive Decision-Making</span>
-
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-    
-    <!-- ===================== SECTION 3 ===================== -->
-    <section class="research-section">
-      <h2>Vision & Multimodal Learning</h2>
-
-      <img class="research-media" src="assets/img/research/Vision_260220.png" alt="Vision and Multimodal Learning research" />
-
-      <p class="research-desc">
-        We develop robust visual representations and multimodal learning methods
-        that combine visual, linguistic, and structured information.
-        Our research covers vision–language models (VLMs), fine-grained recognition,
-        and reliable perception under distribution shifts and challenging conditions.
-        We also study training strategies and model architectures that improve generalization,
-        robustness, and interpretability across diverse real-world environments.
-
-      </p>
-
-      <div class="keywords">
-        <span class="pill">Vision-Language Models (VLMs)</span>
-        <span class="pill">Multimodal Representation</span>
-        <span class="pill">Fine-Grained Recognition</span>
-        <span class="pill">Robust & Trustworthy Perception</span>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- ===================== SELECTED KEYWORDS (optional) ===================== -->
-    <section class="research-section">
-      <h2>Selected Keywords</h2>
-      <p class="research-desc" style="margin-top:0;">
-        Diffusion Model, 3D/4D Generation, Vision-Language-Action (VLA),
-        Multimodal Foundation Models, Embodied Agents,
-        Robotic Manipulation, Data-Efficient & Trustworthy AI
-
-      </p>
+      <article class="direction">
+        <span class="direction-number">03</span>
+        <h2>Vision &amp; Multimodal<br />Intelligence</h2>
+        <p>
+          Robust visual and multimodal intelligence for understanding diverse real-world environments.
+        </p>
+        <a class="explore-link" href="research-vision.html">Explore Research <span class="arrow">→</span></a>
+      </article>
     </section>
   </main>
 
@@ -241,7 +185,6 @@
       <p>© <span id="year"></span> AIVS Lab.</p>
     </div>
   </footer>
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
