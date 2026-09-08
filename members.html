@@ -99,21 +99,70 @@
       color: var(--muted);
     }
 
-    .pi-appointment {
-      margin: 18px 0 0;
-      padding-left: 14px;
-      border-left: 3px solid rgba(136, 0, 0, 0.65);
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
     .pi-bio {
       max-width: 760px;
       margin: 20px 0 0;
       font-size: 15px;
       line-height: 1.78;
       color: var(--text);
+    }
+
+    .appointments-block {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border: 1px solid var(--members-border);
+      border-radius: 14px;
+      background: var(--members-muted-bg);
+    }
+
+    .appointments-title {
+      margin: 0 0 12px;
+      color: var(--members-accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .appointments-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .appointments-grid li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .appointments-grid li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--members-accent);
+      transform: translateY(-50%);
+    }
+
+    .appointment-role {
+      font-weight: 800;
+    }
+
+    .appointment-period {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .research-tags {
@@ -249,6 +298,12 @@
       }
     }
 
+    @media (max-width: 760px) {
+      .appointments-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 680px) {
       main.container {
         padding-top: 22px;
@@ -335,17 +390,67 @@
             Korea University Sejong Campus
           </p>
 
-          <p class="pi-appointment">
-            Associate Dean for Academic Affairs, College of Science and Technology<br />
-            September 2026 – Present
-          </p>
-
           <!-- Edit this paragraph when you want to update the PI introduction. -->
           <p class="pi-bio">
             His research focuses on generative AI, physical and embodied AI,
             computer vision, and multimodal intelligent systems, with an emphasis
             on building AI systems that connect perception, reasoning, and action.
           </p>
+
+          <div class="appointments-block">
+            <h3 class="appointments-title">Current &amp; Selected Appointments</h3>
+            <ul class="appointments-grid">
+              <li>
+                <span class="appointment-role">Associate Dean for Academic Affairs, College of Science and Technology</span>
+                <span class="appointment-period">Korea University Sejong Campus · Sep. 2026 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Chair, Department of Electronics and Information Engineering</span>
+                <span class="appointment-period">Korea University Sejong Campus · Mar. 2026 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Director, Finance Division</span>
+                <span class="appointment-period">Korean Institute of Communications and Information Sciences (KICS) · Jan. 2026 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Member, Informatization Committee</span>
+                <span class="appointment-period">Daejeon Metropolitan City · Sep. 2026 – Aug. 2028</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Deputy Director, BK21 Smart Energy Program</span>
+                <span class="appointment-period">Korea University Sejong Campus · May 2025 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Adjunct Professor, Department of Digital Healthcare Engineering</span>
+                <span class="appointment-period">Korea University Sejong Campus · Mar. 2025 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Participating Faculty, Software-Centered University Program</span>
+                <span class="appointment-period">Korea University Sejong Campus · Apr. 2024 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Participating Faculty, Advanced Semiconductor Process Equipment Talent Development Program</span>
+                <span class="appointment-period">Korea University Sejong Campus · Sep. 2023 – Present</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Participating Faculty, AI Convergence Security Graduate School Program</span>
+                <span class="appointment-period">Korea University Sejong Campus · Sep. 2026 – Dec. 2031</span>
+              </li>
+
+              <li>
+                <span class="appointment-role">Assistant Professor, Department of Artificial Intelligence</span>
+                <span class="appointment-period">Hannam University · 2020 – 2022</span>
+              </li>
+            </ul>
+          </div>
 
           <div class="research-tags" aria-label="Research interests">
             <span class="research-tag">Generative AI</span>
@@ -359,10 +464,10 @@
             <a class="profile-link" href="publications.html">Publications</a>
             <a
               class="profile-link"
-              href="https://pure.korea.ac.kr/en/persons/yong-goo-shin/"
+              href="https://scholar.google.com/citations?hl=en&amp;user=TNWHgVEAAAAJ"
               target="_blank"
               rel="noopener noreferrer"
-            >Korea University Profile</a>
+            >Google Scholar</a>
           </div>
         </div>
       </div>
@@ -375,6 +480,14 @@
       <div class="section-rule"></div>
 
       <div class="students-grid">
+        <!--
+          ADDING A NEW STUDENT
+          1) Put the photo in: assets/img/students/
+          2) Copy one complete <article class="student-profile">...</article> block below.
+          3) Change the image filename, alt text, name, program, and start date.
+          4) Keep the new <article> inside this .students-grid div.
+        -->
+
         <article class="student-profile">
           <div class="student-photo-wrap">
             <img class="student-photo" src="assets/img/students/왕우진.jpg" alt="Woo-Jin Wang" />
