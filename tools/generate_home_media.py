@@ -27,7 +27,7 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
 ACTIVITY_DIR = Path("assets/img/activity")
 DEFAULT_OUTPUT = Path("assets/home_media.json")
 DEFAULT_LIMIT = 6
-MIN_ASPECT_RATIO = 1.25
+MIN_ASPECT_RATIO = 1.10
 MAX_ASPECT_RATIO = 1.90
 
 
