@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "assets/img/activity/**"
-      - "tools/generate_home_media_v3.py"
-      - ".github/workflows/update-home-media-v3.yml"
+  paths:
+    - "assets/img/activity/**"
+    - "tools/generate_home_media.py"
+    - ".github/workflows/update-home-media.yml"
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: python -m pip install --upgrade Pillow
 
       - name: Generate recent landscape activity list
-        run: python tools/generate_home_media_v3.py
+        run: python tools/generate_home_media.py
 
       - name: Commit updated media list
         run: |
